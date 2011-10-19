@@ -1,0 +1,7 @@
+#Importar as Jar`s para as bibliotecas de Usuário - Eclipse
+
+1) Abra o Eclipse
+2) Em Windows -> Preferences
+  2.1) Acesse Java -> Build Path -> User Libraries
+3) Vá em Import e localize o arquivo "eclipseUserLibraries.userlibraries"
+4) Pronto.

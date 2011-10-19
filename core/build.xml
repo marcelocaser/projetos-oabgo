@@ -1,0 +1,42 @@
+<project name="core" default="gerar-projeto" basedir=".">
+
+	<target name="gerar-projeto">
+		<antcall target="copiar-dependencias" />
+	</target>
+
+	<!-- ### GERA AS DEPENDENCIAS NECESSÁRIAS PARA O PROJETO #### -->
+	<target name="copiar-dependencias" description="Copia as dependencias para o LIB da aplicação.">
+
+
+		<delete>
+			<fileset dir="lib" />
+		</delete>
+
+		<copy file="../core/bibliotecas/brazilUtils/0.1.1/brazilutils-0.1.1.jar" todir="lib" />
+
+		<copy file="../core/bibliotecas/commons/beanutils/1.7/commons-beanutils-1.7.jar" todir="lib" />
+	
+		<copy file="../core/bibliotecas/el/api/1.0/el-api-1.0.jar" todir="lib" />
+		
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-3.2.4.jar" todir="lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-validator.jar" todir="lib" />
+		
+		<copy file="../core/bibliotecas/jsf-ri/1.2.15/jsf-api.jar" todir="lib" />
+		
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.beans-3.0.3.RELEASE.jar" todir="lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.context-3.0.3.RELEASE.jar" todir="lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.core-3.0.3.RELEASE.jar" todir="lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.orm-3.0.3.RELEASE.jar" todir="lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.transaction-3.0.3.RELEASE.jar" todir="lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.web-3.0.3.RELEASE.jar" todir="lib" />
+		
+		<copy file="../core/bibliotecas/richFaces/3.3.3/richfaces-api-3.3.3.Final.jar" todir="lib" />
+		<copy file="../core/bibliotecas/richFaces/3.3.3/richfaces-impl-3.3.3.Final.jar" todir="lib" />
+		<copy file="../core/bibliotecas/richFaces/3.3.3/richfaces-ui-3.3.3.Final.jar" todir="lib" />
+
+		<copy file="../core/bibliotecas/servlet/2.5/servlet-api.jar" todir="lib" />
+
+	</target>
+
+
+</project>

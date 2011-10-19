@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="Aopalliance" systemlibrary="false">
+        <archive path="C:/Projetos GTI/Bibliotecas/aopalliance/aopalliance.jar"/>
+    </library>
+    <library name="ASM 3.2" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/asm/3.2/asm-3.2.jar"/>
+    </library>
+    <library name="C3P0 0.9.0" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/c3p0/c3p0-0.9.0.jar"/>
+    </library>
+    <library name="CGLIB 2.2" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/cglib/2.2/cglib-2.2.jar"/>
+    </library>
+    <library name="Commons-collections 3.2" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/commons/collections/3.2/commons-collections-3.2.jar"/>
+    </library>
+    <library name="Commons-logging 1.1" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/commons/logging/1.1/commons-logging-1.1.jar"/>
+    </library>
+    <library name="DOM4J 1.6" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/dom4j/1.6/dom4j-1.6.1.jar"/>
+    </library>
+    <library name="ehCache 1.2.3" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/ehCache/1.2.3/ehcache-1.2.3.jar"/>
+    </library>
+    <library name="Hibernate 3.2.4" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/hibernate/tools/ejb3-persistence.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/hibernate/tools/hibernate-3.2.4.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/hibernate/tools/hibernate-annotations.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/hibernate/tools/hibernate-commons-annotations.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/hibernate/tools/hibernate-validator.jar"/>
+    </library>
+    <library name="Jackson 1.5.0" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/jackson/1.5.0/jackson-core-asl-1.5.0.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/jackson/1.5.0/jackson-mapper-asl-1.5.0.jar"/>
+    </library>
+    <library name="JCIFS 1.3.14" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/jcifs/1.3.14/jcifs-1.3.14.jar"/>
+    </library>
+    <library name="JTA" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/jta/jta.jar"/>
+    </library>
+    <library name="Log4j 1.211" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/log4j/1.2.11/log4j-1.2.11.jar"/>
+    </library>
+    <library name="Spring 3.0.2" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.aop-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.asm-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.aspects-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.beans-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.context.support-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.context-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.core-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.expression-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.instrument.tomcat-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.instrument-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.jdbc-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.jms-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.orm-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.oxm-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.test-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.transaction-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.web.portlet-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.web.servlet-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.web.struts-3.0.2.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/3.0.2/org.springframework.web-3.0.2.RELEASE.jar"/>
+    </library>
+    <library name="Spring Flex Integration 1.0.3" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/flex-integration/1.0.3/org.springframework.flex-1.0.3.RELEASE.jar"/>
+        <archive path="C:/Projetos GTI/Bibliotecas/spring/flex-integration/1.0.3/org.springframework.flex-sources-1.0.3.RELEASE.jar"/>
+    </library>
+    <library name="SQLJDBC4" systemlibrary="true">
+        <archive path="C:/Projetos GTI/Bibliotecas/sqljdbc4/sqljdbc4.jar"/>
+    </library>
+</eclipse-userlibraries>
