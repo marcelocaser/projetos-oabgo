@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title><ui:insert name="title">
+				<h:outputText value="#{msg.sigedTitulo}" />
+			</ui:insert></title>
+		<link rel="shortcut icon"
+			href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+
+		<link rel="stylesheet"
+			href="${facesContext.externalContext.request.contextPath}/css/main.css"
+			type="text/css" />
+		<script
+			src="${facesContext.externalContext.request.contextPath}/js/popup.js"
+			type="text/javascript" />
+
+		<script
+			src="${facesContext.externalContext.request.contextPath}/js/jquery.meio.mask.min.js"
+			type="text/javascript" />
+
+		<f:loadBundle var="msg" basename="ressources.messages" />
+	</head>
+
+	<body>
+		<div id="logoOABCadastro"></div>
+		<rich:spacer height="120px" />
+		<div>
+			<rich:spacer width="10px" />
+			<h:outputLabel styleClass="txtMsgdashBoard"
+				value="#{msg.sigedCadastroRelatorCriarConta}" />
+		</div>
+		<rich:spacer height="20px" />
+		<div align="left">
+			<rich:spacer width="15px" />
+			<h:outputLabel value="#{msg.sigedCadastroRelatorInformacao}" />
+			<br />
+			<rich:spacer width="15px" />
+			<h:outputLabel
+				value="#{msg.sigedCadastroRelatorInformacaoContaExistente} " />
+			<h:outputLink styleClass="linkLoginBold"
+				value="${facesContext.externalContext.request.contextPath}" target="_parent">#{msg.sigedCadastroRelatorInformacaoContaExistenteLogin}</h:outputLink>
+		</div>
+		<div id="areaCadastro">
+			<t:panelGrid columns="1" width="100%">
+				<h:panelGrid columns="2"
+					columnClasses="textLabelLogin, textAlignLefth" width="50%">
+
+					<oab:outputLabel required="true" for="Nome"
+						value="#{msg.sigedCadastroRelatorNomeCompleto}" />
+					<h:inputText id="Nome" required="true" maxlength="50"
+						styleClass="inputGrande" value="#{usuarioBean.usuario.vchNome}"
+						autocomplete="off" />
+
+					<oab:outputLabel required="true" for="DataNascimento"
+						value="#{msg.sigedCadastroRelatorDataNascimento}" />
+					<rich:calendar id="DataNascimento" required="true" value=""
+						autocomplete="off" datePattern="dd/MM/yyyy"
+						enableManualInput="true">
+					</rich:calendar>
+
+					<oab:outputLabel required="true" for="CPF"
+						value="#{msg.sigedCadastroRelatorNumeroCPF}" />
+					<h:inputText id="CPF" required="true" maxlength="50"
+						styleClass="inputPequeno" value="" autocomplete="off" />
+
+					<oab:outputLabel required="true" for="Inscricao"
+						value="#{msg.sigedCadastroRelatorNumeroOAB}" />
+					<h:inputText id="Inscricao" required="true" maxlength="50"
+						styleClass="inputPequeno" value="" autocomplete="off" />
+
+					<oab:outputLabel required="true" for="Login"
+						value="#{msg.sigedCadastroRelatorNomeLogin}" />
+					<h:inputText id="Login" required="true" maxlength="12"
+						styleClass="inputPequeno" value="#{usuarioBean.usuario.vchLogin}"
+						autocomplete="off" />
+
+					<oab:outputLabel required="true" for="Senha"
+						styleClass="txtPequenoBold"
+						value="#{msg.sigedCadastroRelatorSenha}" />
+					<h:inputSecret id="Senha" required="true" maxlength="8"
+						styleClass="inputPequeno" value="#{usuarioBean.usuario.vchSenha}" />
+
+					<oab:outputLabel required="true" for="ConfirmaSenha"
+						styleClass="txtPequenoBold"
+						value="#{msg.sigedCadastroRelatorSenhaConfirma}" />
+					<h:inputSecret id="ConfirmaSenha" required="true" maxlength="8"
+						styleClass="inputPequeno" value="#{usuarioBean.confirmaSenha}" />
+
+					<oab:outputLabel required="true" for="Email"
+						styleClass="txtPequenoBold"
+						value="#{msg.sigedCadastroRelatorEmail}" />
+					<h:inputText id="Email" required="true" maxlength="50"
+						styleClass="inputPequeno" value="#{usuarioBean.usuario.vchEmail}"
+						autocomplete="off" />
+
+					<oab:outputLabel required="true" for="ConfirmaEmail"
+						styleClass="txtPequenoBold"
+						value="#{msg.sigedCadastroRelatorEmailConfirma}" />
+					<h:inputText id="ConfirmaEmail" required="true" maxlength="50"
+						styleClass="inputPequeno" value="#{usuarioBean.usuario.vchEmail}"
+						autocomplete="off" />
+
+					<rich:spacer width="10px" />
+					<h:panelGrid columns="3">
+						<h:commandButton styleClass="botao2"
+							onclick="showModalCentro('modalSubmit');"
+							action="#{loginBean.logon}"
+							value="#{msg.sigedCadastroRelatorCriarMinhaConta}." />
+						<rich:spacer width="44px" />
+					</h:panelGrid>
+					<rich:jQuery selector="#Nome" timing="onload" query="focus()"
+						rendered="#{state.showUserPassWord}" />
+				</h:panelGrid>
+				<rich:spacer height="60px" />
+				<t:panelGrid align="center">
+					<h:panelGroup>
+						<rich:spacer width="15px" />
+						<t:panelGrid align="center">
+							<h:outputText styleClass="txtPequeno"
+								value="#{msg.sigedTituloTI}">
+								<h:graphicImage styleClass="pic2" url="#{msg.sigedLogoGTIMenor}" />
+							</h:outputText>
+						</t:panelGrid>
+						<h:outputText styleClass="txtPequeno"
+							value="#{msg.sigedCopyright} " />
+						<h:outputLink styleClass="linkLoginBold"
+							value="#{msg.sigedPortalOABGO}" target="_top">#{msg.sigedOabUpperCase}</h:outputLink>
+						<h:outputText styleClass="txtPequeno"
+							value=", #{msg.sigedDireitos}" />
+					</h:panelGroup>
+				</t:panelGrid>
+			</t:panelGrid>
+		</div>
+	</body>
+
+</html>

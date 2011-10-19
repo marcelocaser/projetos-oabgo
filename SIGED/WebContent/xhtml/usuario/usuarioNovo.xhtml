@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:sdh="http://richfaces.org/session-data-helper">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedUsuarioNovo}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.sigedIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoSalvar}"
+							action="#{usuarioBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.sigedIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoRetornar}"
+							action="#{usuarioBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.sigedIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<a4j:region id="region">
+				<rich:panel id="painelIncluir" headerClass="txtRotuloPannelCenter">
+
+					<rich:jQuery selector="#Nome" timing="onload" query="focus()" />
+
+					<h:panelGrid width="100%" columns="3"
+						columnClasses="labelDireito, bgCampo">
+
+						<a4j:mediaOutput id="Imagem" element="img" cacheable="false"
+							session="false" createContent="#{usuarioBean.abrirFoto}"
+							value="#{usuarioBean.fileFoto}" mimeType="image/jpg"
+							style="width: 40px; height: 45px">
+						</a4j:mediaOutput>
+						<t:inputFileUpload id="File" storage="file"
+							value="#{usuarioBean.fileFoto}" >
+						</t:inputFileUpload>
+					</h:panelGrid>
+
+					<h:panelGrid width="100%" columns="2"
+						columnClasses="labelDireito, bgCampo">
+
+						<oab:outputLabel required="true" for="Nome"
+							value="#{msg.sigedUsuarioNome}" />
+						<h:inputText id="Nome" required="true" maxlength="50"
+							styleClass="inputMedio" value="#{usuarioBean.usuario.vchNome}" />
+
+						<oab:outputLabel required="true" for="Login"
+							value="#{msg.sigedUsuarioUserName}" />
+						<h:inputText id="Login" required="true" maxlength="50"
+							styleClass="inputPequeno" value="#{usuarioBean.usuario.vchLogin}" />
+
+						<oab:outputLabel required="true" for="Senha"
+							value="#{msg.sigedUsuarioSenha}" />
+						<h:inputSecret id="Senha" required="true" maxlength="8"
+							styleClass="inputPequeno" value="#{usuarioBean.usuario.vchSenha}" />
+
+						<oab:outputLabel required="true" for="ConfirmaSenha"
+							value="#{msg.sigedUsuarioConfirmaSenha}" />
+						<h:inputSecret id="ConfirmaSenha" required="true" maxlength="8"
+							styleClass="inputPequeno" value="#{usuarioBean.confirmaSenha}" />
+
+						<oab:outputLabel required="true" for="Email"
+							value="#{msg.sigedUsuarioEmail}" />
+						<h:inputText id="Email" required="true" maxlength="50"
+							styleClass="inputPequeno" value="#{usuarioBean.usuario.vchEmail}" />
+
+						<h:outputLabel id="labelAtivo" for="Ativo"
+							value="#{msg.sigedUsuarioAtivo}:" />
+						<h:selectBooleanCheckbox id="Ativo"
+							value="#{usuarioBean.usuario.bitAtivo}" />
+
+						<h:outputLabel id="labelMembro" for="Membro"
+							value="#{msg.sigedUsuarioMembro}:" />
+						<h:selectBooleanCheckbox id="Membro"
+							value="#{usuarioBean.usuario.bitMembro}" />
+
+					</h:panelGrid>
+				</rich:panel>
+				<t:saveState value="#{usuarioBean.usuario}" />
+			</a4j:region>
+		</ui:define>
+	</ui:composition>
+</html>

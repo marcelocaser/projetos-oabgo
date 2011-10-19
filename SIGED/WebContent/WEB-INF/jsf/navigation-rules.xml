@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<!-- ###########REGRAS DE NAVEGAÇÃO - GERAL ############ -->
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>logoff</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>logon</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>paginaPrincipal</from-outcome>
+			<to-view-id>/xhtml/principal/paginaPrincipal.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## USUARIO ################# -->
+		<navigation-case>
+			<from-outcome>listarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## TIPO DOCUMENTO ################# -->
+		<navigation-case>
+			<from-outcome>listarTipoDocumento</from-outcome>
+			<to-view-id>/xhtml/tipoDocumento/tipoDocumentoListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarTipoDocumento</from-outcome>
+			<to-view-id>/xhtml/tipoDocumento/tipoDocumentoConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoTipoDocumento</from-outcome>
+			<to-view-id>/xhtml/tipoDocumento/tipoDocumentoNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarTipoDocumento</from-outcome>
+			<to-view-id>/xhtml/tipoDocumento/tipoDocumentoEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## DOCUMENTO ELETRONICO ################# -->
+		<navigation-case>
+			<from-outcome>listarDocumentoEletronico</from-outcome>
+			<to-view-id>/xhtml/documentoEletronico/documentoEletronicoListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarDocumentoEletronico</from-outcome>
+			<to-view-id>/xhtml/documentoEletronico/documentoEletronicoConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoDocumentoEletronico</from-outcome>
+			<to-view-id>/xhtml/documentoEletronico/documentoEletronicoNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarDocumentoEletronico</from-outcome>
+			<to-view-id>/xhtml/documentoEletronico/documentoEletronicoEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## CONSULTA ################# -->
+		<navigation-case>
+			<from-outcome>consultaDeDocumento</from-outcome>
+			<to-view-id>/xhtml/consulta/consultaDeDocumento.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

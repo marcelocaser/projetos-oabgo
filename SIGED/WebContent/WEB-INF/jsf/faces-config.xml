@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<application>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+		<message-bundle>ressources.messages</message-bundle>
+		
+		<!-- Rich Faces State Manager API -->
+		<navigation-handler>org.richfaces.ui.application.StateNavigationHandler</navigation-handler>
+		<el-resolver>org.richfaces.el.StateELResolver</el-resolver>
+
+		<!-- ** INTERNACIONALIZACAO ** -->
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>pt</supported-locale>
+		</locale-config>
+	</application>
+
+	<converter>
+		<converter-id>ConverterDataAD</converter-id>
+		<converter-class>core.conversor.ConverterDataAD</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterData</converter-id>
+		<converter-class>core.conversor.ConverterData</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterMoeda</converter-id>
+		<converter-class>core.conversor.ConverterMoeda</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterCNPJ</converter-id>
+		<converter-class>core.conversor.ConverterCNPJ</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterCPF</converter-id>
+		<converter-class>core.conversor.ConverterCPF</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterCEP</converter-id>
+		<converter-class>core.conversor.ConverterCEP</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterTelefone</converter-id>
+		<converter-class>core.conversor.ConverterTelefone</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>ConverterProcesso</converter-id>
+		<converter-class>core.conversor.ConverterProcesso</converter-class>
+	</converter>
+
+	<validator>
+		<validator-id>ValidatorCNPJ</validator-id>
+		<validator-class>core.validador.ValidatorCNPJ</validator-class>
+	</validator>
+
+	<validator>
+		<validator-id>ValidatorCPF</validator-id>
+		<validator-class>core.validador.ValidatorCPF</validator-class>
+	</validator>
+
+	<!-- ** LISTENER'S CONTROLE DE ACESSO ** -->
+	<lifecycle>
+		<phase-listener>br.org.oabgo.siged.web.controle.SIGEDPhaseListener</phase-listener>
+		<phase-listener>br.org.oabgo.siged.web.controle.SIGEDMessageListener</phase-listener>
+	</lifecycle>
+
+	<!-- ** Rich Faces State Manager API ** -->
+	<factory>
+		<application-factory>org.richfaces.ui.application.StateApplicationFactory</application-factory>
+	</factory>
+	
+</faces-config>

@@ -1,0 +1,20 @@
+package br.org.oabgo.siged.negocio.enumerador;
+
+public enum SIGEDEnumSecurity {
+	//representa o session ID registrado na tabela de acesso
+	REDIRECT_SIGED, 
+	PARAM_PAGINA_SIGED, 
+	SISTEMA_CONTROLADO, 
+	REQUEST_DASH_BOARD, 
+	USUARIO_LOGADO, 
+	PERFIL_ACESSO_LOGADO,
+	SESSION_ID_SIGED,
+	COOKIE_SIGED,
+	ACESSO,
+	IDENTIFICADOR_ACESSO,
+	LOCALE,
+	MENSAGEM_ACESSO_RECURSO,
+	SIGED_TIPO_MENSAGEM,
+	SIGED_MODAL_MENSAGEM,
+	AUTENTICADO
+}

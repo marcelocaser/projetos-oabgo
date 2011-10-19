@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:sdh="http://richfaces.org/session-data-helper">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedUsuarioConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.sigedIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoEditar}"
+							action="#{usuarioBean.editar}" reRender="Imagem"
+							icon="#{msg.sigedIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoExcluir}"
+							action="#{usuarioBean.excluir}"
+							onclick="#{msg.sigedConfirmaExclusao}"
+							icon="#{msg.sigedIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoRetornar}"
+							action="#{usuarioBean.listar}"
+							icon="#{msg.sigedIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelFoto" value="#{msg.sigedUsuarioFoto}:"
+						styleClass="txtMedioNegrito" />
+					<a4j:mediaOutput element="img" cacheable="false" session="false"
+						createContent="#{usuarioBean.abrirFoto}"
+						value="#{sdh:storeDataAndGetKey(usuarioBean.usuario)}"
+						mimeType="image/jpg" style="width: 40px; height: 45px">
+					</a4j:mediaOutput>
+
+					<h:outputLabel id="labelLogin" value="#{msg.sigedUsuarioUserName}:"
+						for="Login" styleClass="txtMedioNegrito" />
+					<h:outputText id="Login" value="#{usuarioBean.usuario.vchLogin}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNome" value="#{msg.sigedUsuarioNome}:"
+						for="nome" styleClass="txtMedioNegrito" />
+					<h:outputText id="nome" value="#{usuarioBean.usuario.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel value="#{msg.sigedUsuarioEmail}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="email" value="#{usuarioBean.usuario.vchEmail}" />
+
+					<h:outputLabel id="labelAtivo" value="#{msg.sigedUsuarioAtivo}:"
+						styleClass="txtMedioNegrito" />
+					<oab:boolean value="#{usuarioBean.usuario.bitAtivo}" />
+
+					<h:outputLabel id="labelMembro" value="#{msg.sigedUsuarioMembro}:"
+						styleClass="txtMedioNegrito" />
+					<oab:booleanPerfil value="#{usuarioBean.usuario.bitMembro}" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+			<t:saveState value="#{usuarioBean.usuario}" />
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/context/spring-aop-2.5.xsd"
+							default-lazy-init="true" default-autowire="byName">
+     
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" 		value="java:comp/env/jdbc/SIGED-DS"/>
+		<property name="resourceRef" 	value="true"/>
+	</bean>
+	
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+	
+	
+	<context:component-scan base-package="core">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+	
+	<context:component-scan base-package="br.org.oabgo.siged.negocio.controle">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+    
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" 			ref="dataSource" />
+		<property name="configurationClass"		value="org.hibernate.cfg.AnnotationConfiguration" />
+		<property name="configLocation" 		value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+         <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	
+	 <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+    
+    <bean id="hibernateDaoSupport" class="org.springframework.orm.hibernate3.support.HibernateDaoSupport" abstract="true">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="hibernateTemplate">
+            <ref bean="hibernateTemplate"/>
+        </property>
+    </bean>
+    
+    <bean id="hibernateUtil" class="core.hibernate.HibernateUtil"   parent="hibernateDaoSupport"/>
+		    
+</beans>

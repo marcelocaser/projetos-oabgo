@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSFFlowViewLayout version="1.0">
+  <Drawing gridVisible="true" snapOn="true" />
+  <JSFFlowResource path="/*" location="9887,0" dimension="530,36" />
+  <JSFFlowResource path="/xhtml/principal/login2.xhtml" location="180,30" dimension="201,36" />
+  <JSFFlowResource path="/xhtml/principal/paginaPrincipal.xhtml" location="270,846" dimension="250,36" />
+  <JSFFlowResource path="/xhtml/usuario/usuarioListar.xhtml" location="19972,846" dimension="228,36" />
+  <JSFFlowResource path="/xhtml/usuario/usuarioConsultar.xhtml" location="20275,846" dimension="251,36" />
+  <JSFFlowResource path="/xhtml/usuario/usuarioNovo.xhtml" location="20601,846" dimension="229,36" />
+  <JSFFlowResource path="/xhtml/usuario/usuarioEditar.xhtml" location="20905,846" dimension="230,36" />
+  <JSFFlowResource path="/xhtml/tipoDocumento/tipoDocumentoListar.xhtml" location="480,130" dimension="318,36" />
+  <JSFFlowResource path="/xhtml/tipoDocumento/tipoDocumentoConsultar.xhtml" location="30,230" dimension="341,36" />
+  <JSFFlowResource path="/xhtml/tipoDocumento/tipoDocumentoNovo.xhtml" location="480,230" dimension="319,36" />
+  <JSFFlowResource path="/xhtml/tipoDocumento/tipoDocumentoEditar.xhtml" location="30,330" dimension="320,36" />
+  <JSFFlowResource path="/xhtml/documentoEletronico/documentoEletronicoListar.xhtml" location="480,330" dimension="380,36" />
+  <JSFFlowResource path="/xhtml/documentoEletronico/documentoEletronicoConsultar.xhtml" location="30,430" dimension="403,36" />
+  <JSFFlowResource path="/xhtml/documentoEletronico/documentoEletronicoNovo.xhtml" location="30,530" dimension="381,36" />
+  <JSFFlowResource path="/xhtml/documentoEletronico/documentoEletronicoEditar.xhtml" location="480,530" dimension="382,36" />
+  <JSFFlowResource path="/xhtml/consulta/consultaDeDocumento.xhtml" location="30,630" dimension="289,36" />
+  <JSFFlowNavigationCase id="/*,/xhtml/principal/login2.xhtml,logoff,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="9887,18" />
+      <AbsolutePoint location="280,18" />
+      <AbsolutePoint location="280,30" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/principal/login2.xhtml,logon,&lt;empty&gt;" routingType="1">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10077,36" />
+      <AbsolutePoint location="10077,48" />
+      <AbsolutePoint location="381,48" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/principal/paginaPrincipal.xhtml,paginaPrincipal,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10212,36" />
+      <AbsolutePoint location="10212,864" />
+      <AbsolutePoint location="520,864" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/usuario/usuarioListar.xhtml,listarUsuario,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10417,33" />
+      <AbsolutePoint location="20086,33" />
+      <AbsolutePoint location="20086,846" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/usuario/usuarioConsultar.xhtml,consultarUsuario,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10417,18" />
+      <AbsolutePoint location="20400,18" />
+      <AbsolutePoint location="20400,846" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/usuario/usuarioNovo.xhtml,novoUsuario,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10417,3" />
+      <AbsolutePoint location="20715,3" />
+      <AbsolutePoint location="20715,846" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/usuario/usuarioEditar.xhtml,editarUsuario,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10227,36" />
+      <AbsolutePoint location="10227,748" />
+      <AbsolutePoint location="21020,748" />
+      <AbsolutePoint location="21020,846" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/tipoDocumento/tipoDocumentoListar.xhtml,listarTipoDocumento,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10092,36" />
+      <AbsolutePoint location="10092,148" />
+      <AbsolutePoint location="798,148" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/tipoDocumento/tipoDocumentoConsultar.xhtml,consultarTipoDocumento,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="9887,3" />
+      <AbsolutePoint location="172,3" />
+      <AbsolutePoint location="172,230" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/tipoDocumento/tipoDocumentoNovo.xhtml,novoTipoDocumento,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10107,36" />
+      <AbsolutePoint location="10107,248" />
+      <AbsolutePoint location="799,248" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/tipoDocumento/tipoDocumentoEditar.xhtml,editarTipoDocumento,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10122,36" />
+      <AbsolutePoint location="10122,303" />
+      <AbsolutePoint location="190,303" />
+      <AbsolutePoint location="190,330" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/documentoEletronico/documentoEletronicoListar.xhtml,listarDocumentoEletronico,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10137,36" />
+      <AbsolutePoint location="10137,348" />
+      <AbsolutePoint location="860,348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/documentoEletronico/documentoEletronicoConsultar.xhtml,consultarDocumentoEletronico,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10152,36" />
+      <AbsolutePoint location="10152,448" />
+      <AbsolutePoint location="433,448" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/documentoEletronico/documentoEletronicoNovo.xhtml,novoDocumentoEletronico,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10167,36" />
+      <AbsolutePoint location="10167,503" />
+      <AbsolutePoint location="220,503" />
+      <AbsolutePoint location="220,530" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/documentoEletronico/documentoEletronicoEditar.xhtml,editarDocumentoEletronico,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10182,36" />
+      <AbsolutePoint location="10182,548" />
+      <AbsolutePoint location="862,548" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/*,/xhtml/consulta/consultaDeDocumento.xhtml,consultaDeDocumento,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="10197,36" />
+      <AbsolutePoint location="10197,648" />
+      <AbsolutePoint location="319,648" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+</JSFFlowViewLayout>
+

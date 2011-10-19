@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<oab:filtro>
+
+		<rich:jQuery selector="#NumeroProcesso" timing="onload"
+			query="setMask('9999/99999')" />
+
+		<rich:jQuery
+			selector="#DataAutuacaoProcessoInputDate, #DataDecisaoProcessoInputDate"
+			timing="onload" query="setMask('99/99/9999')" />
+
+		<h:panelGrid columns="2" width="100%"
+			columnClasses="labelDireito, bgCampo">
+			<oab:outputLabel for="NumeroProcesso"
+				value="#{msg.sigedDocumentoEletronicoNumeroProcesso}" />
+			<h:inputText id="NumeroProcesso"
+				value="#{documentoEletronicoBean.numeroFiltro}"
+				styleClass="inputMenor100" maxlength="9">
+			</h:inputText>
+			<oab:outputLabel for="DataAutuacaoProcesso"
+				value="#{msg.sigedDocumentoEletronicoDataAutuacao}" />
+			<rich:calendar id="DataAutuacaoProcesso"
+				value="#{documentoEletronicoBean.dataAutuacaoFiltro}"
+				datePattern="dd/MM/yyyy" enableManualInput="true">
+			</rich:calendar>
+			<oab:outputLabel for="DataDecisaoProcesso"
+				value="#{msg.sigedDocumentoEletronicoDataDecisao}" />
+			<rich:calendar id="DataDecisaoProcesso"
+				value="#{documentoEletronicoBean.dataDecisaoFiltro}"
+				datePattern="dd/MM/yyyy" enableManualInput="true">
+			</rich:calendar>
+		</h:panelGrid>
+
+		<h:panelGrid align="right">
+			<h:commandButton id="btnListar" styleClass="botao2"
+				value="#{msg.sigedFiltrar}"
+				action="#{documentoEletronicoBean.listar}" />
+		</h:panelGrid>
+
+		<t:saveState value="#{documentoEletronicoBean.numeroFiltro}" />
+		<t:saveState value="#{documentoEletronicoBean.relatorFiltro}" />
+	</oab:filtro>
+</html>

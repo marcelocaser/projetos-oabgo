@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form prependId="false">
+		<rich:toolBar>
+
+			<h:form rendered="#{usuarioLogado.vchLogin=='admin'}">
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="#{msg.sigedIconeMenuCadastro}"
+								styleClass="pic" />
+							<h:outputText value="#{msg.sigedMenuCadastro}" />
+						</h:panelGroup>
+					</f:facet>
+
+					<rich:menuItem value="#{msg.sigedMenuCadastroDocumentos}"
+						action="#{documentoEletronicoBean.listar}"
+						icon="#{msg.sigedIconeMenuCadastroDocumento}" />
+
+					<rich:menuItem value="#{msg.sigedMenuCadastroUsuario}"
+						action="#{usuarioBean.listar}"
+						icon="#{msg.sigedIconeMenuCadastroUsuario}" />
+
+					<rich:menuSeparator />
+
+					<rich:menuGroup location="right"
+						value="#{msg.sigedMenuCadastroTabela}"
+						icon="#{msg.sigedIconeMenuCadastroTabela}">
+						<rich:menuItem value="#{msg.sigedMenuCadastroTabelaTipoDocumento}"
+							action="#{tipoDocumentoBean.listar}" />
+					</rich:menuGroup>
+
+				</rich:dropDownMenu>
+			</h:form>
+
+			<rich:dropDownMenu location="right">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:graphicImage value="#{msg.sigedIconeMenuConsulta}"
+							styleClass="pic" />
+						<h:outputText value="#{msg.sigedMenuConsulta}" />
+					</h:panelGroup>
+				</f:facet>
+
+				<rich:menuItem value="#{msg.sigedMenuConsultaDocumento}"
+					action="#{documentoEletronicoBean.consultaDeDocumento}"
+					icon="#{msg.sigedIconeMenuCadastroDocumento}" />
+			</rich:dropDownMenu>
+
+
+		</rich:toolBar>
+	</h:form>
+</html>

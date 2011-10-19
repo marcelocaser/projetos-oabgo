@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedDocumentoEletronicoNovo}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.sigedIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoSalvar}"
+							iconDisabled="#{msg.sigedIconeMenuOpcoesSalvarDesativado}"
+							disabled="#{documentoEletronicoBean.validacaoProcessoJaExiste!=false}"
+							action="#{documentoEletronicoBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.sigedIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoRetornar}"
+							action="#{documentoEletronicoBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.sigedIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:panel id="painelIncluir" headerClass="txtRotuloPannelCenter">
+
+				<rich:jQuery
+					selector="#DataAutuacaoProcessoInputDate, #DataDecisaoProcessoInputDate"
+					timing="onload" query="setMask('99/99/9999')" />
+
+				<rich:jQuery selector="#Numero" query="setMask('9999/99999')"
+					timing="onload" />
+
+				<rich:jQuery selector="#Numero" timing="onload" query="focus()" />
+
+				<rich:jQuery selector="#DataAutuacaoProcessoInputDate"
+					timing="onload" query="focus()" />
+
+				<h:panelGrid columns="2" columnClasses="labelDireito, bgCampo"
+					width="100%">
+
+					<h:commandLink id="consultarProcesso"
+						action="#{documentoEletronicoBean.consultaNumeroProcesso}"
+						immediate="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+						<oab:outputLabel required="true" for="Numero"
+							onclick="showModalCentro('modalSubmit');"
+							value="#{msg.sigedDocumentoEletronicoNumeroProcesso}" link="true" />
+					</h:commandLink>
+					<h:inputText id="Numero" required="true" maxlength="10"
+						styleClass="inputMenor100"
+						value="#{documentoEletronicoBean.documentoEletronico.vchNumeroProcesso}"
+						autocomplete="off"
+						disabled="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+						<f:validateLength minimum="10" />
+					</h:inputText>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" columnClasses="labelDireito, bgCampo"
+					width="100%"
+					rendered="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+					<oab:outputLabel required="true" for="DataAutuacaoProcesso"
+						value="#{msg.sigedDocumentoEletronicoDataAutuacao}" />
+					<rich:calendar id="DataAutuacaoProcesso" required="true"
+						value="#{documentoEletronicoBean.documentoEletronico.datProcesso}"
+						datePattern="dd/MM/yyyy" enableManualInput="true">
+					</rich:calendar>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" columnClasses="labelDireito, bgCampo"
+					width="100%"
+					rendered="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+					<oab:outputLabel required="true" for="DataDecisaoProcesso"
+						value="#{msg.sigedDocumentoEletronicoDataDecisao}" />
+					<rich:calendar id="DataDecisaoProcesso" required="true"
+						value="#{documentoEletronicoBean.documentoEletronico.datDecisao}"
+						datePattern="dd/MM/yyyy" enableManualInput="true">
+					</rich:calendar>
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<rich:panel id="painelIncluirRelatores"
+				headerClass="txtRotuloPannelCenter"
+				rendered="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+				<f:facet name="header">
+					<h:outputText value="#{msg.sigedRelatorRelator}" />
+				</f:facet>
+
+				<h:panelGrid columns="5" width="100%">
+					<oab:outputLabel required="true" for="RelatoresCadastrados"
+						value="#{msg.sigedRelatorNenhumRelatorSelecionado}"
+						help="#{msg.sigedRelatorAtalhos}" />
+					<rich:pickList id="RelatoresCadastrados"
+						value="#{relatorBean.listaRelatorSelecionado}"
+						showButtonsLabel="false" sourceListWidth="300px"
+						switchByDblClick="true" targetListWidth="300px"
+						valueChangeListener="#{documentoEletronicoBean.alterouListaRelatorSelecionado}">
+						<t:selectItems id="listaRelatorPickList"
+							value="#{relatorBean.listaRelatorPickList}" var="relator"
+							itemValue="#{relator.value}" itemLabel="#{relator.label}">
+						</t:selectItems>
+						<a4j:support event="onlistchanged" ajaxSingle="true"
+							reRender="RelatoresSelecionados, RelatoresCadastrados, ValidacaoRelatores" />
+					</rich:pickList>
+
+					<rich:panel id="RelatoresSelecionados">
+						<h:outputText
+							value="#{relatorBean.totalRelatoresCadastrados} #{msg.sigedRelatorNenhumRelatorSelecionados}" />
+					</rich:panel>
+				</h:panelGrid>
+				<h:outputText id="ValidacaoRelatores" styleClass="txtLabelVermelha"
+					value="#{documentoEletronicoBean.validacaoRelatores}"
+					rendered="#{documentoEletronicoBean.validacaoRelatores!=null}"
+					escape="false" />
+
+			</rich:panel>
+
+			<rich:panel id="painelIncluirArquivo"
+				headerClass="txtRotuloPannelCenter"
+				rendered="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+				<f:facet name="header">
+					<h:outputText
+						value="#{msg.sigedDocumentoEletronicoAnexarDocumento}" />
+				</f:facet>
+				<h:panelGrid columns="2" columnClasses="labelDireito, bgCampo"
+					width="100%">
+
+					<oab:outputLabel required="true" for="TipoDocumentoEletronico"
+						value="#{msg.sigedDocumentoEletronicoTipoDocumento}" />
+					<h:selectOneMenu id="TipoDocumentoEletronico"
+						value="#{documentoEletronicoBean.idTipoDocumento}">
+						<f:selectItem itemValue="" itemLabel="#{msg.sigedSelecione}" />
+						<f:selectItems
+							value="#{documentoEletronicoBean.listaTipoDocumento}" />
+						<a4j:support event="onchange" reRender="TipoDocumentoEletronico"
+							ajaxSingle="true" />
+					</h:selectOneMenu>
+
+					<oab:outputLabel required="true" for="PaginaDocumento"
+						value="#{msg.sigedDocumentoEletronicoArquivoInfomeAPagina}" />
+					<h:selectOneMenu id="PaginaDocumento"
+						value="#{documentoEletronicoBean.paginaSelecionada}">
+						<f:selectItem itemValue="" itemLabel="#{msg.sigedSelecione}" />
+						<f:selectItem itemValue="1"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 1" />
+						<f:selectItem itemValue="2"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 2" />
+						<f:selectItem itemValue="3"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 3" />
+						<f:selectItem itemValue="4"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 4" />
+						<f:selectItem itemValue="5"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 5" />
+						<f:selectItem itemValue="6"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 6" />
+						<f:selectItem itemValue="7"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 7" />
+						<f:selectItem itemValue="8"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 8" />
+						<f:selectItem itemValue="9"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 9" />
+						<f:selectItem itemValue="10"
+							itemLabel="#{msg.sigedDocumentoEletronicoArquivoPagina} 10" />
+						<a4j:support event="onchange" reRender="PaginaDocumento"
+							ajaxSingle="true" />
+					</h:selectOneMenu>
+
+					<oab:outputLabel for="AnexarArquivo"
+						value="#{msg.sigedDocumentoEletronicoAnexarArquivo}" />
+					<rich:fileUpload id="AnexarArquivo" listHeight="58px"
+						addControlLabel="#{msg.sigedDocumentoEletronicoAdicionar}"
+						stopControlLabel="#{msg.sigedDocumentoEletronicoPararEnvio}"
+						stopEntryControlLabel="#{msg.sigedDocumentoEletronicoPararEnvio}"
+						progressLabel="#{msg.sigedDocumentoEletronicoAguardeCarregando}"
+						fileUploadListener="#{documentoEletronicoBean.adicionarArquivos}"
+						maxFilesQuantity="10" noDuplicate="true" acceptedTypes="pdf"
+						immediateUpload="true" autoclear="true" ajaxSingle="true">
+						<a4j:support event="onuploadcomplete"
+							reRender="ListaEnviados, TipoDocumentoEletronico, PaginaDocumento, ValidacaoArquivoAnexo, ValidacaoRelatores"
+							ajaxSingle="true" />
+						<f:facet name="label">
+							<h:outputText value="{_KB}KB de {KB}KB enviado" />
+						</f:facet>
+					</rich:fileUpload>
+				</h:panelGrid>
+				<h:outputText id="ValidacaoArquivoAnexo"
+					styleClass="txtLabelVermelha"
+					value="#{documentoEletronicoBean.validacaoArquivoAnexo}"
+					rendered="#{documentoEletronicoBean.validacaoArquivoAnexo!=null}"
+					escape="false" />
+			</rich:panel>
+			<h:panelGroup id="ListaEnviados"
+				rendered="#{documentoEletronicoBean.validacaoProcessoJaExiste==false}">
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg.sigedDocumentoEletronicoDocumentoAnexado}" />
+					</f:facet>
+					<h:outputText
+						value="#{msg.sigedDocumentoEletronicoNenhumDocumentoAnexado}"
+						rendered="#{documentoEletronicoBean.totalArquivosEnviados==0}" />
+
+					<rich:dataGrid columns="1"
+						value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}"
+						var="documentoEletronicoArquivo">
+
+						<h:commandLink id="excluirAnexo"
+							action="#{documentoEletronicoBean.excluirAnexo}" immediate="true">
+							<rich:toolTip followMouse="true" for="excluirAnexo"
+								value="#{msg.sigedDocumentoEletronicoCliqueParaExcluirArquivo}"
+								direction="top-right" showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.sigedIconeMenuOpcoesExcluir}" />
+							<f:setPropertyActionListener
+								value="#{documentoEletronicoArquivo}"
+								target="#{documentoEletronicoBean.documentoEletronicoArquivo}" />
+						</h:commandLink>
+						<rich:spacer width="5" />
+						<h:graphicImage id="permissaoAcessoArquivo"
+							value="#{msg.sigedIconeDocumentoPermissaoAcessoArquivo}">
+							<rich:toolTip followMouse="true" for="permissaoAcessoArquivo"
+								direction="top-right" showDelay="100">
+								<h:outputText
+									value="#{msg.sigedDocumentoEletronicoCliqueParaAcessoMembro} (" />
+								<h:graphicImage styleClass="pic3"
+									value="#{msg.sigedIconeUnCkeckBox}" />
+								<h:outputText
+									value=") #{msg.sigedDocumentoEletronicoCliqueParaAcessoMembroDesmarque}" />
+							</rich:toolTip>
+						</h:graphicImage>
+						<rich:spacer width="5" />
+						<h:selectBooleanCheckbox id="AcessoDoArquivo"
+							value="#{documentoEletronicoArquivo.bitAcessoAnonimo}" />
+						<rich:spacer width="5" />
+						<h:graphicImage
+							value="#{msg.sigedIconeDocumentoEletronicoArquivoAnexo}" />
+						<rich:spacer width="5" />
+						<h:outputText value="#{documentoEletronicoArquivo.vchNome}"
+							styleClass="outputTextBold" />
+						<rich:spacer width="5" />
+						<h:outputText value="(#{documentoEletronicoArquivo.vchMimeType})"
+							styleClass="outputTextBold" />
+						<rich:spacer width="5" />
+						<h:outputText value="#{documentoEletronicoArquivo.intTamanho}k"
+							styleClass="outputTextBold" />
+						<rich:spacer width="5" />
+						<rich:editor
+							label="#{msg.sigedDocumentoEletronicoArquivoConteudo}"
+							value="#{documentoEletronicoArquivo.vchConteudo}" width="900"
+							height="200" required="true">
+						</rich:editor>
+					</rich:dataGrid>
+				</rich:panel>
+				<rich:spacer height="3" />
+				<br />
+			</h:panelGroup>
+			<t:saveState value="#{documentoEletronicoBean.documentoEletronico}" />
+			<t:saveState
+				value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}" />
+			<t:saveState value="#{documentoEletronicoBean.totalArquivosEnviados}" />
+			<t:saveState value="#{documentoEletronicoBean.idTipoDocumento}" />
+			<t:saveState value="#{documentoEletronicoBean.paginaSelecionada}" />
+			<t:saveState value="#{documentoEletronicoBean.validacaoArquivoAnexo}" />
+			<t:saveState value="#{documentoEletronicoBean.validacaoRelatores}" />
+			<t:saveState
+				value="#{documentoEletronicoBean.validacaoProcessoJaExiste}" />
+		</ui:define>
+	</ui:composition>
+</html>

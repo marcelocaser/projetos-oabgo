@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:graphicImage value="#{msg.sigedIconeMenuCadastroDocumento}"
+							styleClass="pic" />
+						<h:outputText value="#{msg.sigedDocumentoEletronicoConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:spacer height="20px" />
+
+			<rich:jQuery selector="#DataDecisaoProcesso, #DataDecisaoProcesso2"
+				timing="onload" query="setMask('9999')" />
+
+			<rich:jQuery selector="#Numero" query="setMask('9999/99999')"
+				timing="onload" />
+
+			<rich:jQuery selector="#Numero" timing="onload" query="focus()" />
+
+			<t:panelGrid align="center" width="50%">
+
+				<h:panelGrid columns="2">
+					<oab:outputLabel for="Numero"
+						value="#{msg.sigedDocumentoEletronicoNumeroProcesso}" />
+					<h:inputText id="Numero"
+						value="#{documentoEletronicoBean.numeroFiltro}"
+						styleClass="inputMenor100" maxlength="10" autocomplete="off" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="4">
+					<oab:outputLabel for="DataDecisaoProcesso"
+						value="#{msg.sigedDocumentoEletronicoDataAnoDecisao}" />
+					<h:inputText id="DataDecisaoProcesso" styleClass="inputMenor50"
+						value="#{documentoEletronicoBean.anoDecisaoDeFiltro}"
+						maxlength="4" autocomplete="off">
+						<f:validateLength minimum="4" />
+					</h:inputText>
+
+					<h:outputLabel value="a" />
+
+					<h:inputText id="DataDecisaoProcesso2" styleClass="inputMenor50"
+						value="#{documentoEletronicoBean.anoDecisaoAteFiltro}"
+						maxlength="4" autocomplete="off">
+						<f:validateLength minimum="4" />
+					</h:inputText>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<oab:outputLabel for="Relator"
+						value="#{msg.sigedDocumentoEletronicoRelator}" />
+					<h:inputText id="Relator"
+						value="#{documentoEletronicoBean.relatorFiltro}"
+						styleClass="inputMedio" maxlength="60" autocomplete="off" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<oab:outputLabel for="TextoPesquisa"
+						value="#{msg.sigedDocumentoEletronicoTextoPesquisa}" />
+					<h:inputText id="TextoPesquisa"
+						value="#{documentoEletronicoBean.conteudoFiltro}"
+						styleClass="inputMedio" maxlength="50" autocomplete="off">
+						<f:validateLength minimum="6" />
+					</h:inputText>
+				</h:panelGrid>
+
+				<rich:spacer height="10px" />
+
+				<rich:toolBar height="15">
+					<rich:toolBarGroup location="right">
+						<h:commandButton id="btnFiltar" styleClass="botao2"
+							value="#{msg.sigedFiltrar}" immediate="false"
+							onclick="showModalCentro('modalSubmit');"
+							action="#{documentoEletronicoBean.consultaDeDocumento}" />
+					</rich:toolBarGroup>
+				</rich:toolBar>
+
+			</t:panelGrid>
+
+			<rich:spacer height="10px" />
+
+			<rich:toolBar height="15">
+				<rich:toolBarGroup location="left">
+					<h:outputText value="#{msg.sigedDocumentoEletronicoResultado}" />
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:dataTable width="100%" id="lista"
+				rendered="#{not empty documentoEletronicoBean.listaDocumentoEletronicoDataTable}"
+				rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+				value="#{documentoEletronicoBean.listaDocumentoEletronicoDataTable}"
+				var="documentoEletronico">
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg.sigedDocumentoEletronicoNumeroProcesso}" />
+					</f:facet>
+					<h:outputText value="#{documentoEletronico.vchNumeroProcesso}">
+						<f:converter converterId="ConverterProcesso" />
+					</h:outputText>
+				</rich:column>
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText value="#{msg.sigedDocumentoEletronicoDataAutuacao}" />
+					</f:facet>
+					<h:outputText value="#{documentoEletronico.datProcesso}">
+						<f:converter converterId="ConverterData" />
+					</h:outputText>
+				</rich:column>
+
+			</rich:dataTable>
+
+			<rich:dataTable width="100%" id="listaRelator"
+				rendered="#{not empty relatorBean.listaRelatorDataTable}"
+				rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+				value="#{relatorBean.listaRelatorDataTable}" var="relator">
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText value="#{msg.sigedRelatorRelator}" />
+					</f:facet>
+					<h:commandLink onclick="showModalCentro('modalSubmit');"
+						styleClass="txtLinkDataTable"
+						action="#{relatorBean.consultaDeDocumento}">
+						<h:outputText value="#{relator.vchNome}" />
+						<f:setPropertyActionListener value="#{relator}"
+							target="#{relatorBean.relator}" />
+					</h:commandLink>
+				</rich:column>
+
+			</rich:dataTable>
+
+			<rich:dataTable width="100%" id="listaArquivos"
+				rendered="#{not empty documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}"
+				rows="#{documentoEletronicoBean.itensPorPagina}"
+				rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+				value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}"
+				var="documentoEletronicoArquivo">
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText value="#{msg.sigedMenuOpcao}" />
+					</f:facet>
+					<h:commandLink id="abrirAnexo"
+						action="#{documentoEletronicoBean.abrirAnexo}" target="_blank">
+						<rich:toolTip followMouse="true" for="abrirAnexo"
+							value="#{msg.sigedDocumentoEletronicoCliqueParaAbrirArquivo}"
+							direction="top-right" showDelay="100" />
+						<t:graphicImage style="border: 0px;"
+							value="#{msg.sigedIconeMenuOpcoesAbrirArquivo}" />
+						<f:setPropertyActionListener value="#{documentoEletronicoArquivo}"
+							target="#{documentoEletronicoBean.documentoEletronicoArquivo}" />
+					</h:commandLink>
+				</rich:column>
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg.sigedDocumentoEletronicoNumeroProcesso}" />
+					</f:facet>
+					<h:outputLabel styleClass="txtLinkDataTable"
+						value="#{documentoEletronicoArquivo.documentoEletronico.vchNumeroProcesso}">
+						<f:converter converterId="ConverterProcesso" />
+					</h:outputLabel>
+				</rich:column>
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg.sigedDocumentoEletronicoArquivoNumeroPagina}" />
+					</f:facet>
+					<h:outputLabel styleClass="txtLinkDataTable"
+						value="#{documentoEletronicoArquivo.intPagina}" />
+				</rich:column>
+
+				<rich:column styleClass="alignCenter">
+					<f:facet name="header">
+						<h:outputText value="#{msg.sigedDocumentoEletronicoTipoDocumento}" />
+					</f:facet>
+					<h:outputLabel styleClass="txtLinkDataTable"
+						value="#{documentoEletronicoArquivo.tipoDocumento.vchDescricao}" />
+				</rich:column>
+
+			</rich:dataTable>
+			<h:panelGrid width="100%" cellpadding="0" cellspacing="1" columns="1"
+				rendered="#{not empty documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}">
+				<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+					<rich:datascroller for="listaArquivos" id="scroller"
+						reRender="listaArquivos" align="left" requestDelay="500"
+						maxPages="10" />
+					<a4j:status>
+						<f:facet name="start">
+							<h:graphicImage value="#{msg.admAjaxOn}" />
+						</f:facet>
+						<f:facet name="stop">
+							<h:graphicImage value="#{msg.admAjaxOff}" />
+						</f:facet>
+					</a4j:status>
+				</h:panelGrid>
+				<h:panelGrid cellpadding="0" cellspacing="0" columns="1"
+					styleClass="txtDataScroller">
+					<h:outputText value="Rotulo Pagina" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<t:saveState
+				value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}" />
+			<t:saveState value="#{relatorBean.listaRelatorDataTable}" />
+			<!-- <t:saveState value="#{documentoEletronicoBean.relatorFiltro}" />
+			<t:saveState value="#{documentoEletronicoBean.conteudoFiltro}" />  -->
+		</ui:define>
+	</ui:composition>
+</html>

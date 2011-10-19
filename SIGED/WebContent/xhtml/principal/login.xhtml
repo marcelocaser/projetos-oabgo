@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-login.xhtml">
+		<ui:define name="corpo">
+			<t:panelGrid id="panelLogin" align="center">
+				<t:panelGrid align="right">
+					<h:graphicImage url="#{msg.sigedIconeBeta}" />
+				</t:panelGrid>
+				<h:form prependId="false">
+					<div class="planoFundoLogin">
+						<rich:spacer height="50px" />
+						<t:panelGrid align="center">
+							<t:panelGrid style="width: 200px;" columns="3">
+								<t:panelGrid columns="1" align="right">
+									<h:graphicImage url="#{msg.sigedLoginImg}" />
+								</t:panelGrid>
+								<h:panelGrid columns="2"
+									columnClasses="textLabelLogin, textAlignLefth">
+									<h:outputLabel for="userName" styleClass="txtPequenoBold"
+										value="#{msg.sigedUsuario}:"
+										rendered="#{state.showUserPassWord}">
+									</h:outputLabel>
+									<h:inputText id="userName" required="true"
+										styleClass="inputPequeno" value="#{loginBean.login}"
+										rendered="#{state.showUserPassWord}" autocomplete="off" />
+
+									<h:outputLabel for="password" styleClass="txtPequenoBold"
+										value="#{msg.sigedSenha}:"
+										rendered="#{state.showUserPassWord}" />
+									<h:inputSecret id="password" required="true"
+										styleClass="inputPequeno" value="#{loginBean.senha}"
+										rendered="#{state.showUserPassWord}" />
+
+									<h:outputLabel for="userNameRemember"
+										styleClass="txtPequenoBold" value="#{msg.sigedUsuario}:"
+										rendered="#{state.showEmail}" />
+									<h:inputText id="userNameRemember" required="true"
+										styleClass="inputPequeno" value="#{loginBean.login}"
+										rendered="#{state.showEmail}" autocomplete="off" />
+
+									<rich:spacer width="10px" />
+									<h:panelGrid columns="3">
+										<h:commandButton styleClass="botao2"
+											onclick="showModalCentro('modalSubmit')"
+											action="#{loginBean.logon}" value="#{state.button}" />
+										<rich:spacer width="32px" />
+										<a4j:commandLink styleClass="txtPequeno" action="switch"
+											value="#{state.link}" immediate="true" reRender="panelLogin" />
+									</h:panelGrid>
+									<rich:jQuery selector="#userName" timing="onload"
+										query="focus()" rendered="#{state.showUserPassWord}" />
+									<rich:jQuery selector="#userNameRemember" timing="onload"
+										query="focus()" rendered="#{state.showEmail}" />
+								</h:panelGrid>
+							</t:panelGrid>
+							<rich:spacer height="60px" />
+							<h:panelGrid>
+								<h:panelGroup>
+									<h:outputText styleClass="txtPequeno"
+										value="#{msg.sigedCopyright} " />
+									<h:outputLink styleClass="linkLoginBold"
+										value="#{msg.sigedPortalOABGO}" target="_blank">#{msg.sigedOabUpperCase}</h:outputLink>
+									<h:outputText styleClass="txtPequeno"
+										value=", #{msg.sigedDireitos}" />
+								</h:panelGroup>
+							</h:panelGrid>
+						</t:panelGrid>
+					</div>
+				</h:form>
+				<t:panelGrid align="left">
+					<h:form prependId="false">
+						<h:graphicImage url="#{msg.sigedIconeCadastrarRelator}"
+							styleClass="pic" />
+						<h:outputLink styleClass="txtPequeno"
+							value="${facesContext.externalContext.request.contextPath}/xhtml/principal/cadastro.jsf">#{msg.sigedCadastroRelatorCriarConta}</h:outputLink>
+						<rich:spacer width="290px" />
+						<h:graphicImage url="#{msg.sigedIconeAcessoAnonimo}"
+							styleClass="pic" />
+						<h:commandLink styleClass="txtPequeno"
+							onclick="showModalCentro('modalSubmit')"
+							action="#{loginBean.logonAnonimo}"
+							value="#{msg.sigedDocumentoEletronicoAnonimo}" immediate="true" />
+					</h:form>
+				</t:panelGrid>
+			</t:panelGrid>
+		</ui:define>
+	</ui:composition>
+</html>

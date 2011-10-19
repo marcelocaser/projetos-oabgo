@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="filtro">
+			<ui:include src="/xhtml/tipoDocumento/tipoDocumentoFiltro.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedTipoDocumentoListar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage style="border: 0px;"
+									value="#{msg.sigedIconeMenuOpcoes}" styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoNovo}"
+							action="#{tipoDocumentoBean.novo}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.sigedIconeMenuOpcoesNovo}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
+
+				<t:saveState value="#{tipoDocumentoBean.listaTipoDocumentoDataTable}" />
+
+				<rich:dataTable width="100%" id="lista"
+					rendered="#{not empty tipoDocumentoBean.listaTipoDocumentoDataTable}"
+					rows="#{tipoDocumentoBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{tipoDocumentoBean.listaTipoDocumentoDataTable}" var="tipoDocumento">
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedMenuOpcao}" />
+						</f:facet>
+						<t:commandLink onclick="#{msg.sigedConfirmaExclusao}"
+							action="#{tipoDocumentoBean.excluir}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.sigedOpcoesToolTipoExcluir}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.sigedIconeExcluir}" />
+							<f:setPropertyActionListener value="#{tipoDocumento}"
+								target="#{tipoDocumentoBean.tipoDocumento}" />
+						</t:commandLink>
+						<rich:spacer width="5" />
+						<t:commandLink onclick="showModalCentro('modalSubmit');"
+							action="#{tipoDocumentoBean.editar}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.sigedOpcoesToolTipoEditar}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.sigedIconeEditar}" />
+							<f:setPropertyActionListener value="#{tipoDocumento}"
+								target="#{tipoDocumentoBean.tipoDocumento}" />
+						</t:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedTipoDocumentoCodigo}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{tipoDocumento.intCodigo}"
+							action="#{tipoDocumentoBean.consultar}">
+							<f:setPropertyActionListener value="#{tipoDocumento}"
+								target="#{tipoDocumentoBean.tipoDocumento}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedTipoDocumentoDescricao}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{tipoDocumento.vchDescricao}"
+							action="#{tipoDocumentoBean.consultar}">
+							<f:setPropertyActionListener value="#{tipoDocumento}"
+								target="#{tipoDocumentoBean.tipoDocumento}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedTipoDocumentoStatus}" />
+						</f:facet>
+						<t:commandLink id="idAtivo" onclick="showModalCentro('modalSubmit');"
+							action="#{tipoDocumentoBean.consultar}">
+							<oab:boolean value="#{tipoDocumento.bitAtivo}" />
+							<f:setPropertyActionListener value="#{tipoDocumento}"
+								target="#{tipoDocumentoBean.tipoDocumento}" />
+						</t:commandLink>
+					</rich:column>
+
+				</rich:dataTable>
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
+					columns="1">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+						<rich:datascroller for="lista" id="scroller"
+							reRender="painelListagem" align="left" requestDelay="500"
+							maxPages="10" />
+						<a4j:status>
+							<f:facet name="start">
+								<h:graphicImage value="#{msg.admAjaxOn}" />
+							</f:facet>
+							<f:facet name="stop">
+								<h:graphicImage value="#{msg.admAjaxOff}" />
+							</f:facet>
+						</a4j:status>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="1"
+						styleClass="txtDataScroller">
+						<h:outputText value="Rotulo Pagina" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

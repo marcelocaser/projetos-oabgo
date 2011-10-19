@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedTipoDocumentoConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.sigedIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoEditar}"
+							action="#{tipoDocumentoBean.editar}"
+							icon="#{msg.sigedIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoExcluir}"
+							action="#{tipoDocumentoBean.excluir}"
+							onclick="#{msg.sigedConfirmaExclusao}"
+							icon="#{msg.sigedIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoRetornar}"
+							action="#{tipoDocumentoBean.listar}"
+							icon="#{msg.sigedIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelCodigo"
+						value="#{msg.sigedTipoDocumentoCodigo}:" for="Codigo"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Codigo"
+						value="#{tipoDocumentoBean.tipoDocumento.intCodigo}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelDescricao"
+						value="#{msg.sigedTipoDocumentoDescricao}:" for="Descricao"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Descricao"
+						value="#{tipoDocumentoBean.tipoDocumento.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelAtivo"
+						value="#{msg.sigedTipoDocumentoStatus}:"
+						styleClass="txtMedioNegrito" />
+					<oab:boolean value="#{tipoDocumentoBean.tipoDocumento.bitAtivo}" />
+
+				</h:panelGrid>
+
+				<t:saveState value="#{tipoDocumentoBean.tipoDocumento}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

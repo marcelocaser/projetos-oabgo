@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.sigedDocumentoEletronicoConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.sigedIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.sigedMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.sigedMenuOpcaoEditar}"
+							action="#{documentoEletronicoBean.editar}"
+							icon="#{msg.sigedIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoExcluir}"
+							action="#{documentoEletronicoBean.excluir}"
+							onclick="#{msg.sigedConfirmaExclusao}"
+							icon="#{msg.sigedIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.sigedMenuOpcaoRetornar}"
+							action="#{documentoEletronicoBean.listar}"
+							icon="#{msg.sigedIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelNumero"
+						value="#{msg.sigedDocumentoEletronicoNumeroProcesso}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Numero"
+						value="#{documentoEletronicoBean.documentoEletronico.vchNumeroProcesso}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterProcesso" />
+					</h:outputText>
+
+					<h:outputLabel id="labelDataProcesso"
+						value="#{msg.sigedDocumentoEletronicoDataAutuacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="DataProcesso"
+						value="#{documentoEletronicoBean.documentoEletronico.datProcesso}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterData" />
+					</h:outputText>
+
+					<h:outputLabel id="labelDataDecisao"
+						value="#{msg.sigedDocumentoEletronicoDataDecisao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="DataDecisao"
+						value="#{documentoEletronicoBean.documentoEletronico.datDecisao}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterData" />
+					</h:outputText>
+
+				</h:panelGrid>
+			</rich:panel>
+
+			<rich:panel id="painelConsultarRelatores"
+				headerClass="txtRotuloPannelCenter">
+				<f:facet name="header">
+					<h:outputText value="#{msg.sigedRelatorRelatores}" />
+				</f:facet>
+				<h:outputText value="#{msg.sigedRelatorNenhumRelatorDefinido}"
+					rendered="#{relatorBean.totalRelatoresCadastrados==0}" />
+				<rich:dataTable width="100%" id="listaRelatores"
+					rendered="#{not empty relatorBean.relatores}"
+					rows="#{relatorBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{relatorBean.relatores}" var="relator">
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedRelatorNome}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{relator.vchNome}" />
+					</rich:column>
+
+				</rich:dataTable>
+			</rich:panel>
+
+			<rich:panel id="painelConsultarAnexos"
+				headerClass="txtRotuloPannelCenter">
+				<f:facet name="header">
+					<h:outputText
+						value="#{msg.sigedDocumentoEletronicoDocumentoAnexado}" />
+				</f:facet>
+				<h:outputText
+					value="#{msg.sigedDocumentoEletronicoNenhumDocumentoAnexado}"
+					rendered="#{documentoEletronicoBean.totalArquivosEnviados==0}" />
+				<rich:dataTable width="100%" id="listaArquivos"
+					rendered="#{not empty documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}"
+					rows="#{documentoEletronicoBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}"
+					var="documentoEletronicoArquivo">
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedMenuOpcao}" />
+						</f:facet>
+						<h:commandLink id="abrirAnexo"
+							action="#{documentoEletronicoBean.abrirAnexo}" target="_blank">
+							<rich:toolTip followMouse="true" for="abrirAnexo"
+								value="#{msg.sigedDocumentoEletronicoCliqueParaAbrirArquivo}"
+								direction="top-right" showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.sigedIconeMenuOpcoesAbrirArquivo}" />
+							<f:setPropertyActionListener
+								value="#{documentoEletronicoArquivo}"
+								target="#{documentoEletronicoBean.documentoEletronicoArquivo}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedDocumentoEletronicoArquivoNome}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{documentoEletronicoArquivo.vchNome}" />
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg.sigedDocumentoEletronicoArquivoNumeroPagina}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{documentoEletronicoArquivo.intPagina}" />
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg.sigedDocumentoEletronicoArquivoTamanho}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{documentoEletronicoArquivo.intTamanho} KB" />
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.sigedDocumentoEletronicoArquivoData}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{documentoEletronicoArquivo.datArquivo}">
+							<f:converter converterId="ConverterData" />
+						</h:outputLabel>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg.sigedDocumentoEletronicoArquivoAcesso}" />
+						</f:facet>
+						<h:outputLabel id="idAdmin">
+							<oab:booleanAcesso
+								value="#{documentoEletronicoArquivo.bitAcessoAnonimo}" />
+						</h:outputLabel>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg.sigedDocumentoEletronicoTipoDocumento}" />
+						</f:facet>
+						<h:outputLabel styleClass="txtLinkDataTable"
+							value="#{documentoEletronicoArquivo.tipoDocumento.vchDescricao}" />
+					</rich:column>
+
+				</rich:dataTable>
+			</rich:panel>
+			<t:saveState
+				value="#{documentoEletronicoBean.listaDocumentoEletronicoArquivoDataTable}" />
+			<t:saveState
+				value="#{documentoEletronicoBean.documentoEletronicoArquivo}" />
+			<t:saveState value="#{relatorBean.listaRelatorSelecionado}" />
+			<t:saveState value="#{documentoEletronicoBean.documentoEletronico}" />
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<oab:filtro>
+		<h:panelGrid columns="2" width="100%"
+			columnClasses="labelDireito, bgCampo">
+			<oab:outputLabel value="#{msg.sigedUsuarioUserName}" />
+			<h:inputText value="#{usuarioBean.userNameFiltro}"
+				styleClass="inputPequeno" maxlength="50" />
+
+			<oab:outputLabel value="#{msg.sigedUsuarioNome}" />
+			<h:inputText value="#{usuarioBean.nomeFiltro}"
+				styleClass="inputGrande" maxlength="100" />
+		</h:panelGrid>
+
+		<h:panelGrid align="right">
+			<h:commandButton id="btnListar" styleClass="botao2"
+				value="#{msg.sigedFiltrar}" action="#{usuarioBean.listar}" />
+		</h:panelGrid>
+
+		<!--  saveState do Filtros -->
+		<t:saveState value="#{usuarioBean.userNameFiltro}" />
+		<t:saveState value="#{usuarioBean.nomeFiltro}" />
+	</oab:filtro>
+</html>
