@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+     <ui:composition xmlns="http://java.sun.com/jsf/facelets">
+      		<h:outputLabel rendered="#{!link}" for="#{for}">
+	 	 		<t:commandLink rendered="#{help != null}" disabled="true"  style="font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 10px; color: red; cursor:pointer;">
+			 		<h:graphicImage value="/images/icon_ajuda.gif" style="border: 0px;" />
+			 		<h:outputText value=" " />
+			 		<rich:toolTip value="#{help}" showDelay="400" />
+			 	</t:commandLink>
+			 	<h:outputText value="#{value}:" />
+	 	 		<t:commandLink rendered="#{required}" disabled="true" value="* " style="font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 10px; color: red; cursor:pointer;">
+	 	 			<rich:toolTip followMouse="true" value="#{msg.satiMsgCampoObrigatorio}" direction="auto" showDelay="100"/>
+	 	 		</t:commandLink>
+	 	 	</h:outputLabel>
+	 	 	
+	 	 	<h:outputLabel rendered="#{link}" styleClass="link" onclick="#{onclick}" for="#{for}">
+	 	 		<t:commandLink rendered="#{help != null}" disabled="true"  style="font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 10px; color: red; cursor:pointer;">
+			 		<h:graphicImage value="/images/icon_ajuda.gif" style="border: 0px;" />
+			 		<h:outputText value=" " />
+			 		<rich:toolTip value="#{help}" showDelay="400" />
+			 	</t:commandLink>
+	 	 		<t:outputText value="#{value}:" style="	font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 9px;	font-weight: bold;	color: #003366;	cursor: pointer; text-decoration: underline;">
+	 	 			<rich:toolTip followMouse="true" value="#{msg.satiMsgCliquePopup}" direction="top-right" showDelay="100"/>
+	 	 		</t:outputText>
+	 	 		<t:commandLink rendered="#{required}" disabled="true" value="* " style="font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 10px; color: red; cursor:pointer;">
+	 	 			<rich:toolTip followMouse="true" value="#{msg.satiMsgCampoObrigatorio}" direction="auto" showDelay="100"/>
+	 	 		</t:commandLink>
+	 	 	</h:outputLabel>
+	  </ui:composition>
+</html>

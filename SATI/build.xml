@@ -1,0 +1,118 @@
+<project name="sati" default="gerar-projeto" basedir=".">
+
+	<target name="gerar-projeto">
+
+		<delete>
+			<fileset dir="WebContent/WEB-INF/lib" />
+		</delete>
+
+		<antcall target="copiar-dependencias" />
+	</target>
+
+	<!-- ### GERA AS DEPENDENCIAS NECESSÁRIAS PARA O PROJETO #### -->
+	<target name="copiar-dependencias" depends="gera-core" description="Copia as dependencias para o LIB da aplicação.">
+
+		<copy file="../core/bibliotecas/c3p0/0.9.1.2/c3p0-0.9.1.2.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/c3p0/0.9.1.2/c3p0-oracle-thin-extras-0.9.1.2.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/cglib/2.2/cglib-2.2.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/collections/3.2/commons-collections-3.2.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/discovery/commons-discovery-0.4.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/digester/1.8/commons-digester-1.8.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/logging/1.1/commons-logging-1.1.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/beanutils/1.7/commons-beanutils-1.7.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/codec/1.3/commons-codec-1.3.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/httpclient/3.1/commons-httpclient-3.1.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/io/1.4/commons-io-1.4.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/lang/2.1/commons-lang-2.1.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/el/commons-el.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/commons-fileupload/commons-fileupload-1.2.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/el/impl/1.0/el-impl-1.0.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/el/api/el-api.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/facelets/1.1.15/jsf-facelets.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/jcifs/1.3.3/jcifs-1.3.3.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/jsf-ri/1.2/MR2/jsf-api.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/jsf-ri/1.2/MR2/jsf-impl.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/jsp/jsp-api.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/myFaces/tomahawk/tomahawk-1.1.9.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/myFaces/tomahawk/tomahawk-sandbox-1.1.7.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/richFaces/oscache-2.3.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-api-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-impl-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-ui-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/jta/jta.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/dom4j/1.6/dom4j-1.6.1.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/ehCache/1.6.0/ehcache-1.6.0.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/tools/ejb3-persistence.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/tools/hibernate-3.2.4.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/tools/hibernate-annotations.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/tools/hibernate-commons-annotations.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/tools/hibernate-validator.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/asm/3.2/asm-3.2.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/quartz/1.6/quartz-1.6.0.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/aopalliance/aopalliance.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/servlet/servlet-api.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.aop-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.asm-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.aspects-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.beans-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.context.support-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.context-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.core-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.expression-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.instrument.tomcat-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.instrument-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.jdbc-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.jms-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.orm-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.oxm-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.test-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.transaction-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.web.portlet-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.web.servlet-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.web.struts-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/spring/3.0.3/org.springframework.web-3.0.3.RELEASE.jar" todir="WebContent/WEB-INF/lib" />
+
+		<copy file="../core/bibliotecas/brazilUtils/0.1.1/brazilutils-0.1.1.jar" todir="WebContent/WEB-INF/lib" />
+
+	</target>
+
+	<target name="gera-core" description="Gera o core na aplicação">
+
+		<!-- Gera o jar com as dependencias do core e dos projetos de negócio -->
+		<zip destfile="WebContent/WEB-INF/lib/oab-core.jar">
+			<zipfileset dir="../core/bin" />
+		</zip>
+	</target>
+
+	<target name="gera-war" depends="copiar-dependencias" description="Cria o arquivo war completo para produção.">
+
+		<!--Apaga o arquivo sati.war-->
+		<delete file="sati.war" />
+
+		<zip destfile="sati.war">
+			<zipfileset dir="WebContent">
+				<!--Não inclui os fontes java nem os fontes IREPORT.-->
+				<exclude name="**/WEB-INF/classes/**/*.java" />
+				<exclude name="**/jasper/*.jrxml" />
+			</zipfileset>
+		</zip>
+	</target>
+
+
+
+</project>

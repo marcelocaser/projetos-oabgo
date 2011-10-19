@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiSistemaConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{sistemaBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{sistemaBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{sistemaBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+					<h:outputLabel id="labelSigla" value="#{msg.satiSistemaSigla}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Sigla" value="#{sistemaBean.sistema.vchSigla}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelDescricao"
+						value="#{msg.satiSistemaDescricao}:" styleClass="txtMedioNegrito" />
+					<h:outputText id="Descricao"
+						value="#{sistemaBean.sistema.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelVersao" value="#{msg.satiSistemaVersao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Versao" value="#{sistemaBean.sistema.vchVersao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelTipo" value="#{msg.satiSistemaTipo}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Tipo" value="#{sistemaBean.sistema.chrTipo}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelSistemaPrincipal"
+						value="#{msg.satiSistemaPrincipal}:" styleClass="txtMedioNegrito" />
+					<oab:boolean value="#{sistemaBean.sistema.bitSistemaPrincipal}" />
+
+					<h:outputLabel id="labelContextoAplicacao"
+						value="#{msg.satiSistemaContextoAplicacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="ContextoAplicacao"
+						value="#{sistemaBean.sistema.vchContextoAplicacao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelUrlSistema"
+						value="#{msg.satiSistemaUrlSistema}:" styleClass="txtMedioNegrito" />
+					<h:outputText id="UrlSistema"
+						value="#{sistemaBean.sistema.vchContextoAplicacao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelUrlPaginaPrincipal"
+						value="#{msg.satiSistemaUrlPaginaPrincipal}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="UrlPaginaPrincipal"
+						value="#{sistemaBean.sistema.vchUrlPaginaPrincipal}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNomePaginaLogin"
+						value="#{msg.satiSistemaNomePaginaLogin}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NomePaginaLogin"
+						value="#{sistemaBean.sistema.vchNomePaginaLogin}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+
+				<t:saveState value="#{sistemaBean.sistema}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

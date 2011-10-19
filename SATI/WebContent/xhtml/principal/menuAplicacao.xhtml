@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form prependId="false">
+		<rich:toolBar>
+
+			<rich:dropDownMenu location="right">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:graphicImage value="#{msg.satiIconeMenuCadastro}"
+							styleClass="pic" />
+						<h:outputText value="#{msg.satiMenuCadastro}" />
+					</h:panelGroup>
+				</f:facet>
+
+				<rich:menuItem
+					value="#{msg.satiMenuCadastroAtendimentoAutenticacaoAdsl}"
+					action="#{atendimentoAutenticacaoAdslBean.listar}"
+					icon="#{msg.satiIconeMenuCadastroAtendimentoAutenticacaoAdsl}" />
+
+				<rich:menuItem value="#{msg.saitMenuCadastroAutenticacaoAdsl}"
+					action="#{autenticacaoAdslBean.listar}"
+					icon="#{msg.saitIconeMenuCadastroAutenticacaoAdsl}" />
+
+				<rich:menuItem value="#{msg.satiMenuCadastroEmpresa}"
+					action="#{empresaBean.listar}"
+					icon="#{msg.satiIconeMenuCadastroEmpresa}" />
+
+				<rich:menuItem value="#{msg.satiMenuCadastroItemCiaTelefonica}"
+					action="#{itemCiaTelefonicaBean.listar}"
+					icon="#{msg.satiIconeMenuCadastroItemCiaTelefonica}" />
+
+				<rich:menuItem value="#{msg.satiMenuCadastroUsuario}"
+					action="#{usuarioBean.listar}"
+					icon="#{msg.satiIconeMenuCadastroUsuario}" />
+
+				<rich:menuSeparator />
+
+				<rich:menuGroup location="right"
+					value="#{msg.satiMenuCadatroTabela}"
+					icon="#{msg.satiIconeMenuCadastroTabela}">
+					<rich:menuItem value="#{msg.satiMenuCadastroTabelaMenuSistema}"
+						action="#{menuSistemaBean.listar}" />
+					<rich:menuItem value="#{msg.satiMenuCadastroTabelaSistema}"
+						action="#{sistemaBean.listar}" />
+					<rich:menuItem
+						value="#{msg.satiMenuCadastroTabelaStatusAutenticacaoAdsl}"
+						action="#{statusAutenticacaoAdslBean.listar}" />
+					<rich:menuItem value="#{msg.satiMenuCadastroTabelaTipoMenuSistema}"
+						action="#{tipoMenuSistemaBean.listar}" />
+					<rich:menuItem
+						value="#{msg.satiMenuCadastroTabelaTpUnidadesAdministrativas}"
+						action="#{tipoUnidadeAdministrativaBean.listar}" />
+					<rich:menuItem
+						value="#{msg.satiMenuCadastroTabelaUnidadesAdministrativas}"
+						action="#{unidadeAdministrativaBean.listar}" />
+				</rich:menuGroup>
+
+				<rich:menuGroup location="right"
+					value="#{msg.satiMenuCadatroSeguranca}"
+					icon="#{msg.satiIconeMenuCadastroSeguranca}">
+					<rich:menuItem
+						value="#{msg.satiMenuCadastroSegurancaAcessoSistema}"
+						action="#{acessoSistemaBean.listar}" />
+					<rich:menuItem value="#{msg.satiMenuCadastroSegurancaPerfilAcesso}"
+						action="#{perfilAcessoBean.listar}" />
+				</rich:menuGroup>
+			</rich:dropDownMenu>
+
+			<rich:dropDownMenu location="right">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:graphicImage value="#{msg.satiIconeMenuInventario}"
+							styleClass="pic" />
+						<h:outputText value="#{msg.satiMenuInventario}" />
+					</h:panelGroup>
+				</f:facet>
+			</rich:dropDownMenu>
+		</rich:toolBar>
+	</h:form>
+</html>

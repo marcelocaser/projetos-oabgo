@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiStatusAutenticacaoAdslEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{statusAutenticacaoAdslBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{statusAutenticacaoAdslBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="Codigo"
+						value="#{msg.satiStatusAutenticacaoAdslCodigo}" />
+					<h:inputText id="Codigo" required="true" maxlength="10"
+						styleClass="inputPequeno"
+						value="#{statusAutenticacaoAdslBean.statusAutenticacaoAdsl.tynCodigo}" />
+
+					<oab:outputLabel required="true" for="Descricao"
+						value="#{msg.satiStatusAutenticacaoAdslDescricao}" />
+					<h:inputText id="Descricao" required="true" maxlength="10"
+						styleClass="inputPequeno"
+						value="#{statusAutenticacaoAdslBean.statusAutenticacaoAdsl.vchDescricao}" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState
+				value="#{statusAutenticacaoAdslBean.statusAutenticacaoAdsl}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

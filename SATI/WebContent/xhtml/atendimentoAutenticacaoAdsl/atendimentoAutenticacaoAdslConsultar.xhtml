@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText
+							value="#{msg.satiAtendimentoAutenticacaoAdslConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{atendimentoAutenticacaoAdslBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{atendimentoAutenticacaoAdslBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{atendimentoAutenticacaoAdslBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelProtocolo"
+						value="#{msg.satiAtendimentoAutenticacaoAdslProtocolo}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Protocolo"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.intProtocolo}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelAssunto"
+						value="#{msg.satiAtendimentoAutenticacaoAdslAssunto}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Assunto"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.vchAssunto}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelAtendimento"
+						value="#{msg.satiAtendimentoAutenticacaoAdslAtendimento}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Atendimento"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.datAtendimento}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterData" />
+					</h:outputText>
+
+					<h:outputLabel id="labelRenegociacao"
+						value="#{msg.satiAtendimentoAutenticacaoAdslRenegociacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Renegociacao"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.datRenegociacao}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterData" />
+					</h:outputText>
+
+					<h:outputLabel id="labelAtendente"
+						value="#{msg.satiAtendimentoAutenticacaoAdslAtendente}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Atendente"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.vchAtendente}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelObservacao"
+						value="#{msg.satiAtendimentoAutenticacaoAdslObservacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Observacao"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.txtObservacao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelContaEmail"
+						value="#{msg.satiAtendimentoAutenticacaoAdslContaEmail}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="ContaEmail"
+						value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl.autenticacaoAdsl.vchContaEmail}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+
+				<t:saveState
+					value="#{atendimentoAutenticacaoAdslBean.atendimentoAutenticacaoAdsl}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

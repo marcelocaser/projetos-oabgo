@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="hibernateSessionFactory">
+		<property name="show_sql">false</property>
+		<property name="use_outer_join">true</property>
+		<property name="dialect">core.hibernate.MSSQLDialect</property>
+		<property name="query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+		<!-- ## <property name="hbm2ddl.auto">update</property> ## -->
+
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.AcaoMenuTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.AcessoSistemaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.AtendimentoAutenticacaoAdslTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.AutenticacaoAdslTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.EmpresaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.ItemCiaTelefonicaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.MenuSistemaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.PaginaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.PerfilAcessoTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.StatusAutenticacaoAdslTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.SistemaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.TipoMenuSistemaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.TipoUnidadeAdministrativaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.UnidadeAdministrativaTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.UsuarioTO" />
+		<mapping class="br.org.oabgo.sati.negocio.controle.entidade.UsuarioUnidadeAdministrativaTO" />
+
+	</session-factory>
+</hibernate-configuration>

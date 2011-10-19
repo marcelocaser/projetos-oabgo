@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiUnidadesAdministrativasConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{unidadeAdministrativaBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{unidadeAdministrativaBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{unidadeAdministrativaBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelSigla"
+						value="#{msg.satiUnidadesAdministrativasSigla}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Sigla"
+						value="#{unidadeAdministrativaBean.unidadeAdministrativa.vchSigla}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNome"
+						value="#{msg.satiUnidadesAdministrativasNome}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Nome"
+						value="#{unidadeAdministrativaBean.unidadeAdministrativa.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelUnidadeAdministrativa"
+						value="#{msg.satiUnidadesAdministrativasSuperiorNome}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="UnidadeAdministrativaSuperior"
+						value="#{unidadeAdministrativaBean.unidadeAdministrativa.unidadeAdministrativaSuperior.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelTipoUnidadeAdministrativa"
+						value="#{msg.satiTpUnidadesAdministrativasNome}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="TipoUnidadeAdministrativa"
+						value="#{unidadeAdministrativaBean.unidadeAdministrativa.tipoUnidadeAdministrativa.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState
+				value="#{unidadeAdministrativaBean.unidadeAdministrativa}" />
+			<t:saveState
+				value="#{unidadeAdministrativaBean.idTipoUnidadeAdministrativa}" />
+			<t:saveState
+				value="#{unidadeAdministrativaBean.listaTpUnidadesAdministrativa}" />
+			<t:saveState
+				value="#{unidadeAdministrativaBean.idUnidadeAdmSuperior}" />
+			<t:saveState
+				value="#{unidadeAdministrativaBean.listaUnidadeAdministrativa}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

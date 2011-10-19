@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="filtro">
+			<ui:include
+				src="/xhtml/itemCiaTelefonica/itemCiaTelefonicaFiltro.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiItemContaTelefonicaListar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoNovo}"
+							action="#{itemCiaTelefonicaBean.novo}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesNovo}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
+
+				<t:saveState
+					value="#{itemCiaTelefonicaBean.listaItemCiaTelefonicaDataTable}" />
+
+				<rich:dataTable width="100%" id="lista"
+					rendered="#{not empty itemCiaTelefonicaBean.listaItemCiaTelefonicaDataTable}"
+					rows="#{itemCiaTelefonicaBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{itemCiaTelefonicaBean.listaItemCiaTelefonicaDataTable}"
+					var="itemCiaTelefonica">
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiMenuOpcao}" />
+						</f:facet>
+						<t:commandLink onclick="#{msg.satiConfirmaExclusao}"
+							action="#{itemCiaTelefonicaBean.excluir}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.satiOpcoesToolTipoExcluir}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.satiIconeExcluir}" />
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</t:commandLink>
+						<rich:spacer width="5" />
+						<t:commandLink onclick="showModalCentro('modalSubmit');"
+							action="#{itemCiaTelefonicaBean.editar}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.satiOpcoesToolTipoEditar}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.satiIconeEditar}" />
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</t:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg.satiItemContaTelefonicaNumrContratoAgrupador}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							value="#{itemCiaTelefonica.vchNumrContratoAgrupador}"
+							action="#{itemCiaTelefonicaBean.consultar}">
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiItemContaTelefonicaNumrTelefone}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							action="#{itemCiaTelefonicaBean.consultar}">
+							<h:outputText value="#{itemCiaTelefonica.vchNumrTelefone}">
+								<f:converter converterId="ConverterTelefone" />
+							</h:outputText>
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiItemContaTelefonicaValorServico}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							value="#{itemCiaTelefonica.vchDescricaoServico}"
+							action="#{itemCiaTelefonicaBean.consultar}">
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiItemContaTelefonicaDiaVencimento}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							value="#{itemCiaTelefonica.vchDiaVencimento}"
+							action="#{itemCiaTelefonicaBean.consultar}">
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiItemContaTelefonicaObservacao}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							value="#{itemCiaTelefonica.txtObservacao}"
+							action="#{itemCiaTelefonicaBean.consultar}">
+							<f:setPropertyActionListener value="#{itemCiaTelefonica}"
+								target="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+						</h:commandLink>
+					</rich:column>
+
+				</rich:dataTable>
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
+					columns="1">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+						<rich:datascroller for="lista" id="scroller"
+							reRender="painelListagem" align="left" requestDelay="500"
+							maxPages="10" />
+						<a4j:status>
+							<f:facet name="start">
+								<h:graphicImage value="#{msg.admAjaxOn}" />
+							</f:facet>
+							<f:facet name="stop">
+								<h:graphicImage value="#{msg.admAjaxOff}" />
+							</f:facet>
+						</a4j:status>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="1"
+						styleClass="txtDataScroller">
+						<h:outputText value="Rotulo Pagina" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

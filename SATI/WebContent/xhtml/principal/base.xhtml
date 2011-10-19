@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC 	"-//W3C//DTD XHTML 1.0 Strict//EN" 
+						"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+			<title><ui:insert name="title"><h:outputText value="#{msg.satiTitulo}"/></ui:insert></title>
+			<link rel="shortcut icon" href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+			
+			<link 	 rel="stylesheet" href="${facesContext.externalContext.request.contextPath}/css/main.css"	type="text/css" /> 
+			<script  src="${facesContext.externalContext.request.contextPath}/js/popup.js"						type="text/javascript" />
+			
+			<script  src="${facesContext.externalContext.request.contextPath}/js/jquery.maskMoney.0.2.js" 	type="text/javascript" />
+			
+			<script  src="${facesContext.externalContext.request.contextPath}/js/jquery.meio.mask.min.js" 	type="text/javascript" />
+			
+			<f:loadBundle var="msg" basename="ressources.messages"/>
+			
+		</head>
+		
+		<body>
+			<div id="bordaCentroImg"></div>
+		  	<div id="topoLogoOAB">
+		  		<div id="nomeDoSistema">
+		  			<h:outputLabel value="#{msg.satiTitulo}" styleClass="nomeDoSistema" />
+		  		</div>
+		  		<div id="logoOABTopo"></div>
+		  	</div>
+		  	
+		  	<div id="caixaTopoUsuarioLogado">
+		  		<h:outputLabel value="#{msg.satiUsuarioOla}," styleClass="labelInfoUsuario"/>
+		  		<h:outputLabel value="#{usuarioLogado.vchNome}" styleClass="labelInfoUsuario"/>
+		  	</div>
+		  	
+		  	<div id="topoLinks"> 
+					<h:form prependId="false">
+					  	<t:commandLink id="idDashBoard" style="cursor: pointer;" immediate="true"  onclick="showModalCentro('modalSubmit');"  action="#{loginBean.dashBoard}">
+					  		<rich:toolTip followMouse="true" for="idDashBoard" value="Menu Principal" direction="top-left" showDelay="500"/>
+					  		<t:graphicImage value="/imagens/icons/iconePaginaPrincipal.png" style="border: 0px;" styleClass="pic2" />
+					  	</t:commandLink>
+					  	<h:outputLabel value="Principal" styleClass="labelMenu"/>
+						<rich:spacer width="10" />
+					  	<t:commandLink id="idLofOff" style="cursor: pointer;" action="#{loginBean.logoff}" onclick="showModalCentro('modalSubmit');">
+					  		<rich:toolTip followMouse="true" for="idLofOff"  value="#{msg.satiSair}" styleClass="txtMedio" direction="top-left" showDelay="500"/>
+					  		<t:graphicImage value="/imagens/icons/iconeLogout.png" style="border: 0px;" styleClass="pic2"/>
+					  	</t:commandLink>
+					  	<h:outputLabel value="Sair" styleClass="labelMenu"/>
+			  		</h:form>
+			 </div>
+			 
+		    <div id="bordaCentro">
+			    <div id="areaTrabalho">
+			    	<ui:include src="/xhtml/principal/menuAplicacao.xhtml" />
+			    	<rich:spacer height="10" />
+			    	<!--<ui:insert name="popup"/>-->
+					<ui:insert name="corpo"/>
+					<ui:insert name="mensagemErro"><ui:include src="/xhtml/principal/mensagemErro.xhtml"/></ui:insert>
+					<ui:insert name="modalSubmit"><ui:include src="/xhtml/principal/modalSubmit.xhtml"/></ui:insert>
+				</div>
+			</div>
+			
+			<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
+			<c:if test="#{SATI_MODAL_MENSAGEM}">
+				<c:if test="#{SATI_TIPO_MENSAGEM eq 'SUCESSO'}">
+						<script>
+							abrirDivMensagem('mpRegraNegocio');
+						</script>
+					</c:if>
+					<c:if test="#{SATI_TIPO_MENSAGEM eq 'ERRO' or SATI_TIPO_MENSAGEM eq 'ATENCAO'}">
+
+						<script>
+							abrirModalMensagemErro('mpRegraNegocio');
+						</script>
+					</c:if>
+			 </c:if>
+			
+		</body>
+</html>

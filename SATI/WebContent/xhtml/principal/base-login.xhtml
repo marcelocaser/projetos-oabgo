@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+      
+      <f:loadBundle var="msg" basename="ressources.messages"/>
+
+	  <head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+			<title><ui:insert name="title"><h:outputText value="#{msg.satiTitulo}"/></ui:insert></title>
+			<link rel="shortcut icon" href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+			
+			<link 	 rel="stylesheet" href="${facesContext.externalContext.request.contextPath}/css/main.css" 	type="text/css" /> 
+			<script  src="${facesContext.externalContext.request.contextPath}/js/popup.js" 						type="text/javascript" />
+	 
+	 </head>
+		  	
+		<body>	
+		  	
+		    <div id="bordaCentroLogin">
+			    <div id="areaTrabalho">
+					<ui:insert name="corpo"/>
+					<ui:insert name="mensagemErro"><ui:include src="/xhtml/principal/mensagemErro.xhtml"/></ui:insert>
+					<ui:insert name="modalSubmit"><ui:include src="/xhtml/principal/modalSubmit.xhtml"/></ui:insert>
+				</div>
+			</div>
+			<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
+			<c:if test="#{SATI_MODAL_MENSAGEM}">
+				<c:if test="#{SATI_TIPO_MENSAGEM eq 'SUCESSO'}">
+						<script>
+							abrirDivMensagem('mpRegraNegocio');
+						</script>
+					</c:if>
+					<c:if test="#{SATI_TIPO_MENSAGEM eq 'ERRO' or SATI_TIPO_MENSAGEM eq 'ATENCAO'}">
+
+						<script>
+							abrirModalMensagemErro('mpRegraNegocio');
+						</script>
+					</c:if>
+			 </c:if>
+		</body>		
+</html>

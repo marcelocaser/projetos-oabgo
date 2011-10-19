@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiTipoMenuSistemaConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{tipoMenuSistemaBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{tipoMenuSistemaBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{tipoMenuSistemaBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelNome"
+						value="#{msg.satiTipoMenuSistemaNome}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Nome"
+						value="#{tipoMenuSistemaBean.tipoMenuSistema.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelDescricao"
+						value="#{msg.satiTipoMenuSistemaDescricao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Descricao"
+						value="#{tipoMenuSistemaBean.tipoMenuSistema.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelSistema"
+						value="#{msg.satiTipoMenuSistemaSistema}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Sistema"
+						value="#{tipoMenuSistemaBean.tipoMenuSistema.sistema.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+			</rich:panel>
+
+			<t:saveState value="#{tipoMenuSistemaBean.tipoMenuSistema}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

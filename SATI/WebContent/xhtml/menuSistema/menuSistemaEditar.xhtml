@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiMenuSistemaEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{menuSistemaBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{menuSistemaBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="Chave"
+						value="#{msg.satiOpcaoSistemaChaveTitulo}" />
+					<h:inputText id="Chave" required="true" maxlength="20"
+						styleClass="inputPequeno"
+						value="#{menuSistemaBean.opcaoSistema.vchChaveTitulo}" />
+
+					<oab:outputLabel required="true" for="Agrupador"
+						value="#{msg.satiOpcaoSistemaAgrupador}" />
+					<h:inputText id="Agrupador" required="true" maxlength="4"
+						styleClass="inputPequeno"
+						value="#{menuSistemaBean.opcaoSistema.intAgrupador}" />
+
+					<oab:outputLabel for="Descricao"
+						value="#{msg.satiOpcaoSistemaDescricao}" />
+					<h:inputText id="Descricao" maxlength="50" styleClass="inputMedio"
+						value="#{menuSistemaBean.opcaoSistema.vchDescricao}" />
+
+					<oab:outputLabel for="Hierarquia"
+						value="#{msg.satiOpcaoSistemaHierarquia}" />
+					<h:inputText id="Hierarquia" maxlength="4"
+						styleClass="inputPequeno"
+						value="#{menuSistemaBean.opcaoSistema.intHierarquia}" />
+
+					<oab:outputLabel for="MenuSistemaSuperior"
+						value="#{msg.satiMenuSistemaSuperior}" />
+					<h:selectOneMenu id="MenuSistemaSuperior"
+						value="#{menuSistemaBean.idMenuSistemaSuperior}">
+						<f:selectItem itemValue="" itemLabel="#{msg.satiSelecione}" />
+						<f:selectItems value="#{menuSistemaBean.listaMenuSistemaSuperior}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState value="#{menuSistemaBean.opcaoSistema}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

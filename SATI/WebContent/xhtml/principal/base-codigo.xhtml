@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+      <ui:composition template="/xhtml/principal/base.xhtml">
+	      	<ui:define name="corpo">
+			  		<table width="100%">
+	      			<tr>
+						<td>
+							<ui:insert name="dashBoard">
+						  		<a4j:form prependId="false" enctype="multipart/form-data">
+						  			<table width="100%" cellpadding="0" cellspacing="0">
+						  				<tr>
+<!--						  					<td width="5%">-->
+<!--								  				<ui:include src="/xhtml/geral/menuAcoes.xhtml" />-->
+<!--						  					</td>-->
+						  				</tr>
+						  				<tr>
+						  					<td width="100%">
+												<ui:insert name="filtro"/>
+						  					</td>
+						  				</tr>
+						  				<tr>
+						  					<td colspan="2">
+												<ui:insert name="body"/>
+						  					</td>
+						  				</tr>
+						  			</table>
+								</a4j:form>
+								<!-- <h:panelGrid styleClass="centralizar">
+											<h:panelGroup>
+												<h:outputText styleClass="txtPequeno" value="#{msg.satiCopyright} "/>
+												<h:outputLink styleClass="linkLoginBold" value="#{msg.satiPortalOABGO}" target="_blank">#{msg.satiOabUpperCase}</h:outputLink>
+												<h:outputText styleClass="txtPequeno" value=", #{msg.satiDireitos}"/>
+											</h:panelGroup>
+								</h:panelGrid> -->
+							</ui:insert>
+						</td>
+					</tr>
+				</table>
+      		</ui:define>
+  	  </ui:composition>
+</html>

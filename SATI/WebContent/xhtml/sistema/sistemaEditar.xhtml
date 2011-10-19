@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiSistemaEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{sistemaBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{sistemaBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="Sigla"
+						value="#{msg.satiSistemaSigla}" />
+					<h:inputText id="Sigla" required="true" maxlength="15"
+						styleClass="inputPequeno" value="#{sistemaBean.sistema.vchSigla}" />
+
+					<oab:outputLabel required="true" for="Descricao"
+						value="#{msg.satiSistemaDescricao}" />
+					<h:inputText id="Descricao" maxlength="50"
+						styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchDescricao}" />
+
+					<oab:outputLabel for="Versao" value="#{msg.satiSistemaVersao}" />
+					<h:inputText id="Versao" maxlength="5" styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchVersao}" />
+
+					<oab:outputLabel for="Tipo" value="#{msg.satiSistemaTipo}" />
+					<h:inputText id="Tipo" maxlength="1" styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.chrTipo}" />
+
+					<h:outputLabel requerid="true" for="SistemaPrincipal"
+						value="#{msg.satiSistemaPrincipal}:" />
+					<h:selectBooleanCheckbox id="SistemaPrincipal" required="true"
+						value="#{sistemaBean.sistema.bitSistemaPrincipal}" />
+
+					<oab:outputLabel required="true" for="ContextoAplicacao"
+						value="#{msg.satiSistemaContextoAplicacao}" />
+					<h:inputText id="ContextoAplicacao" required="true" maxlength="150"
+						styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchContextoAplicacao}" />
+
+					<oab:outputLabel required="true" for="UrlSistema"
+						value="#{msg.satiSistemaUrlSistema}" />
+					<h:inputText id="UrlSistema" required="true" maxlength="150"
+						styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchUrlSistema}" />
+
+					<oab:outputLabel required="true" for="UrlPaginaPrincipal"
+						value="#{msg.satiSistemaUrlPaginaPrincipal}" />
+					<h:inputText id="UrlPaginaPrincipal" required="true"
+						maxlength="150" styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchUrlPaginaPrincipal}" />
+
+					<oab:outputLabel required="true" for="NomePaginaLogin"
+						value="#{msg.satiSistemaNomePaginaLogin}" />
+					<h:inputText id="NomePaginaLogin" required="true" maxlength="50"
+						styleClass="inputPequeno"
+						value="#{sistemaBean.sistema.vchNomePaginaLogin}" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState value="#{sistemaBean.sistema}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="filtro">
+			<ui:include src="/xhtml/activeDirectory/activeDirectoryFiltro.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiUsuarioLDAPListar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{usuarioBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+
+			</rich:toolBar>
+
+			<rich:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
+
+				<t:saveState
+					value="#{activeDirectoryBean.listaUsuarioLDAPDataTable}" />
+
+				<rich:dataTable width="100%" id="lista"
+					rendered="#{not empty activeDirectoryBean.listaUsuarioLDAPDataTable}"
+					rows="#{activeDirectoryBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{activeDirectoryBean.listaUsuarioLDAPDataTable}"
+					var="usuarioLDAP">
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPDisplayName}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{usuarioLDAP.displayName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPGivenName}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{usuarioLDAP.givenName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPMemberOf}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{usuarioLDAP.memberOf}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPScriptPath}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{usuarioLDAP.scriptPath}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPUserPrincipalName}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable"
+							value="#{usuarioLDAP.userPrincipalName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPAdminCount}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							id="idAdmin" styleClass="txtLinkDataTable"
+							action="#{usuarioBean.novo}">
+							<oab:booleanPerfil value="#{usuarioLDAP.adminCount}" />
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiUsuarioLDAPWhenCreated}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" action="#{usuarioBean.novo}">
+							<h:outputText value="#{usuarioLDAP.whenCreated}">
+								<f:converter converterId="ConverterDataAD" />
+							</h:outputText>
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</h:commandLink>
+					</rich:column>
+
+				</rich:dataTable>
+
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
+					columns="1">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+						<rich:datascroller for="lista" id="scroller"
+							reRender="painelListagem" align="left" requestDelay="500"
+							maxPages="10" />
+						<a4j:status>
+							<f:facet name="start">
+								<h:graphicImage value="#{msg.admAjaxOn}" />
+							</f:facet>
+							<f:facet name="stop">
+								<h:graphicImage value="#{msg.admAjaxOff}" />
+							</f:facet>
+						</a4j:status>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="1"
+						styleClass="txtDataScroller">
+						<h:outputText value="Rotulo Pagina" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

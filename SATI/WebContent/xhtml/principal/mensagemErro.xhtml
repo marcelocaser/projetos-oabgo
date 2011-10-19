@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c_rt="http://java.sun.com/jstl/core_rt">
+      
+      <body>
+			<a4j:form>
+				<!-- ## COMPONENTE DE MENSAGENS ## -->
+				<rich:modalPanel onshow="focoBotao();" rendered="#{SATI_MODAL_MENSAGEM}" id="mpRegraNegocio" resizeable="false" autosized="true"> 
+						<f:facet name="header">
+							<h:outputText value="#{msg.satiAtencao}"/>
+						</f:facet>
+						
+						<f:facet name="controls">
+							<h:graphicImage url="#{msg.satiFecharImg }" style="cursor: pointer;" onclick="closePopup('mpRegraNegocio')" />
+						</f:facet>
+						
+						<rich:spacer width="400"/>	
+				        
+				        <!-- ## MENSAGENS DE ERRO ## -->
+						<rich:panel rendered="#{SATI_TIPO_MENSAGEM eq 'ERRO'}">
+						        <rich:spacer height="5"/>
+						        <h:panelGrid align="center" columns="2">
+						 			<h:graphicImage value="#{msg.satiMsgErro}" /> 
+							 		<t:messages replaceIdWithLabel="true" layout="list" styleClass="txtMsgErro"/>
+							 	</h:panelGrid>
+							 	<h:panelGrid align="center">
+							 		<input id="botaoFecharErro" type="button" value="#{msg.satiFechar }" class="botao" onclick="closePopup('mpRegraNegocio')"/>
+								</h:panelGrid>
+						        <rich:spacer height="5"/>
+					    </rich:panel>
+					    
+				        <!-- ## MENSAGENS DE SUCESSO ## -->
+						<rich:panel id="dobox2" rendered="#{SATI_TIPO_MENSAGEM eq 'SUCESSO'}">
+						        <rich:effect name="fecharDivMensagem" for="dobox2" type="Fade"/>
+						        <rich:spacer height="5"/>
+						        <h:panelGrid align="center" columns="2">
+						 			<h:graphicImage value="#{msg.satiMsgSucesso}" /> 
+							 		<t:messages replaceIdWithLabel="true" layout="table" styleClass="txtMsgSucesso"/>
+							 	</h:panelGrid>
+							 	<h:panelGrid align="center">
+							 		<input id="botaoFecharSucesso" type="button" value="#{msg.satiFechar }" class="botao" onclick="closePopup('mpRegraNegocio')"/>
+								</h:panelGrid>
+						        <rich:spacer height="5"/>
+					    </rich:panel>
+					    
+					    <!-- ## MENSAGENS DE ATENCAO ## -->
+						<rich:panel id="dobox3" rendered="#{SATI_TIPO_MENSAGEM eq 'ATENCAO'}">
+						        <rich:spacer height="5"/>
+						        <h:panelGrid align="center" columns="2">
+						 			<h:graphicImage value="#{msg.satiMsgAtencao}" /> 
+							 		<t:messages  replaceIdWithLabel="true" layout="table" styleClass="txtMsgAtencao"/>
+							 	</h:panelGrid>
+							 	<h:panelGrid align="center">
+									<input id="botaoFecharAtencao" type="button" value="#{msg.satiFechar }" class="botao" onclick="closePopup('mpRegraNegocio')"/>
+								</h:panelGrid>
+						        <rich:spacer height="5"/>
+					    </rich:panel>
+				</rich:modalPanel>
+				<script>
+					function focoBotao(){
+						if(document.getElementById('botaoFecharErro') != null){
+							document.getElementById('botaoFecharErro').focus();
+						}else if(document.getElementById('botaoFecharAtencao') != null){
+							document.getElementById('botaoFecharAtencao').focus();
+						}else if(document.getElementById('botaoFecharSucesso') != null){
+							document.getElementById('botaoFecharSucesso').focus();
+						}
+					}
+				</script>
+			</a4j:form>
+		</body>
+</html>

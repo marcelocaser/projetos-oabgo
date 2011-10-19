@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiEmpresaEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{empresaBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{empresaBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<rich:jQuery selector="#CNPJ" timing="onload"
+					query="setMask('99.999.999/9999-99')" />
+
+				<rich:jQuery selector="#CEP" query="setMask('99.999-999')"
+					timing="onload" />
+
+				<h:panelGrid width="100%" columns="4"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="CNPJ"
+						value="#{msg.satiEmpresaCNPJ}" />
+					<h:inputText id="CNPJ" required="true" maxlength="14"
+						styleClass="inputPequeno" value="#{empresaBean.empresa.vchCNPJ}">
+						<f:validator validatorId="ValidatorCNPJ" />
+					</h:inputText>
+
+					<oab:outputLabel required="true" for="RazaoSocial"
+						value="#{msg.satiEmpresaRazaoSocial}" />
+					<h:inputText id="RazaoSocial" required="true" maxlength="70"
+						styleClass="inputGrande"
+						value="#{empresaBean.empresa.vchRazaoSocial}" />
+
+					<oab:outputLabel required="true" for="NomeFantasia"
+						value="#{msg.satiEmpresaNomeFantasia}" />
+					<h:inputText id="NomeFantasia" required="true" maxlength="50"
+						styleClass="inputGrande"
+						value="#{empresaBean.empresa.vchNomeFantasia}" />
+
+					<oab:outputLabel for="InscricaoMunicipal"
+						value="#{msg.satiEmpresaInscricaoMunicipal}" />
+					<h:inputText id="InscricaoMunicipal" maxlength="18"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchInscricaoMunicipal}" />
+
+					<oab:outputLabel for="InscricaoEstadual"
+						value="#{msg.satiEmpresaInscricaoEstadual}" />
+					<h:inputText id="InscricaoEstadual" maxlength="18"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchInscricaoEstadual}" />
+
+					<oab:outputLabel required="true" for="CEP"
+						value="#{msg.satiEmpresaCEP}" />
+					<h:inputText id="CEP" required="true" maxlength="8"
+						styleClass="inputPequeno" value="#{empresaBean.empresa.vchCEP}">
+					</h:inputText>
+
+					<oab:outputLabel required="true" for="NomeLogradouro"
+						value="#{msg.satiEmpresaNomeLogradouro}" />
+					<h:inputText id="NomeLogradouro" required="true" maxlength="50"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchNomeLogradouro}" />
+
+					<oab:outputLabel required="true" for="NumeroImovel"
+						value="#{msg.satiEmpresaNumeroImovel}" />
+					<h:inputText id="NumeroImovel" required="true" maxlength="50"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchNumeroImovel}" />
+
+					<oab:outputLabel for="Quadra" value="#{msg.satiEmpresaQuadra}" />
+					<h:inputText id="Quadra" maxlength="50" styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchQuadra}" />
+
+					<oab:outputLabel for="Lote" value="#{msg.satiEmpresaLote}" />
+					<h:inputText id="Lote" maxlength="50" styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchLote}" />
+
+					<oab:outputLabel for="Complemento"
+						value="#{msg.satiEmpresaComplemento}" />
+					<h:inputText id="Complemento" maxlength="30"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchComplemento}" />
+
+					<oab:outputLabel required="true" for="Bairro"
+						value="#{msg.satiEmpresaBairro}" />
+					<h:inputText id="Bairro" required="true" maxlength="40"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchNomeBairro}" />
+
+					<oab:outputLabel for="Eletronico" value="#{msg.satiEmpresaEmail}" />
+					<h:inputText id="Eletronico" maxlength="80"
+						styleClass="inputPequeno"
+						value="#{empresaBean.empresa.vchEnderecoEletronico}" />
+
+					<oab:outputLabel for="Observacoes"
+						value="#{msg.satiEmpresaObservacao}" />
+					<h:inputTextarea id="Observacoes" maxlength="150"
+						styleClass="campoTextAreaTotal"
+						value="#{empresaBean.empresa.vchObservacoes}" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState value="#{empresaBean.empresa}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

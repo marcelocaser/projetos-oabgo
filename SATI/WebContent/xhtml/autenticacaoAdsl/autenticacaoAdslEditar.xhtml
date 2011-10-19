@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiAutenticacaoAdslEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{autenticacaoAdslBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{autenticacaoAdslBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<rich:jQuery
+					selector="#CriacaoPlanoInputDate,#AlteracaoPlanoInputDate"
+					timing="onload" query="setMask('99/99/9999')" />
+
+				<rich:jQuery selector="#ValorServico"
+					query="maskMoney({symbol:'R$',decimal:',',thousands:'.',precision:2})"
+					timing="onload" />
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="ContaEmail"
+						value="#{msg.satiAutenticacaoAdslContaEmail}" />
+					<h:inputText id="ContaEmail" required="true" maxlength="50"
+						styleClass="inputPequeno"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.vchContaEmail}" />
+
+					<oab:outputLabel required="true" for="Senha"
+						value="#{msg.satiAutenticacaoAdslSenha}" />
+					<h:inputText id="Senha" required="true" maxlength="6"
+						styleClass="inputPequeno"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.vchSenha}" />
+
+					<oab:outputLabel for="Plano"
+						value="#{msg.satiAutenticacaoAdslPlano}" />
+					<h:inputTextarea id="Plano" maxlength="1000"
+						styleClass="inputPequeno"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.txtPlano}" />
+
+					<oab:outputLabel for="CriacaoPlano"
+						value="#{msg.satiAutenticacaoAdslCriacaoPlano}" />
+					<rich:calendar id="CriacaoPlano"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.datCriacaoPlano}"
+						inputClass="maskDate" datePattern="dd/MM/yyyy"
+						enableManualInput="true">
+						<f:converter converterId="ConverterData" />
+					</rich:calendar>
+
+					<oab:outputLabel for="AlteracaoPlano"
+						value="#{msg.satiAutenticacaoAdslAlteracaoPlano}" />
+					<rich:calendar id="AlteracaoPlano"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.datAlteracaoPlano}"
+						inputClass="maskDate" datePattern="dd/MM/yyyy"
+						enableManualInput="true">
+						<f:converter converterId="ConverterData" />
+					</rich:calendar>
+
+					<oab:outputLabel required="true" for="ValorServico"
+						value="#{msg.satiAutenticacaoAdslValorServico}" />
+					<h:inputText id="ValorServico" required="true" maxlength="6"
+						styleClass="inputPequeno"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.decValorServico}">
+						<f:converter converterId="ConverterMoeda" />
+					</h:inputText>
+
+					<oab:outputLabel for="DiaVencimento"
+						value="#{msg.satiAutenticacaoAdslDiaVencimento}" />
+					<h:outputText id="DiaVencimento" maxlength="2"
+						styleClass="inputPequenoDisabled"
+						value="#{autenticacaoAdslBean.autenticacaoAdsl.tynDiaVencimento}" />
+
+					<oab:outputLabel required="true" for="Empresa"
+						value="#{msg.satiAutenticacaoAdslEmpresa}" />
+					<h:selectOneMenu id="Empresa"
+						value="#{autenticacaoAdslBean.idEmpresa}">
+						<f:selectItem itemValue="" itemLabel="#{msg.satiSelecione}" />
+						<f:selectItems value="#{autenticacaoAdslBean.listaEmpresa}" />
+					</h:selectOneMenu>
+
+					<oab:outputLabel required="true" for="UnidadeAdministrativa"
+						value="#{msg.satiAutenticacaoAdslUnidadeAdministrativa}" />
+					<h:selectOneMenu id="UnidadeAdministrativa"
+						value="#{autenticacaoAdslBean.idUnidadeAdministrativa}">
+						<f:selectItem itemValue="" itemLabel="#{msg.satiSelecione}" />
+						<f:selectItems
+							value="#{autenticacaoAdslBean.listaUnidadeAdministrativa}" />
+					</h:selectOneMenu>
+
+					<oab:outputLabel required="true" for="StatusAutenticacaoAdsl"
+						value="#{msg.satiAutenticacaoAdslStatusAutenticacaoAdsl}" />
+					<h:selectOneMenu id="StatusAutenticacaoAdsl"
+						value="#{autenticacaoAdslBean.idStatusAutenticacaoAdsl}">
+						<f:selectItem itemValue="" itemLabel="#{msg.satiSelecione}" />
+						<f:selectItems
+							value="#{autenticacaoAdslBean.listaStatusAutenticacaoAdsl}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState value="#{autenticacaoAdslBean.autenticacaoAdsl}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

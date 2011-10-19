@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiItemContaTelefonicaConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{itemCiaTelefonicaBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{itemCiaTelefonicaBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{itemCiaTelefonicaBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelNumrContratoAgrupador"
+						value="#{msg.satiItemContaTelefonicaNumrContratoAgrupador}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NumrContratoAgrupador"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.vchNumrContratoAgrupador}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNumrTelefone"
+						value="#{msg.satiItemContaTelefonicaNumrTelefone}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NumrTelefone"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.vchNumrTelefone}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterTelefone" />
+					</h:outputText>
+
+					<h:outputLabel id="labelDescricaoServico"
+						value="#{msg.satiItemContaTelefonicaDescricaoServico}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="DescricaoServico"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.vchDescricaoServico}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelValorServico"
+						value="#{msg.satiItemContaTelefonicaValorServico}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="ValorServico"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.decValorServico}"
+						styleClass="inputPequenoDisabled">
+						<f:convertNumber locale="pt_BR" />
+					</h:outputText>
+
+					<h:outputLabel id="labelDiaVencimento"
+						value="#{msg.satiItemContaTelefonicaDiaVencimento}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="DiaVencimento"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.vchDiaVencimento}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelObservacao"
+						value="#{msg.satiItemContaTelefonicaObservacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Observacao"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.txtObservacao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelUnidadeAdministrativa"
+						value="#{msg.satiItemContaTelefonicaEmpresa}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="UnidadeAdministrativa"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.empresa.vchNomeFantasia}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelStatusAutenticacaoAdsl"
+						value="#{msg.satiItemContaTelefonicaUnidadeAdministrativa}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="StatusAutenticacaoAdsl"
+						value="#{itemCiaTelefonicaBean.itemCiaTelefonica.unidadeAdministrativa.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+
+				<t:saveState value="#{itemCiaTelefonicaBean.itemCiaTelefonica}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

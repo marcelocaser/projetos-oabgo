@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<!-- ###########REGRAS DE NAVEGAÇÃO - GERAL ############ -->
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>logoff</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>logon</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>paginaPrincipal</from-outcome>
+			<to-view-id>/xhtml/principal/paginaPrincipal.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## ACESSO SISTEMA ################# -->
+		<navigation-case>
+			<from-outcome>listarAcessoSistema</from-outcome>
+			<to-view-id>/xhtml/acessoSistema/acessoSistemaListar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## ACTIVE DIRECTORY ################# -->
+		<navigation-case>
+			<from-outcome>listarUsuarioLDAP</from-outcome>
+			<to-view-id>/xhtml/activeDirectory/activeDirectoryListar.xhtml</to-view-id>
+		</navigation-case>
+		<!--
+			################## ATENDIMENTO AUTENTICACAO ADSL #################
+		-->
+		<navigation-case>
+			<from-outcome>listarAtendimentoAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/atendimentoAutenticacaoAdsl/atendimentoAutenticacaoAdslListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarAtendimentoAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/atendimentoAutenticacaoAdsl/atendimentoAutenticacaoAdslConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoAtendimentoAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/atendimentoAutenticacaoAdsl/atendimentoAutenticacaoAdslNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarAtendimentoAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/atendimentoAutenticacaoAdsl/atendimentoAutenticacaoAdslEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## AUTENTICACAO ADSL ################# -->
+		<navigation-case>
+			<from-outcome>listarAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/autenticacaoAdsl/autenticacaoAdslListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/autenticacaoAdsl/autenticacaoAdslConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/autenticacaoAdsl/autenticacaoAdslNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/autenticacaoAdsl/autenticacaoAdslEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## EMPRESA ################# -->
+		<navigation-case>
+			<from-outcome>listarEmpresa</from-outcome>
+			<to-view-id>/xhtml/empresa/empresaListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarEmpresa</from-outcome>
+			<to-view-id>/xhtml/empresa/empresaConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novaEmpresa</from-outcome>
+			<to-view-id>/xhtml/empresa/empresaNova.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarEmpresa</from-outcome>
+			<to-view-id>/xhtml/empresa/empresaEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## ITEM CIA TELEFONICA ################# -->
+		<navigation-case>
+			<from-outcome>listarItemCiaTelefonica</from-outcome>
+			<to-view-id>/xhtml/itemCiaTelefonica/itemCiaTelefonicaListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarItemCiaTelefonica</from-outcome>
+			<to-view-id>/xhtml/itemCiaTelefonica/itemCiaTelefonicaConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoItemCiaTelefonica</from-outcome>
+			<to-view-id>/xhtml/itemCiaTelefonica/itemCiaTelefonicaNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarItemCiaTelefonica</from-outcome>
+			<to-view-id>/xhtml/itemCiaTelefonica/itemCiaTelefonicaEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## MENU SISTEMA ################# -->
+		<navigation-case>
+			<from-outcome>listarMenuSistema</from-outcome>
+			<to-view-id>/xhtml/menuSistema/menuSistemaListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarMenuSistema</from-outcome>
+			<to-view-id>/xhtml/menuSistema/menuSistemaConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoMenuSistema</from-outcome>
+			<to-view-id>/xhtml/menuSistema/menuSistemaNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarMenuSistema</from-outcome>
+			<to-view-id>/xhtml/menuSistema/menuSistemaEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## PERFIL ACESSO ################# -->
+		<navigation-case>
+			<from-outcome>listarPerfilAcesso</from-outcome>
+			<to-view-id>/xhtml/perfilAcesso/perfilListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarPerfilAcesso</from-outcome>
+			<to-view-id>/xhtml/perfilAcesso/perfilConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoPerfilAcesso</from-outcome>
+			<to-view-id>/xhtml/perfilAcesso/perfilNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarPerfilAcesso</from-outcome>
+			<to-view-id>/xhtml/perfilAcesso/perfilEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## SISTEMA ################# -->
+		<navigation-case>
+			<from-outcome>listarSistema</from-outcome>
+			<to-view-id>/xhtml/sistema/sistemaListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarSistema</from-outcome>
+			<to-view-id>/xhtml/sistema/sistemaConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoSistema</from-outcome>
+			<to-view-id>/xhtml/sistema/sistemaNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarSistema</from-outcome>
+			<to-view-id>/xhtml/sistema/sistemaEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## STATUS AUTENTICACAO ADSL ################# -->
+		<navigation-case>
+			<from-outcome>listarStatusAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/statusAutenticacaoAdsl/statusAutenticacaoAdslListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarStatusAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/statusAutenticacaoAdsl/statusAutenticacaoAdslConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoStatusAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/statusAutenticacaoAdsl/statusAutenticacaoAdslNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarStatusAutenticacaoAdsl</from-outcome>
+			<to-view-id>/xhtml/statusAutenticacaoAdsl/statusAutenticacaoAdslEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## TIPO MENU SISTEMA ################# -->
+		<navigation-case>
+			<from-outcome>listarTipoMenuSistema</from-outcome>
+			<to-view-id>/xhtml/tipoMenuSistema/tipoMenuSistemaListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarTipoMenuSistema</from-outcome>
+			<to-view-id>/xhtml/tipoMenuSistema/tipoMenuSistemaConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoTipoMenuSistema</from-outcome>
+			<to-view-id>/xhtml/tipoMenuSistema/tipoMenuSistemaNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarTipoMenuSistema</from-outcome>
+			<to-view-id>/xhtml/tipoMenuSistema/tipoMenuSistemaEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!--
+			################## TIPO UNIDADES ADMINISTRATIVAS #################
+		-->
+		<navigation-case>
+			<from-outcome>listarTipoUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/tiposDeUnidadesAdministrativas/tpUnidadesAdministrativasListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarTipoUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/tiposDeUnidadesAdministrativas/tpUnidadesAdministrativasConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoTipoUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/tiposDeUnidadesAdministrativas/tpUnidadesAdministrativasNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarTipoUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/tiposDeUnidadesAdministrativas/tpUnidadesAdministrativasEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## UNIDADES ADMINISTRATIVAS ################# -->
+		<navigation-case>
+			<from-outcome>listarUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/unidadesAdministrativas/unidadesAdministrativasListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/unidadesAdministrativas/unidadesAdministrativasConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novaUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/unidadesAdministrativas/unidadesAdministrativasNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarUnidadeAdministrativa</from-outcome>
+			<to-view-id>/xhtml/unidadesAdministrativas/unidadesAdministrativasEditar.xhtml</to-view-id>
+		</navigation-case>
+		<!-- ################## USUARIO ################# -->
+		<navigation-case>
+			<from-outcome>listarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarUsuario</from-outcome>
+			<to-view-id>/xhtml/usuario/usuarioEditar.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiTpUnidadesAdministrativasNova}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{tipoUnidadeAdministrativaBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{tipoUnidadeAdministrativaBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<a4j:region id="region">
+				<rich:panel id="painelIncluir" headerClass="txtRotuloPannelCenter">
+
+					<rich:jQuery selector="#Codigo" timing="onload" query="focus()" />
+
+					<h:panelGrid width="100%" columns="2"
+						columnClasses="labelDireito, bgCampo">
+
+						<oab:outputLabel required="true" for="Codigo"
+							value="#{msg.satiTpUnidadesAdministrativasCodigo}" />
+						<h:inputText id="Codigo" required="true" maxlength="10"
+							styleClass="inputPequeno"
+							value="#{tipoUnidadeAdministrativaBean.tipoUnidadeAdministrativa.intCodigo}" />
+
+						<oab:outputLabel required="true" for="Descricao"
+							value="#{msg.satiTpUnidadesAdministrativasDescricao}" />
+						<h:inputText id="Descricao" maxlength="40"
+							styleClass="inputPequeno"
+							value="#{tipoUnidadeAdministrativaBean.tipoUnidadeAdministrativa.vchDescricao}" />
+
+					</h:panelGrid>
+
+				</rich:panel>
+			</a4j:region>
+		</ui:define>
+	</ui:composition>
+</html>

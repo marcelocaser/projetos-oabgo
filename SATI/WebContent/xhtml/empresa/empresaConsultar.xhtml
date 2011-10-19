@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiEmpresaConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{empresaBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{empresaBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{empresaBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelCNPJ" value="#{msg.satiEmpresaCNPJ}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Codigo" value="#{empresaBean.empresa.vchCNPJ}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterCNPJ" />
+					</h:outputText>
+
+					<h:outputLabel id="labelRazaoSocial"
+						value="#{msg.satiEmpresaRazaoSocial}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="RazaoSocial"
+						value="#{empresaBean.empresa.vchRazaoSocial}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNomeFantasia"
+						value="#{msg.satiEmpresaNomeFantasia}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NomeFantasia"
+						value="#{empresaBean.empresa.vchNomeFantasia}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelInscricaoMunicipal"
+						value="#{msg.satiEmpresaInscricaoMunicipal}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="InscricaoMunicipal"
+						value="#{empresaBean.empresa.vchInscricaoMunicipal}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelInscricaoEstadual"
+						value="#{msg.satiEmpresaInscricaoEstadual}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="InscricaoEstadual"
+						value="#{empresaBean.empresa.vchInscricaoEstadual}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelObservacao"
+						value="#{msg.satiEmpresaObservacao}:" styleClass="txtMedioNegrito" />
+					<h:outputText id="Observacao"
+						value="#{empresaBean.empresa.vchObservacoes}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelCEP" value="#{msg.satiEmpresaCEP}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="CEP" value="#{empresaBean.empresa.vchCEP}"
+						styleClass="inputPequenoDisabled">
+						<f:converter converterId="ConverterCEP" />
+					</h:outputText>
+
+					<h:outputLabel id="labelNomeLogradouro"
+						value="#{msg.satiEmpresaNomeLogradouro}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NomeLogradouro"
+						value="#{empresaBean.empresa.vchNomeLogradouro}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNumeroImovel"
+						value="#{msg.satiEmpresaNumeroImovel}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NumeroImovel"
+						value="#{empresaBean.empresa.vchNumeroImovel}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelQuadra" value="#{msg.satiEmpresaQuadra}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Quadra" value="#{empresaBean.empresa.vchQuadra}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelLote" value="#{msg.satiEmpresaLote}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Lote" value="#{empresaBean.empresa.vchQuadra}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelEmpresaComplemento"
+						value="#{msg.satiEmpresaComplemento}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Complemento"
+						value="#{empresaBean.empresa.vchComplemento}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelBairro" value="#{msg.satiEmpresaBairro}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Bairro"
+						value="#{empresaBean.empresa.vchNomeBairro}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelEmail" value="#{msg.satiEmpresaEmail}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Email"
+						value="#{empresaBean.empresa.vchEnderecoEletronico}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+
+				<t:saveState value="#{empresaBean.empresa}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>
