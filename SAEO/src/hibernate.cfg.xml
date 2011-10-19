@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="hibernateSessionFactory">
+		<property name="show_sql">false</property>
+		<property name="use_outer_join">true</property>
+		<property name="dialect">core.hibernate.MSSQLDialect</property>
+		<property name="query.factory_class">
+			org.hibernate.hql.classic.ClassicQueryTranslatorFactory
+	</property>
+		<!-- ## <property name="hbm2ddl.auto">update</property> ## -->
+
+		<mapping class="br.org.oabgo.saeo.negocio.controle.entidade.AreaAtuacaoTO" />
+		<mapping
+			class="br.org.oabgo.saeo.negocio.controle.entidade.CandidatoAnteriorExameOrdemTO" />
+		<mapping class="br.org.oabgo.saeo.negocio.controle.entidade.CertameTO" />
+		<mapping class="br.org.oabgo.saeo.negocio.controle.entidade.SistemaTO" />
+		<mapping class="br.org.oabgo.saeo.negocio.controle.entidade.UsuarioTO" />
+
+	</session-factory>
+</hibernate-configuration>

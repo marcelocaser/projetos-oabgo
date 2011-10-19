@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.saeoCandidatoAnteriorExameOrdemEditar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.saeoIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.saeoMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.saeoMenuOpcaoSalvar}"
+							action="#{candidatoAnteriorExameOrdemBean.salvar}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.saeoIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.saeoMenuOpcaoRetornar}"
+							action="#{candidatoAnteriorExameOrdemBean.consultar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.saeoIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelEditar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<oab:outputLabel required="true" for="NumeroSequencia"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemNumeroSequencia}" />
+					<h:inputText id="NumeroSequencia" required="true" maxlength="4"
+						styleClass="inputPequeno"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.intNumeroSequencia}">
+					</h:inputText>
+
+					<oab:outputLabel required="true" for="PaginaLivro"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemPaginaLivro}" />
+					<h:inputText id="PaginaLivro" required="true" maxlength="5"
+						styleClass="inputPequeno"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.intPaginaLivro}" />
+
+					<oab:outputLabel required="true" for="Nome"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemNomeCandidato}" />
+					<h:inputText id="Nome" required="true" maxlength="60"
+						styleClass="inputGrande"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.vchNomeCandidato}" 
+						autocomplete="off"/>
+
+					<oab:outputLabel required="true" for="Situacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemSituacao}" />
+					<h:selectOneRadio id="Situacao" required="true"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.bitSituacao}">
+						<f:selectItem itemValue="True" itemLabel="Aprovado" />
+						<f:selectItem itemValue="False" itemLabel="Reprovado" />
+					</h:selectOneRadio>
+
+					<oab:outputLabel for="Observacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemObservacao}" />
+					<h:inputTextarea id="Observacao" maxlength="4000"
+						styleClass="inputGrande"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.texObservacao}" />
+
+					<oab:outputLabel for="AreaAtuacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemAreaAtuacao}" />
+					<h:selectOneMenu id="AreaAtuacao"
+						value="#{candidatoAnteriorExameOrdemBean.idAreaAtuacao}">
+						<f:selectItem itemValue="" itemLabel="#{msg.saeoSelecione}" />
+						<f:selectItems
+							value="#{candidatoAnteriorExameOrdemBean.listaAreaAtuacao}" />
+					</h:selectOneMenu>
+
+					<oab:outputLabel for="Certame"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemCertame}" />
+					<h:selectOneMenu id="Certame"
+						value="#{candidatoAnteriorExameOrdemBean.idCertame}">
+						<f:selectItem itemValue="" itemLabel="#{msg.saeoSelecione}" />
+						<f:selectItems
+							value="#{candidatoAnteriorExameOrdemBean.listaCertame}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<t:saveState
+				value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<!-- ###########REGRAS DE NAVEGAÇÃO - GERAL ############ -->
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>logoff</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>logon</from-outcome>
+			<to-view-id>/xhtml/principal/login.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>paginaPrincipal</from-outcome>
+			<to-view-id>/xhtml/principal/paginaPrincipal.xhtml</to-view-id>
+		</navigation-case>
+
+		<!-- ################## CERTAME ################# -->
+		<navigation-case>
+			<from-outcome>listarCertame</from-outcome>
+			<to-view-id>/xhtml/certame/certameListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarCertame</from-outcome>
+			<to-view-id>/xhtml/certame/certameConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoCertame</from-outcome>
+			<to-view-id>/xhtml/certame/certameNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarCertame</from-outcome>
+			<to-view-id>/xhtml/certame/certameEditar.xhtml</to-view-id>
+		</navigation-case>
+
+		<!-- ################## CANDIDATO ################# -->
+		<navigation-case>
+			<from-outcome>listarCandidatoAnteriorExameOrdem</from-outcome>
+			<to-view-id>/xhtml/candidato/candidatoListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarCandidatoAnteriorExameOrdem</from-outcome>
+			<to-view-id>/xhtml/candidato/candidatoConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoCandidatoAnteriorExameOrdem</from-outcome>
+			<to-view-id>/xhtml/candidato/candidatoNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarCandidatoAnteriorExameOrdem</from-outcome>
+			<to-view-id>/xhtml/candidato/candidatoEditar.xhtml</to-view-id>
+		</navigation-case>
+
+		<!-- ################## AREA ATUACAO ################# -->
+		<navigation-case>
+			<from-outcome>listarAreaAtuacao</from-outcome>
+			<to-view-id>/xhtml/areaAtuacao/areaAtuacaoListar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultarAreaAtuacao</from-outcome>
+			<to-view-id>/xhtml/areaAtuacao/areaAtuacaoConsultar.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novaAreaAtuacao</from-outcome>
+			<to-view-id>/xhtml/areaAtuacao/areaAtuacaoNovo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarAreaAtuacao</from-outcome>
+			<to-view-id>/xhtml/areaAtuacao/areaAtuacaoEditar.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

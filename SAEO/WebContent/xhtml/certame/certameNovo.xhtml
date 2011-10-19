@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.saeoCertameNovo}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.saeoIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.saeoMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.saeoMenuOpcaoSalvar}"
+							action="#{certameBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.saeoIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.saeoMenuOpcaoRetornar}"
+							action="#{certameBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.saeoIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<a4j:region id="region">
+				<rich:panel id="painelIncluir" headerClass="txtRotuloPannelCenter">
+
+					<rich:jQuery
+						selector="#DataProvaEscritaInputDate,#DataProvaOralInputDate,#DataProvaObjetivaInputDate"
+						timing="onload" query="setMask('99/99/9999')" />
+
+					<rich:jQuery selector="#Descricao" query="setMask('9999.9')"
+						timing="onload" />
+
+					<rich:jQuery selector="#NumeroLivro" timing="onload"
+						query="focus()" />
+
+					<h:panelGrid width="100%" columns="2"
+						columnClasses="labelDireito, bgCampo">
+
+						<oab:outputLabel for="NumeroLivro"
+							value="#{msg.saeoCertameNumeroLivro}" />
+						<h:inputText id="NumeroLivro" maxlength="4"
+							styleClass="inputPequeno"
+							value="#{certameBean.certame.intNumeroLivro}" />
+
+						<oab:outputLabel required="true" for="Descricao"
+							value="#{msg.saeoCertameDescricao}" />
+						<h:inputText id="Descricao" required="true" maxlength="5"
+							styleClass="inputPequeno"
+							value="#{certameBean.certame.vchDescricao}">
+						</h:inputText>
+
+						<oab:outputLabel for="DataProvaObjetiva"
+							value="#{msg.saeoCertameDataProvaObjetiva}" />
+						<rich:calendar id="DataProvaObjetiva"
+							value="#{certameBean.certame.datDataProvaObjetiva}"
+							datePattern="dd/MM/yyyy" enableManualInput="true">
+						</rich:calendar>
+
+						<oab:outputLabel for="DataProvaEscrita"
+							value="#{msg.saeoCertameDataProvaEscrita}" />
+						<rich:calendar id="DataProvaEscrita"
+							value="#{certameBean.certame.datDataProvaEscrita}"
+							datePattern="dd/MM/yyyy" enableManualInput="true">
+						</rich:calendar>
+
+						<oab:outputLabel for="DataProvaOral"
+							value="#{msg.saeoCertameDataProvaOral}" />
+						<rich:calendar id="DataProvaOral"
+							value="#{certameBean.certame.datDataProvaOral}"
+							datePattern="dd/MM/yyyy" enableManualInput="true">
+						</rich:calendar>
+
+					</h:panelGrid>
+				</rich:panel>
+			</a4j:region>
+		</ui:define>
+	</ui:composition>
+</html>

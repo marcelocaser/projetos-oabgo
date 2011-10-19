@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form prependId="false">
+		<rich:toolBar>
+
+			<rich:dropDownMenu location="right">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:graphicImage value="#{msg.saeoIconeMenuCadastro}"
+							styleClass="pic" />
+						<h:outputText value="#{msg.saeoMenuCadastro}" />
+					</h:panelGroup>
+				</f:facet>
+
+				<rich:menuItem value="#{msg.saeoMenuCadastroCandidato}"
+					action="#{candidatoAnteriorExameOrdemBean.listar}"
+					icon="#{msg.saeoIconeMenuCadastroCandidato}" />
+
+				<rich:menuItem value="#{msg.saeoMenuCadastroCertame}"
+					action="#{certameBean.listar}"
+					icon="#{msg.saeoIconeMenuCadastroCertame}" />
+
+				<rich:menuGroup location="right"
+					value="#{msg.saeoMenuCadastroTabela}"
+					icon="#{msg.saeoIconeMenuCadastroTabela}">
+					<rich:menuItem value="#{msg.saeoMenuCadastroTabelasAreaAtuacao}"
+						action="#{areaAtuacaoBean.listar}" />
+				</rich:menuGroup>
+
+			</rich:dropDownMenu>
+		</rich:toolBar>
+	</h:form>
+</html>

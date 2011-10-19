@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.saeoAreaAtuacaoNovo}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.saeoIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.saeoMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.saeoMenuOpcaoSalvar}"
+							action="#{areaAtuacaoBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.saeoIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.saeoMenuOpcaoRetornar}"
+							action="#{areaAtuacaoBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.saeoIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<a4j:region id="region">
+				<rich:panel id="painelIncluir" headerClass="txtRotuloPannelCenter">
+
+					<rich:jQuery selector="#Codigo" timing="onload"
+						query="focus()" />
+
+					<h:panelGrid width="100%" columns="2"
+						columnClasses="labelDireito, bgCampo">
+
+						<oab:outputLabel required="true" for="Codigo"
+							value="#{msg.saeoAreaAtuacaoCodigo}" />
+						<h:inputText id="Codigo" required="true" maxlength="4"
+							styleClass="inputPequeno"
+							value="#{areaAtuacaoBean.areaAtuacao.intCodigo}" />
+
+						<oab:outputLabel for="Descricao"  value="#{msg.saeoAreaAtuacaoDescricao}" />
+						<h:inputText id="Descricao" maxlength="50" styleClass="inputPequeno"
+							value="#{areaAtuacaoBean.areaAtuacao.vchDescricao}" />
+
+						<oab:outputLabel required="true" for="ExameDeOrdem"
+							value="#{msg.saeoAreaAtuacaoExameDeOrdem}" />
+						<h:selectOneRadio id="ExameDeOrdem" required="true"
+							value="#{areaAtuacaoBean.areaAtuacao.bitExameDeOrdem}">
+							<f:selectItem itemValue="True" itemLabel="Ativo" />
+							<f:selectItem itemValue="False" itemLabel="Inativo" />
+						</h:selectOneRadio>
+
+					</h:panelGrid>
+
+				</rich:panel>
+
+			</a4j:region>
+		</ui:define>
+	</ui:composition>
+</html>

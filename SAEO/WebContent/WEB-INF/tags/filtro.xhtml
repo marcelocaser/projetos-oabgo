@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition>
+		<rich:simpleTogglePanel binding="#{managedBean.simpleTogglePanel}"
+			action="#{managedBean.alterarEstadoToggle}" switchType="ajax">
+
+			<f:facet name="header">
+				<t:commandLink disabled="true">
+					<rich:toolTip followMouse="true"
+						value="#{msg.saeoGlogalMsgToolTipFiltrarConsulta}"
+						direction="top-right" showDelay="500" />
+					<t:graphicImage value="#{msg.saeoIconeLupaFiltrar}"
+						styleClass="pic" />
+					<rich:spacer width="5" />
+					<h:outputText value="#{msg.saeoGlobalMsgPesquisar}" />
+				</t:commandLink>
+			</f:facet>
+			<rich:panel>
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="0">
+					<ui:insert />
+				</h:panelGrid>
+				<!--  saveState do SimpleTogglePanel -->
+				<t:saveState value="#{managedBean.estadoSimpleTogglePanel}" />
+			</rich:panel>
+		</rich:simpleTogglePanel>
+	</ui:composition>
+</html>

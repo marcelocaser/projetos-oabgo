@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:adm="http://www.leonardopeixoto.com.br/adm"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText
+							value="#{msg.saeoCandidatoAnteriorExameOrdemConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.saeoIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.saeoMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.saeoMenuOpcaoEditar}"
+							action="#{candidatoAnteriorExameOrdemBean.editar}"
+							icon="#{msg.saeoIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.saeoMenuOpcaoExcluir}"
+							action="#{candidatoAnteriorExameOrdemBean.excluir}"
+							onclick="#{msg.saeoConfirmaExclusao}"
+							icon="#{msg.saeoIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.saeoMenuOpcaoRetornar}"
+							action="#{candidatoAnteriorExameOrdemBean.listar}"
+							icon="#{msg.saeoIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelNumeroSequencia"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemNumeroSequencia}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="NumeroSequencia"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.intNumeroSequencia}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelPaginaLivro"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemPaginaLivro}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="PaginaLivro"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.intPaginaLivro}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNome"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemNomeCandidato}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Nome"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.vchNomeCandidato}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelSituacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemSituacao}:"
+						styleClass="txtMedioNegrito" />
+					<oab:booleanExameDeOrdem
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.bitSituacao}" />
+
+					<h:outputLabel id="labelObservacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemObservacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Observacao"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.texObservacao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelAreaAtuacao"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemAreaAtuacao}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="AreaAtuacao"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.areaAtuacao.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelCertame"
+						value="#{msg.saeoCandidatoAnteriorExameOrdemCertame}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="Certame"
+						value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem.certame.vchDescricao}"
+						styleClass="inputPequenoDisabled" />
+
+				</h:panelGrid>
+			</rich:panel>
+
+			<t:saveState
+				value="#{candidatoAnteriorExameOrdemBean.candidatoAnteriorExameOrdem}" />
+
+		</ui:define>
+	</ui:composition>
+</html>

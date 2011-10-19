@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:oab="http://www.oabgo.org.br/oab"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="filtro">
+			<ui:include src="/xhtml/areaAtuacao/areaAtuacaoFiltro.xhtml" />
+		</ui:define>
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.saeoAreaAtuacaoListar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.saeoIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.saeoMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.saeoMenuOpcaoNovo}"
+							action="#{areaAtuacaoBean.novo}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.saeoIconeMenuOpcoesNovo}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<rich:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
+
+				<t:saveState value="#{areaAtuacaoBean.listaAreaAtuacaoDataTable}" />
+
+				<rich:dataTable width="100%" id="lista"
+					rendered="#{not empty areaAtuacaoBean.listaAreaAtuacaoDataTable}"
+					rows="#{areaAtuacaoBean.itensPorPagina}"
+					rowClasses="txtRowFisrtLeft, txtRowSecoundLeft"
+					value="#{areaAtuacaoBean.listaAreaAtuacaoDataTable}"
+					var="areaAtuacao">
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.saeoMenuOpcao}" />
+						</f:facet>
+						<t:commandLink onclick="#{msg.saeoConfirmaExclusao}"
+							action="#{areaAtuacaoBean.excluir}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.saeoOpcoesToolTipoExcluir}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.saeoIconeExcluir}" />
+							<f:setPropertyActionListener value="#{areaAtuacao}"
+								target="#{areaAtuacaoBean.areaAtuacao}" />
+						</t:commandLink>
+						<rich:spacer width="5" />
+						<t:commandLink onclick="showModalCentro('modalSubmit');"
+							action="#{areaAtuacaoBean.editar}">
+							<rich:toolTip followMouse="true"
+								value="#{msg.saeoOpcoesToolTipoEditar}" direction="top-right"
+								showDelay="100" />
+							<t:graphicImage style="border: 0px;"
+								value="#{msg.saeoIconeEditar}" />
+							<f:setPropertyActionListener value="#{areaAtuacao}"
+								target="#{areaAtuacaoBean.areaAtuacao}" />
+						</t:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.saeoAreaAtuacaoCodigo}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{areaAtuacao.intCodigo}"
+							action="#{areaAtuacaoBean.consultar}">
+							<f:setPropertyActionListener value="#{areaAtuacao}"
+								target="#{areaAtuacaoBean.areaAtuacao}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.saeoAreaAtuacaoDescricao}" />
+						</f:facet>
+						<h:commandLink onclick="showModalCentro('modalSubmit');"
+							styleClass="txtLinkDataTable" value="#{areaAtuacao.vchDescricao}"
+							action="#{areaAtuacaoBean.consultar}">
+							<f:setPropertyActionListener value="#{areaAtuacao}"
+								target="#{areaAtuacaoBean.areaAtuacao}" />
+						</h:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="alignCenter">
+						<f:facet name="header">
+							<h:outputText value="#{msg.saeoAreaAtuacaoExameDeOrdem}" />
+						</f:facet>
+						<t:commandLink onclick="showModalCentro('modalSubmit');"
+							action="#{areaAtuacaoBean.consultar}">
+							<oab:boolean value="#{areaAtuacao.bitExameDeOrdem}" />
+							<f:setPropertyActionListener value="#{areaAtuacao}"
+								target="#{areaAtuacaoBean.areaAtuacao}" />
+						</t:commandLink>
+					</rich:column>
+
+				</rich:dataTable>
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
+					columns="1">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+						<rich:datascroller for="lista" id="scroller"
+							reRender="painelListagem" align="left" requestDelay="500"
+							maxPages="10" />
+						<a4j:status>
+							<f:facet name="start">
+								<h:graphicImage value="#{msg.admAjaxOn}" />
+							</f:facet>
+							<f:facet name="stop">
+								<h:graphicImage value="#{msg.admAjaxOff}" />
+							</f:facet>
+						</a4j:status>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="1"
+						styleClass="txtDataScroller">
+						<h:outputText value="Rotulo Pagina" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

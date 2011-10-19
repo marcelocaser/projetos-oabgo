@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/xhtml/principal/base-login.xhtml">
+		<ui:define name="corpo">
+			<t:panelGrid align="center">
+				<h:form prependId="false">
+					<div class="planoFundoLogin">
+						<rich:spacer height="70" />
+						<t:panelGrid>
+							<t:panelGrid style="width: 200px;" columns="2">
+								<h:graphicImage url="#{msg.saeoLoginImg}" />
+								<h:panelGrid columns="2" columnClasses="textLabelLogin, textAlignLefth">
+									<h:outputLabel for="userName" styleClass="txtPequenoBold" value="#{msg.saeoUsuario}:" />
+									<h:inputText id="userName" required="true" styleClass="inputPequeno" value="#{loginBean.login}" autocomplete="off" />
+
+									<h:outputLabel for="password" styleClass="txtPequenoBold" value="#{msg.saeoSenha}:" />
+									<h:inputSecret id="password" required="true" styleClass="inputPequeno" value="#{loginBean.senha}" />
+
+									<rich:spacer width="10px" />
+									<h:panelGrid columns="3">
+										<h:commandButton styleClass="botao2" onclick="showModalCentro('modalSubmit');" action="#{loginBean.logon}" value="#{msg.saeoLogar}" />
+									</h:panelGrid>
+									<rich:jQuery selector="#userName" timing="onload" query="focus()"/>
+								</h:panelGrid>
+							</t:panelGrid>
+							<rich:spacer height="20px"/>
+							<h:panelGrid align="center">
+								<h:panelGroup>
+									<h:outputText styleClass="txtPequeno" value="#{msg.saeoCopyright} " />
+									<h:outputLink styleClass="linkLoginBold" value="#{msg.saeoPortalOABGO}" target="_blank">#{msg.saeoOabUpperCase}</h:outputLink>
+									<h:outputText styleClass="txtPequeno" value=", #{msg.saeoDireitos}" />
+								</h:panelGroup>
+							</h:panelGrid>
+
+						</t:panelGrid>
+					</div>
+				</h:form>
+			</t:panelGrid>
+		</ui:define>
+	</ui:composition>
+</html>
+
+
