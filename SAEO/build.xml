@@ -26,7 +26,7 @@
 		<copy file="../core/bibliotecas/commons/io/1.4/commons-io-1.4.jar" todir="WebContent/WEB-INF/lib" />
 		<copy file="../core/bibliotecas/commons/lang/2.1/commons-lang-2.1.jar" todir="WebContent/WEB-INF/lib" />
 		<copy file="../core/bibliotecas/commons/el/commons-el.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/commons/commons-fileupload/commons-fileupload-1.2.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/commons/fileupload/commons-fileupload-1.2.jar" todir="WebContent/WEB-INF/lib" />
 
   		<copy file="../core/bibliotecas/el/impl/1.0/el-impl-1.0.jar" todir="WebContent/WEB-INF/lib"/>
   		<copy file="../core/bibliotecas/el/api/el-api.jar" todir="WebContent/WEB-INF/lib"/>
@@ -43,21 +43,21 @@
 		<copy file="../core/bibliotecas/myFaces/tomahawk/tomahawk-1.1.9.jar" todir="WebContent/WEB-INF/lib" />
 		<copy file="../core/bibliotecas/myFaces/tomahawk/tomahawk-sandbox-1.1.7.jar" todir="WebContent/WEB-INF/lib" />
 
-		<copy file="../core/bibliotecas/richFaces/oscache-2.3.jar"								todir="WebContent/WEB-INF/lib"/>
+		<copy file="../core/bibliotecas/oscache/2.3/oscache-2.3.jar" todir="WebContent/WEB-INF/lib"/>
   		
-		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-api-3.2.2.GA.jar"				todir="WebContent/WEB-INF/lib"/>
-		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-impl-3.2.2.GA.jar" 			todir="WebContent/WEB-INF/lib"/>
-		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-ui-3.2.2.GA.jar"				todir="WebContent/WEB-INF/lib"/>
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-api-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib"/>
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-impl-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib"/>
+		<copy file="../core/bibliotecas/richFaces/3.2.2/richfaces-ui-3.2.2.GA.jar" todir="WebContent/WEB-INF/lib"/>
 
 		<copy file="../core/bibliotecas/jta/jta.jar" todir="WebContent/WEB-INF/lib" />
 
 		<copy file="../core/bibliotecas/dom4j/1.6/dom4j-1.6.1.jar" todir="WebContent/WEB-INF/lib" />
 		<copy file="../core/bibliotecas/ehCache/1.6.0/ehcache-1.6.0.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/hibernate/tools/ejb3-persistence.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/hibernate/tools/hibernate-3.2.4.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/hibernate/tools/hibernate-annotations.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/hibernate/tools/hibernate-commons-annotations.jar" todir="WebContent/WEB-INF/lib" />
-		<copy file="../core/bibliotecas/hibernate/tools/hibernate-validator.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/ejb3-persistence.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-3.2.4.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-annotations.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-commons-annotations.jar" todir="WebContent/WEB-INF/lib" />
+		<copy file="../core/bibliotecas/hibernate/3.2.4/tools/hibernate-validator.jar" todir="WebContent/WEB-INF/lib" />
 
 		<copy file="../core/bibliotecas/asm/3.2/asm-3.2.jar" todir="WebContent/WEB-INF/lib" />
 		<copy file="../core/bibliotecas/quartz/1.6/quartz-1.6.0.jar" todir="WebContent/WEB-INF/lib" />
