@@ -1,0 +1,6 @@
+INSERT INTO TCCOTACAO (CODCOTACAO, CODCOLIGADA, DATCOTACAO, DATLIMRESPTA, 
+CODCOMPRADOR, STSCOTACAO,  
+TXTOBSERVACAO, 
+CODCPG,  
+DATENTREGA, CODFILIAL, CODMOEDA, TIPOJULGAMENTO, ULTIMAATUALIZACAO)
+VALUES (?, ?, convert(varchar,getdate(),112), ?, ?, ?, ?, ?, ?, ?, ?, ?, convert(varchar,getdate(),112) + ' ' + convert(varchar,getdate(),108))
