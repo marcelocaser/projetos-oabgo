@@ -33,8 +33,6 @@ import core.mensagem.MensagemLista;
 @Service
 public class UsuarioBO implements Usuario {
 
-	private static final long serialVersionUID = 6163656505600586094L;
-	
 	@Autowired
 	private UsuarioPO persistencia;
 

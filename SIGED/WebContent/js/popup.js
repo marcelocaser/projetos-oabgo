@@ -40,11 +40,11 @@ var idModal = "";
 function abrirDivMensagem(idElemento){
 	idModal = idElemento;
 	showModalCentro(idElemento);
-	setTimeout("acionarDivMensagem()",1000) 
+	setTimeout("acionarDivMensagem()",1000) ;
 }
 
 function acionarDivMensagem(){
-	setTimeout("fecharModal()", 650) 
+	setTimeout("fecharModal()", 650) ;
 }
 
 function fecharModal(){
@@ -83,7 +83,7 @@ function showModalPanel(idModalPanel, porcentagemAreaVisivel, porcentagemLargura
  * Parâmetros: componente html
  */
 function dataTableSelectAll(radio) {
-    var id = radio.name.substring(radio.name.lastIndexOf(':'));
+    //var id = radio.name.substring(radio.name.lastIndexOf(':'));
     var el = radio.form.elements;
     for (var i = 0; i < el.length; i++) {
     	if(el[i].checked){
