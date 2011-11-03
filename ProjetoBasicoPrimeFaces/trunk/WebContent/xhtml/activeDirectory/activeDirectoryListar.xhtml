@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+	<ui:define name="filtro">
+		<ui:include src="/xhtml/activeDirectory/activeDirectoryFiltro.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+
+		<p:toolbar>
+			<p:toolbarGroup location="left">
+				<h:outputText value="#{msg.satiUsuarioLDAPListar}" />
+			</p:toolbarGroup>
+
+			<p:toolbarGroup location="right">
+				<h:form>
+					<p:menu type="tiered">
+						<p:submenu label="#{msg.pbpfMenuOpcao}" icon="iconeMenuOpcoes">
+							<p:menuitem value="#{msg.satiMenuOpcaoRetornar}"
+								action="#{usuarioBean.listar}" icon="iconeMenuOpcoesVoltar"
+								ajax="false" />
+						</p:submenu>
+					</p:menu>
+
+				</h:form>
+			</p:toolbarGroup>
+
+		</p:toolbar>
+
+		<p:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
+			<h:form prependId="false">
+				<p:dataTable width="100%" id="lista"
+					rendered="#{not empty activeDirectoryBean.listaUsuarioLDAPDataTable}"
+					rows="#{activeDirectoryBean.itensPorPagina}"
+					value="#{activeDirectoryBean.listaUsuarioLDAPDataTable}"
+					var="usuarioLDAP">
+
+					<p:column headerText="#{msg.satiUsuarioLDAPDisplayName}">
+						<p:commandLink value="#{usuarioLDAP.displayName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPGivenName}">
+						<p:commandLink value="#{usuarioLDAP.givenName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPMemberOf}">
+						<p:commandLink value="#{usuarioLDAP.memberOf}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPScriptPath}">
+						<p:commandLink value="#{usuarioLDAP.scriptPath}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPUserPrincipalName}" styleClass="alignCenter">
+						<p:commandLink value="#{usuarioLDAP.userPrincipalName}"
+							action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPAdminCount}" styleClass="alignCenter">
+						<p:commandLink id="idAdmin" action="#{usuarioBean.novo}">
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{msg.satiUsuarioLDAPWhenCreated}">
+						<p:commandLink action="#{usuarioBean.novo}">
+							<h:outputText value="#{usuarioLDAP.whenCreated}">
+							</h:outputText>
+							<f:setPropertyActionListener value="#{usuarioLDAP}"
+								target="#{usuarioBean.usuarioLDAP}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+
+				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
+					columns="1">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+
+					</h:panelGrid>
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="1">
+						<h:outputText value="Rotulo Pagina" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,42 @@
+<project name="pbpf" default="gerar-projeto" basedir=".">
+
+	<target name="gerar-projeto">
+
+		<delete>
+			<fileset dir="WebContent/WEB-INF/lib" />
+		</delete>
+
+		<antcall target="copiar-dependencias" />
+	</target>
+
+	<!-- ### GERA AS DEPENDENCIAS NECESSÁRIAS PARA O PROJETO #### -->
+	<target name="copiar-dependencias" depends="gera-core" description="Copia as dependencias para o LIB da aplicação.">
+
+	
+	</target>
+
+	<target name="gera-core" description="Gera o core na aplicação">
+
+		<!-- Gera o jar com as dependencias do core e dos projetos de negócio -->
+		<zip destfile="WebContent/WEB-INF/lib/oab-core.jar">
+			<zipfileset dir="../core/bin" />
+		</zip>
+	</target>
+
+	<target name="gera-war" depends="copiar-dependencias" description="Cria o arquivo war completo para produção.">
+
+		<!--Apaga o arquivo pbpf.war-->
+		<delete file="pbpf.war" />
+
+		<zip destfile="pbpf.war">
+			<zipfileset dir="WebContent">
+				<!--Não inclui os fontes java nem os fontes IREPORT.-->
+				<exclude name="**/WEB-INF/classes/**/*.java" />
+				<exclude name="**/jasper/*.jrxml" />
+			</zipfileset>
+		</zip>
+	</target>
+
+
+
+</project>

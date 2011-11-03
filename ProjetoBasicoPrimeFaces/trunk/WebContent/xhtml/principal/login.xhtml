@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/xhtml/principal/base-login.xhtml">
+	<ui:define name="corpo">
+		<p:focus />
+		<h:panelGrid id="panelLogin" styleClass="centralizar"
+			columnClasses="alignRight">
+			<h:graphicImage url="#{msg.pbpfIconeBeta}" styleClass="alignRight" />
+			<h:form prependId="false">
+				<div class="planoFundoLogin">
+					<p:spacer height="40px" />
+					<h:panelGrid style="width: 200px;" columns="3">
+						<p:spacer height="30px" />
+						<h:graphicImage url="#{msg.pbpfLoginImg}" />
+						<h:panelGrid columns="2"
+							columnClasses="textLabelLogin, textAlignLeft">
+							<h:outputLabel for="Usuario" styleClass="txtPequenoBold"
+								value="#{msg.pbpfUsuario}:" />
+							<p:inputText id="Usuario" required="true"
+								value="#{loginBean.login}" autocomplete="off" />
+							<h:outputLabel for="Senha" styleClass="txtPequenoBold"
+								value="#{msg.pbpfSenha}:" />
+							<p:password id="Senha" required="true" feedback="false"
+								value="#{loginBean.senha}" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid columns="2" styleClass="centralizar">
+						<p:commandButton onclick="showModalCentro('modalSubmit')"
+							action="#{loginBean.logon}" value="#{msg.pbpfLogar}"
+							image="ui-icon ui-icon-person" />
+						<p:spacer width="40px" />
+					</h:panelGrid>
+					<p:spacer width="60px" />
+					<h:panelGrid columns="1" styleClass="centralizar">
+						<h:panelGroup>
+							<h:outputText styleClass="txtPequeno"
+								value="#{msg.pbpfCopyright} " />
+							<h:outputLink styleClass="linkLoginBold"
+								value="#{msg.pbpfPortalFlavios}" target="_blank">#{msg.pbpfFlaviosUpperCase}</h:outputLink>
+							<h:outputText styleClass="txtPequeno"
+								value=", #{msg.pbpfDireitos}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</div>
+			</h:form>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
+</html>

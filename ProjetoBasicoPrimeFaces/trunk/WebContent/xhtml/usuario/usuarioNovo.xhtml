@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiUsuarioNovo}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoSalvar}"
+							action="#{usuarioBean.incluir}"
+							onclick="showModalCentro('modalSubmit');" immediate="false"
+							icon="#{msg.satiIconeMenuOpcoesSalvar}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{usuarioBean.listar}"
+							onclick="showModalCentro('modalSubmit');" immediate="true"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+			<a4j:region id="region">
+				<rich:panel id="painelIncluir"
+					headerClass="txtRotuloPannelCenter">
+
+					<h:panelGrid width="100%" columns="2"
+						columnClasses="labelDireito, bgCampo">
+
+						<oab:outputLabel required="true" for="Nome"
+							value="#{msg.satiUsuarioNome}" />
+						<h:inputText id="Nome" required="true" maxlength="50"
+							styleClass="inputMedio" value="#{usuarioBean.usuario.vchNome}" />
+
+						<oab:outputLabel required="true" for="Login"
+							value="#{msg.satiUsuarioUserName}" />
+						<h:outputText id="Login" styleClass="inputPequenoDisabled"
+							value="#{usuarioBean.usuario.vchLogin}" />
+
+						<oab:outputLabel required="true" for="Email"
+							value="#{msg.satiUsuarioEmail}" />
+						<h:inputText id="Email" required="true" maxlength="50"
+							styleClass="inputPequeno" value="#{usuarioBean.usuario.vchEmail}" />
+
+						<h:outputLabel id="labelAtivo" for="ativo"
+							value="#{msg.satiUsuarioAtivo}:" />
+						<h:selectBooleanCheckbox id="ativo"
+							value="#{usuarioBean.usuario.bitAtivo}" />
+
+						<oab:outputLabel for="perfilAcesso" required="false"
+							value="#{msg.satiUsuarioPerfilAcesso}" />
+						<h:selectOneMenu id="perfilAcesso"
+							value="#{usuarioBean.idPerfilAcesso}">
+							<f:selectItem itemValue="" itemLabel="#{msg.satiSelecione}" />
+							<f:selectItems value="#{usuarioBean.listaPerfilAcesso}" />
+						</h:selectOneMenu>
+
+					</h:panelGrid>
+				</rich:panel>
+			</a4j:region>
+		</ui:define>
+	</ui:composition>
+</html>

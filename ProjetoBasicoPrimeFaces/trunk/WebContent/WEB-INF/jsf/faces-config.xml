@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
+	<application>
+		<resource-bundle>
+			<base-name>resources.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+
+		<!-- ** INTERNACIONALIZACAO ** -->
+		<locale-config>
+			<default-locale>pt</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+	</application>
+
+	<!-- ** LISTENER'S CONTROLE DE ACESSO ** -->
+	<lifecycle>
+		<phase-listener>br.com.flavios.pbpf.web.controle.PBPFPhaseListener</phase-listener>
+		<phase-listener>br.com.flavios.pbpf.web.controle.PBPFMessageListener</phase-listener>
+	</lifecycle>
+	
+	<managed-bean>
+        <managed-bean-name>LoginBean</managed-bean-name>
+        <managed-bean-class>br.com.flavios.pbpf.web.controle.bean.LoginBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+</faces-config>

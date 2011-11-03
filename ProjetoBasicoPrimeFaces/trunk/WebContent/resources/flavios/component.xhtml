@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<h:head>
+	<title>Meu Primeiro Componente JSF 2.0</title>
+</h:head>
+
+<h:body>
+	<composite:interface>
+		<composite:attribute name="identificacao" required="true" />
+		<composite:attribute name="managedbean" required="true" />
+		<composite:attribute name="qtdcaracteres" required="true" />
+	</composite:interface>
+
+	<composite:implementation>
+		<h:outputText value="#{rotulo.texto}" />
+		<h:inputText id="#{cc.attrs.identificacao}"
+			value="#{cc.attrs.managedbean}" required="true"
+			validatorMessage="#{rotulo.validacao}"
+			requiredMessage="#{rotulo.obrigatorio}">
+			<f:validateLength minimum="#{cc.attrs.qtdcaracteres}" />
+		</h:inputText>
+		<h:messages />
+		<br />
+		<h:commandButton value="#{rotulo.enviar}" />
+		<br />
+		<h3>
+			<h:outputText value="#{cc.attrs.managedbean}" />
+		</h3>
+	</composite:implementation>
+</h:body>
+
+</html>

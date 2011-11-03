@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://java.sun.com/jsf/facelets" contentType="text/html">
+
+	<h:head>
+		<link rel="shortcut icon"
+			href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+	</h:head>
+
+	<pm:page title="::Flávios Mobile::">
+		<pm:view id="main">
+			<p:focus />
+			<pm:header title="Acesso ao Sistema Flávios" swatch="b">
+				<f:facet name="left">
+					<pm:button value="Voltar" icon="back" role="back" swatch="b" />
+				</f:facet>
+			</pm:header>
+			<pm:content>
+				<h:form id="login">
+					<pm:listView inset="true" title="Login" titleSwatch="b">
+						<pm:panelGrid columns="2">
+							<pm:field>
+								<h:outputLabel for="userName" value="#{msg.pbpfUsuario}: "
+									styleClass="txtPequenoBold" />
+								<h:inputText id="userName" value="#{loginBean.login}" />
+							</pm:field>
+
+							<pm:field>
+								<h:outputLabel for="password" value="#{msg.pbpfSenha}: " />
+								<p:password id="password" feedback="false"
+									value="#{loginBean.senha}" />
+							</pm:field>
+
+							<pm:commandButton value="Login" swatch="b" icon="check"
+								action="#{loginBean.logon}" />
+						</pm:panelGrid>
+					</pm:listView>
+				</h:form>
+			</pm:content>
+		</pm:view>
+
+		<pm:view id="settings">
+			<pm:header title="Weather">
+				<f:facet name="left">
+					<pm:button value="Back" icon="back" role="back" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+			</pm:content>
+		</pm:view>
+
+	</pm:page>
+</f:view>

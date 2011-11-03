@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC 	"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">
+			<h:outputText value="#{msg.pbpfTitulo}" />
+		</ui:insert></title>
+	<link rel="shortcut icon"
+		href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+
+	<link rel="stylesheet"
+		href="${facesContext.externalContext.request.contextPath}/css/main.css"
+		type="text/css" />
+	<script
+		src="${facesContext.externalContext.request.contextPath}/js/popup.js"
+		type="text/javascript" />
+
+	<script
+		src="${facesContext.externalContext.request.contextPath}/js/jquery.meio.mask.min.js"
+		type="text/javascript" />
+
+</h:head>
+
+<h:body>
+
+	<f:view contentType="text/html">
+		<div id="bordaCentroImg"></div>
+		<div id="topoLogoFlavios">
+			<div id="nomeDoSistema">
+				<h:outputLabel value="#{msg.pbpfTitulo}" styleClass="nomeDoSistema" />
+			</div>
+			<div id="logoFlaviosTopo"></div>
+		</div>
+		<div id="caixaTopoUsuarioLogado">
+			<h:outputLabel value="#{msg.pbpfUsuarioOla},"
+				styleClass="labelInfoUsuario" />
+			<h:outputLabel value="#{usuarioLogado.vchNome}."
+				styleClass="labelInfoUsuario" />
+			<!--<h:outputLabel value="#{msg.pbpfUsuarioUltimoAcesso} 08/02/2011, 16:40:52" styleClass="labelInfoUsuario"/> -->
+		</div>
+
+		<div id="topoLinks">
+			<h:form prependId="false">
+				<p:commandLink id="idLofOff" style="cursor: pointer;"
+					action="#{loginBean.logoff}" ajax="false">
+					<p:tooltip followMouse="true" for="idLofOff"
+						value="#{msg.pbpfSair}" />
+					<p:graphicImage value="/imagens/icons/iconeLogout.png"
+						styleClass="pic" />
+				</p:commandLink>
+			</h:form>
+		</div>
+
+		<div id="bordaCentro">
+			<div id="areaTrabalho">
+				<ui:include src="/xhtml/principal/menuAplicacao.xhtml" />
+				<p:spacer height="10" />
+				<ui:insert name="corpo" />
+			</div>
+		</div>
+
+		<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
+		<c:if test="#{PBPF_MODAL_MENSAGEM}">
+			<c:if test="#{PBPF_TIPO_MENSAGEM eq 'SUCESSO'}">
+				<p:growl id="sucesso" infoIcon="ui-icon-info" />
+			</c:if>
+			<c:if
+				test="#{PBPF_TIPO_MENSAGEM eq 'ERRO' or PBPF_TIPO_MENSAGEM eq 'ATENCAO'}">
+				<p:growl id="erro" errorIcon="#{msg.pbpfMsgErro}" life="3000"/>
+			</c:if>
+		</c:if>
+	</f:view>
+</h:body>
+</html>

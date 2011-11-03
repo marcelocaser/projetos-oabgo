@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+		<ui:define name="body">
+
+			<rich:toolBar>
+				<rich:toolBarGroup location="left">
+					<h:panelGroup>
+						<h:outputText value="#{msg.satiUsuarioConsultar}" />
+					</h:panelGroup>
+				</rich:toolBarGroup>
+
+				<rich:toolBarGroup location="right">
+					<rich:dropDownMenu direction="bottom-left">
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="#{msg.satiIconeMenuOpcoes}"
+									styleClass="pic" />
+								<h:outputText value="#{msg.satiMenuOpcao}" />
+							</h:panelGroup>
+						</f:facet>
+
+						<rich:menuItem value="#{msg.satiMenuOpcaoEditar}"
+							action="#{usuarioBean.editar}"
+							icon="#{msg.satiIconeMenuOpcoesEditar}" />
+						<rich:menuItem value="#{msg.satiMenuOpcaoExcluir}"
+							action="#{usuarioBean.excluir}"
+							onclick="#{msg.satiConfirmaExclusao}"
+							icon="#{msg.satiIconeMenuOpcoesExcluir}" />
+						<rich:menuSeparator />
+						<rich:menuItem value="#{msg.satiMenuOpcaoRetornar}"
+							action="#{usuarioBean.listar}"
+							icon="#{msg.satiIconeMenuOpcoesVoltar}" />
+					</rich:dropDownMenu>
+				</rich:toolBarGroup>
+			</rich:toolBar>
+
+
+			<rich:panel id="painelConsultar" headerClass="txtRotuloPannelCenter">
+
+				<h:panelGrid width="100%" columns="2"
+					columnClasses="labelDireito, bgCampo">
+
+					<h:outputLabel id="labelLogin" value="#{msg.satiUsuarioUserName}:"
+						for="Login" styleClass="txtMedioNegrito" />
+					<h:outputText id="Login" value="#{usuarioBean.usuario.vchLogin}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel id="labelNome" value="#{msg.satiUsuarioNome}:"
+						for="nome" styleClass="txtMedioNegrito" />
+					<h:outputText id="nome" value="#{usuarioBean.usuario.vchNome}"
+						styleClass="inputPequenoDisabled" />
+
+					<h:outputLabel value="#{msg.satiUsuarioEmail}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="email" value="#{usuarioBean.usuario.vchEmail}" />
+
+					<h:outputLabel id="labelUsuarioAtivo"
+						value="#{msg.satiUsuarioAtivo}:" styleClass="txtMedioNegrito" />
+					<oab:boolean value="#{usuarioBean.usuario.bitAtivo}" />
+
+					<h:outputLabel id="labelPerfilAceso"
+						value="#{msg.satiUsuarioPerfilAcesso}:"
+						styleClass="txtMedioNegrito" />
+					<h:outputText id="perfil"
+						value="#{usuarioBean.usuario.perfilAcesso.vchDescricao}" />
+
+				</h:panelGrid>
+
+				<t:saveState value="#{usuarioBean.usuario}" />
+				<t:saveState value="#{usuarioBean.idPerfilAcesso}" />
+				<t:saveState value="#{usuarioBean.listaPerfilAcesso}" />
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>
