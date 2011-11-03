@@ -32,8 +32,6 @@ import core.excecoes.RegraNegocioException;
 @Service
 public class PaginaBO implements Pagina {
 
-	private static final long serialVersionUID = -6137413362653990464L;
-	
 	@Autowired
 	private PaginaPO	persistencia;
 

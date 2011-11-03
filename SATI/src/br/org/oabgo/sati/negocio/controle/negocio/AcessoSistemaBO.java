@@ -39,8 +39,6 @@ import core.utilitario.Data;
 @Service
 public class AcessoSistemaBO implements AcessoSistema {
 
-	private static final long serialVersionUID = -8999179449034743422L;
-
 	@Autowired
 	private AcessoSistemaPO	persistencia;
 	

@@ -40,8 +40,6 @@ import core.mensagem.MensagemLista;
 @Service
 public class PerfilAcessoBO implements PerfilAcesso {
 
-	private static final long serialVersionUID = 5271323819683474421L;
-
 	@Autowired
 	private PerfilAcessoPO	persistencia;
 	

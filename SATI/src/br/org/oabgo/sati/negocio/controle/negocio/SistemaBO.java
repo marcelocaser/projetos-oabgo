@@ -31,8 +31,6 @@ import core.excecoes.RegraNegocioException;
 @Service
 public class SistemaBO implements Sistema {
 
-	private static final long serialVersionUID = -6137413362653990464L;
-	
 	@Autowired
 	private SistemaPO	persistencia;
 
