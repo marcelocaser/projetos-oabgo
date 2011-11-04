@@ -46,12 +46,10 @@ public class ResourceServiceUtil {
 	public static String getMessageResourceString(String key, Object params[]) {
 		String text = null;
 		FacesContext context = FacesContext.getCurrentInstance();
-
-		String bundleName = context.getApplication().getMessageBundle();
+		
 		Locale locale = getLocale(context);
 		
-		ResourceBundle bundle = ResourceBundle.getBundle(bundleName, locale,
-				getCurrentClassLoader(params));
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");;
 		try {
 			text = bundle.getString(key);
 		} catch (Exception e) {
