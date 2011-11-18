@@ -15,7 +15,7 @@ package core.criptografia;
  */
 public interface Encrypter {
 
-	public static final String			KEY_ENCRYPT						= "ChaveEncryptOAB_GO";
+	public static final String			KEY_ENCRYPT						= "ChaveEncryptFlavios";
 	
 	/**
 	 * Método responsável por encriptar a informação passada como parâmetro.

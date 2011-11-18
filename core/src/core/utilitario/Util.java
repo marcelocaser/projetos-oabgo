@@ -323,6 +323,19 @@ public class Util {
 	}
 	
 	/**
+	 * 
+	 * Retorna valor numerico se a String for diferente de 
+	 * null ou vazia.
+	 * 
+	 */
+	public static Integer setInteger(String str){
+		if(stringOk(str)){
+			return Integer.parseInt(str);
+		}
+		else return null;
+	}
+	
+	/**
 	 * Realiza um SPLIT, dividindo a String de acordo com o CHAR passado como parâmetro.
 	 * 
 	 * @param s - String a ser dividida
