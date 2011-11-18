@@ -108,7 +108,7 @@ public class UsuarioPO extends PBPFPersistencia {
 	public List<TransferObject> listar() throws BDException{
 		Criteria criteria = this.getDaoHibernate().createCriteria(
 				UsuarioTO.class);
-		criteria.addOrder(Order.asc("vchLogin"));
+		criteria.addOrder(Order.asc("qdfLoginAd"));
 		return (List<TransferObject>) this.getDaoHibernate().executar(criteria);
 	}
 
@@ -123,8 +123,8 @@ public class UsuarioPO extends PBPFPersistencia {
 	public UsuarioTO buscarUsuarioPorLogin(String userName) throws BDException {
 		Criteria criteria = this.getDaoHibernate().createCriteria(
 				UsuarioTO.class);
-		criteria.add(Restrictions.eq("bitAtivo", Boolean.TRUE));
-		criteria.add(Restrictions.eq("vchLogin", userName));
+		criteria.add(Restrictions.eq("qdfStaFunc", "A"));
+		criteria.add(Restrictions.eq("qdfLoginAd", userName));
 		return (UsuarioTO) this.getDaoHibernate().buscarObjeto(criteria);
 	}
 	

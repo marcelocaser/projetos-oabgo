@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<composite:interface>
+		<composite:attribute name="value" required="true" />
+	</composite:interface>
+
+	<composite:implementation>
+		<p:graphicImage id="ativo" rendered="#{cc.attrs.value=='A'}"
+			value="#{msg.pbpfIconeAtivo}" />
+		<p:tooltip for="ativo" rendered="#{cc.attrs.value=='A'}"
+			value="#{msg.pbpfGlobalSim}" />
+		<p:graphicImage id="inativo" rendered="#{cc.attrs.value=='I'}"
+			value="#{msg.pbpfIconeInativo}" />
+		<p:tooltip for="inativo" rendered="#{cc.attrs.value=='I'}"
+			value="#{msg.pbpfGlobalNao}" />
+	</composite:implementation>
+
+</h:body>
+</html>

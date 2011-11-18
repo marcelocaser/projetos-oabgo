@@ -1,52 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pm="http://primefaces.org/mobile"
-	xmlns:ui="http://java.sun.com/jsf/facelets" contentType="text/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view contentType="text/html">
 
 	<h:head>
 		<link rel="shortcut icon"
 			href="${facesContext.externalContext.request.contextPath}/imagens/icons/favicon.ico" />
+
 	</h:head>
 
-	<pm:page title="::Flávios Mobile::">
-		<pm:view id="main">
-			<p:focus />
-			<pm:header title="Acesso ao Sistema Flávios" swatch="b">
+	<pm:page title="Flávios Mobile">
+		<pm:view id="paginaPrincipal">
+			<pm:header title="Flávios Mobile" swatch="#{mobileBean.tema}">
+				<f:facet name="right">
+					<h:form>
+						<pm:commandButton value="Sair" icon="delete"
+							swatch="#{mobileBean.tema}" action="#{loginBean.logoffMobile}"
+							ajax="false" />
+					</h:form>
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<pm:listView>
+					<h:outputLink value="#autorizarVenda">Autorizar Venda</h:outputLink>
+					<h:outputLink value="#exibirAutorizadas">Vendas Autorizadas</h:outputLink>
+					<h:outputLink value="#exibirTema">Escolher Tema</h:outputLink>
+				</pm:listView>
+			</pm:content>
+
+		</pm:view>
+
+		<!--
+			AUTORIZAR VENDA
+		 -->
+		<pm:view id="autorizarVenda">
+			<pm:header title="Autorizar Venda" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back" swatch="b" />
+					<pm:button value="Voltar" icon="back" role="back"
+						swatch="#{mobileBean.tema}" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<h:outputText
+					value="Informe o código recebido, de 8 digitos, abaixo, para liberar a venda." />
+
+				<h:form>
+					<pm:buttonGroup>
+						<pm:field>
+							<p:inputMask id="codigoCliente" required="true" mask="999999999"
+								value="#{mobileBean.codigoCliente}" autocomplete="off" />
+						</pm:field>
+					</pm:buttonGroup>
+
+					<pm:commandButton value="Autorizar" icon="check"
+						action="#{mobileBean.gerarCodigo}"
+						oncomplete="PrimeFaces.navigate('vendaAutorizada')"
+						update=":formCodigoGerado, codigoCliente">
+					</pm:commandButton>
+				</h:form>
+
+			</pm:content>
+		</pm:view>
+		<!--
+			VENDA AUTORIZADA
+		-->
+		<pm:view id="vendaAutorizada">
+			<pm:header title="Número da autorização" swatch="#{mobileBean.tema}">
+				<f:facet name="left">
+					<pm:button value="Voltar" icon="back" role="back"
+						swatch="#{mobileBean.tema}">
+					</pm:button>
 				</f:facet>
 			</pm:header>
 			<pm:content>
-				<h:form id="login">
-					<pm:listView inset="true" title="Login" titleSwatch="b">
-						<pm:panelGrid columns="2">
-							<pm:field>
-								<h:outputLabel for="userName" value="#{msg.pbpfUsuario}: "
-									styleClass="txtPequenoBold" />
-								<h:inputText id="userName" value="#{loginBean.login}" />
-							</pm:field>
-
-							<pm:field>
-								<h:outputLabel for="password" value="#{msg.pbpfSenha}: " />
-								<p:password id="password" feedback="false"
-									value="#{loginBean.senha}" />
-							</pm:field>
-
-							<pm:commandButton value="Login" swatch="b" icon="check"
-								action="#{loginBean.logon}" />
-						</pm:panelGrid>
-					</pm:listView>
+				<h:form id="formCodigoGerado">
+					<center>
+						<font size="20">#{mobileBean.codigoGerado}</font>
+					</center>
 				</h:form>
 			</pm:content>
 		</pm:view>
-
-		<pm:view id="settings">
-			<pm:header title="Weather">
+		<!--
+			EXIBIR AUTORIZADAS
+		 -->
+		<pm:view id="exibirAutorizadas">
+			<pm:header title="Autorizadas" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Back" icon="back" role="back" />
+					<pm:button value="Voltar" icon="back" role="back"
+						swatch="#{mobileBean.tema}" />
 				</f:facet>
 			</pm:header>
 
@@ -54,5 +102,35 @@
 			</pm:content>
 		</pm:view>
 
+		<!--
+			EXIBIR TEMAS
+		 -->
+		<pm:view id="exibirTema">
+			<pm:header title="Temas" swatch="#{mobileBean.tema}">
+				<f:facet name="left">
+					<pm:button value="Voltar" icon="back" role="back"
+						swatch="#{mobileBean.tema}" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<h:form>
+					<h:outputLabel value="Escolha seu tema: " />
+					<pm:field>
+						<h:selectOneMenu id="selectOneMenu" value="#{mobileBean.tema}">
+							<f:selectItem itemLabel="Amarelo" itemValue="e" />
+							<f:selectItem itemLabel="Azul" itemValue="b" />
+							<f:selectItem itemLabel="Branco" itemValue="c" />
+							<f:selectItem itemLabel="Prata" itemValue="d" />
+							<f:selectItem itemLabel="Preto" itemValue="a" />
+						</h:selectOneMenu>
+					</pm:field>
+					<pm:commandButton value="Aplicar" icon="check"
+						onclick="location.reload()">
+					</pm:commandButton>
+				</h:form>
+			</pm:content>
+		</pm:view>
 	</pm:page>
 </f:view>
+</html>

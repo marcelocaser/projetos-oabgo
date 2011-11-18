@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:flavios="http://java.sun.com/jsf/composite/flavios"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -18,13 +18,11 @@
 		href="${facesContext.externalContext.request.contextPath}/css/main.css"
 		type="text/css" />
 
-	<script
-		src="${facesContext.externalContext.request.contextPath}/js/popup.js"
-		type="text/javascript" />
-
 </h:head>
 
 <h:body>
+
+	<flavios:modalSubmit />
 
 	<f:view contentType="text/html">
 		<div id="bordaCentroLogin">
@@ -32,16 +30,10 @@
 				<ui:insert name="corpo" />
 			</div>
 		</div>
+
 		<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
-		<c:if test="#{PBPF_MODAL_MENSAGEM}">
-			<c:if test="#{PBPF_TIPO_MENSAGEM eq 'SUCESSO'}">
-				<p:growl id="sucesso" infoIcon="ui-icon-info" />
-			</c:if>
-			<c:if
-				test="#{PBPF_TIPO_MENSAGEM eq 'ERRO' or PBPF_TIPO_MENSAGEM eq 'ATENCAO'}">
-				<p:growl id="erro" errorIcon="#{msg.pbpfMsgErro}" life="3000" />
-			</c:if>
-		</c:if>
+		<flavios:modalMensagem modalTeste="#{PBPF_MODAL_MENSAGEM}"
+			mensagemTeste="#{PBPF_TIPO_MENSAGEM}" />
 	</f:view>
 </h:body>
 </html>

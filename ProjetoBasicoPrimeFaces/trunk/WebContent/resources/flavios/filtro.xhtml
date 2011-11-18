@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<composite:interface>
+	</composite:interface>
+
+	<composite:implementation>
+		<p:panel collapsed="true"
+			toggleable="true" closable="false" toggleSpeed="500"
+			closeSpeed="2000">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:graphicImage value="#{msg.pbpfIconeLupaFiltrar}"
+						styleClass="pic" />
+					<h:outputText value="#{msg.pbpfGlobalMsgPesquisar}" />
+				</h:panelGroup>
+			</f:facet>
+
+			<p:ajax event="close" />
+			<p:ajax event="toggle" />
+
+			<composite:insertChildren />
+
+		</p:panel>
+
+	</composite:implementation>
+
+</h:body>
+</html>

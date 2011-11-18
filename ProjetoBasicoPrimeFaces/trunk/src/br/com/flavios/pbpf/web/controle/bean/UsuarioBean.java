@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 import br.com.flavios.pbpf.negocio.controle.PBPFLDAPUsuario;
@@ -29,7 +29,7 @@ import core.utilitario.Util;
  * @version Revision: $ Date: $
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UsuarioBean extends PBPFManagedBean {
 
 	private static final long serialVersionUID = 1336108950785391584L;
@@ -45,10 +45,10 @@ public class UsuarioBean extends PBPFManagedBean {
 	private List<TransferObject> listaUsuarioDataTable;
 
 	// valores dos Filtros
-	private String userNameFiltro;
+	private String codigoFiltro;
 
 	private String nomeFiltro;
-
+	
 	/**
 	 * Lista todos os usuarios cadastrados.
 	 * 
@@ -71,8 +71,8 @@ public class UsuarioBean extends PBPFManagedBean {
 	 */
 	public UsuarioTO pegarValorFiltro() {
 		UsuarioTO usuario = new UsuarioTO();
-		usuario.setVchLogin(Util.setString(this.getUserNameFiltro()));
-		usuario.setVchNome(Util.setString(this.getNomeFiltro()));
+		usuario.setQdfCod(Util.setInteger(this.getCodigoFiltro()));
+		usuario.setQdfNomFunc(Util.setString(this.getNomeFiltro()));
 		return usuario;
 	}
 
@@ -143,7 +143,7 @@ public class UsuarioBean extends PBPFManagedBean {
 		Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
 		try {
 			this.setUsuario(negocioUsuario.consultar(new UsuarioTO(this
-					.getUsuario().getId())));
+					.getUsuario().getQdfCod())));
 
 			return "editarUsuario";
 		} catch (Exception e) {
@@ -157,14 +157,14 @@ public class UsuarioBean extends PBPFManagedBean {
 	 * @return String
 	 */
 	public String novo() {
-		this.setUsuario(new UsuarioTO());
+		/*this.setUsuario(new UsuarioTO());
 
 		if (this.getUsuarioLDAP() != null) {
 			this.getUsuario().setVchLogin(
 					this.getUsuarioLDAP().getUserPrincipalName());
 			this.getUsuario()
 					.setVchNome(this.getUsuarioLDAP().getDisplayName());
-		}
+		}*/
 
 		return "novoUsuario";
 	}
@@ -178,10 +178,9 @@ public class UsuarioBean extends PBPFManagedBean {
 		Usuario negocio = getPBPFBusinessFactory().createUsuario();
 		try {
 			negocio.retirarObjetoSessao(usuario);
-			this.setUsuario(negocio.consultar(new UsuarioTO(this.getUsuario()
-					.getId())));
+			this.setUsuario(negocio.consultar(new UsuarioTO(this.getUsuario().getQdfCod())));
 
-			return "consultarUsuario";
+			return URL_USUARIO_CONSULTAR;
 		} catch (Exception e) {
 			return tratarExcecao(e);
 		}
@@ -255,12 +254,12 @@ public class UsuarioBean extends PBPFManagedBean {
 		this.listaUsuarioDataTable = listaUsuarioDataTable;
 	}
 
-	public String getUserNameFiltro() {
-		return userNameFiltro;
+	public String getCodigoFiltro() {
+		return codigoFiltro;
 	}
 
-	public void setUserNameFiltro(String userNameFiltro) {
-		this.userNameFiltro = userNameFiltro;
+	public void setCodigoFiltro(String codigoFiltro) {
+		this.codigoFiltro = codigoFiltro;
 	}
 
 	public String getNomeFiltro() {

@@ -11,12 +11,8 @@ import jcifs.smb.SmbException;
 import jcifs.smb.SmbSession;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Usuario;
-import br.com.flavios.pbpf.negocio.enumerador.PBPFEnumTipoMensagem;
 import br.com.flavios.pbpf.web.controle.PBPFManagedBean;
-import core.criptografia.Encrypter;
-import core.criptografia.EncrypterImpl;
 import core.excecoes.RegraNegocioException;
-import core.mensagem.MensagemLista;
 
 /**
  * <b>Classe:</b> LoginBean.java <br>
@@ -47,13 +43,25 @@ public class LoginBean extends PBPFManagedBean {
 		try{
 			
 			if (this.getSenha() == null) {
-				this.recuperacaoDeSenha();
+				//this.recuperacaoDeSenha();
 				return null;
 			}
 			
 			this.rotinaAutenticacaoSingleSignOn(this.getLogin(), this.getSenha());
 			
 			return dashBoard();
+			
+		} catch (Exception e) {
+			return tratarExcecao(e);
+		}
+	}
+	
+	public String logonMobile(){
+		try{
+			
+			this.rotinaAutenticacaoSingleSignOn(this.getLogin(), this.getSenha());
+			
+			return dashBoardMobile();
 			
 		} catch (Exception e) {
 			return tratarExcecao(e);
@@ -75,7 +83,7 @@ public class LoginBean extends PBPFManagedBean {
 				
 				//consulta um usuário com base no login e na senha
 				this.setUsuario(usuarioService.buscarUsuarioPorLogin(userName));
-				if(this.getUsuario().getVchLogin() != null){
+				if(this.getUsuario().getQdfCod() != null){
 					//associa o usuário a sessão atual.
 					setParamSession(USUARIO_LOGADO, usuario);
 					
@@ -107,6 +115,10 @@ public class LoginBean extends PBPFManagedBean {
 		return JSF_DEFAULT;
 	}
 	
+	public String dashBoardMobile(){
+		return JSF_DEFAULT_MOBILE;
+	}
+	
 	public void logoff(){
 		try{
 			//realiza o logoff do usuário.
@@ -116,7 +128,16 @@ public class LoginBean extends PBPFManagedBean {
 		}
 	}
 	
-	public void recuperacaoDeSenha() throws RegraNegocioException {
+	public void logoffMobile(){
+		try{
+			//realiza o logoff do usuário.
+			removerAcessoMobile();
+		}catch (Exception e) {
+			tratarExcecao(e);
+		}
+	}
+	
+	/*public void recuperacaoDeSenha() throws RegraNegocioException {
 				
 		MensagemLista msgs = new MensagemLista();
 		
@@ -135,7 +156,7 @@ public class LoginBean extends PBPFManagedBean {
 		msgs.addMensagem(this.getUsuario().getVchEmail());
 		setMessage(msgs, PBPFEnumTipoMensagem.SUCESSO);
 		
-	}
+	}*/
 
 	public UsuarioTO getUsuario() {
 		if (usuario == null) {

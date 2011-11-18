@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<composite:interface>
+		<composite:attribute name="mensagem" required="true" />
+		<composite:attribute name="managedBean"
+			method-signature="java.lang.String action()" required="false" />
+	</composite:interface>
+
+	<composite:implementation>
+		<p:confirmDialog message="#{cc.attrs.mensagem}" width="200"
+			closable="false" header="Confirmar" severity="alert"
+			widgetVar="confirmacao">
+			<h:form>
+				<p:commandButton value="#{msg.pbpfGlobalSim}"
+					action="#{cc.attrs.managedBean}" image="ui-icon ui-icon-check"
+					oncomplete="confirmacao.hide()" ajax="false" />
+				<p:commandButton value="#{msg.pbpfGlobalNao}"
+					onclick="confirmacao.hide()" image="ui-icon ui-icon-cancel" />
+			</h:form>
+		</p:confirmDialog>
+	</composite:implementation>
+</h:body>
+
+
+</html>

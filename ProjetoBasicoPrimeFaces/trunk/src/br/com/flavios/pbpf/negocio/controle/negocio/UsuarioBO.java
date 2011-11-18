@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Usuario;
 import br.com.flavios.pbpf.negocio.controle.persistencia.UsuarioPO;
-import core.criptografia.Encrypter;
-import core.criptografia.EncrypterImpl;
 import core.dao.TransferObject;
 import core.excecoes.BDException;
 import core.excecoes.RegraNegocioException;
@@ -49,39 +47,6 @@ public class UsuarioBO implements Usuario {
 	protected void beforeInsert(TransferObject bean)
 			throws RegraNegocioException {
 		
-		UsuarioTO usuario = (UsuarioTO) bean;
-		
-		UsuarioTO usuarioTmp = new UsuarioTO();
-		
-		EncrypterImpl encrypt = new EncrypterImpl(Encrypter.KEY_ENCRYPT);
-		
-		//objeto que encapsula as mensagens de regra de negocio
-		MensagemLista msgs = new MensagemLista();
-		
-		//valida login já cadastro
-		usuarioTmp.setVchLogin(usuario.getVchLogin());
-		
-		//verifica se o existe usuario cadastrado com o mesmo login
-		if(this.persistencia.beforeInsert(usuarioTmp)){
-			msgs.addMensagem("pbpfUsuarioJaCadastrado");
-		}
-		
-		//valida e-mail já cadastro
-		usuarioTmp.setVchLogin(new String());
-		usuarioTmp.setVchEmail(usuario.getVchEmail());
-		
-		//verifica se o existe usuario cadastrado com o mesmo email
-		if(this.persistencia.beforeInsert(usuarioTmp)){
-			msgs.addMensagem("pbpfUsuarioEmailJaCadastrado");
-		}
-		
-		//encriptar senha do usuário antes de incluir.
-		usuario.setVchSenha(encrypt.encrypt(usuario.getVchSenha()));
-		
-		if(msgs.getNumeroRegistros() > 0) {
-			throw new RegraNegocioException(msgs);
-		}
-		
 	}
 
 	/**
@@ -97,27 +62,9 @@ public class UsuarioBO implements Usuario {
 	protected void beforeUpdate(TransferObject bean)
 			throws RegraNegocioException {
 		
-		UsuarioTO usuario = (UsuarioTO) bean;
-		
-		UsuarioTO usuarioTmp = new UsuarioTO();
-		
-		usuarioTmp.setVchEmail(usuario.getVchEmail());
-		
-		//verifica se o existe usuario cadastrado com o mesmo e-mail
-		if(this.persistencia.beforeUpdate(usuario, usuarioTmp)){
-			throw new RegraNegocioException("pbpfUsuarioEmailJaCadastrado");
-		}
-		
 	}
 	
 	protected void beforeDelete(TransferObject bean) throws RegraNegocioException {
-		
-		UsuarioTO usuario =(UsuarioTO) bean;
-		
-		//verifica se o usuario não é o único cadastrado.
-		if (usuario.getVchLogin().equals("admin")) {
-			throw new RegraNegocioException("pbpfMsgUsuarioAdmin");
-		}
 		
 	}
 
@@ -153,25 +100,6 @@ public class UsuarioBO implements Usuario {
 	public void alterar(UsuarioTO usuario, UsuarioTO usuarioLogado, String confirmaSenha, String senhaAtual)
 			throws RegraNegocioException, BDException {
 		
-		UsuarioTO usuarioTmp = usuario;
-		
-		MensagemLista msgs = new MensagemLista();
-		
-		EncrypterImpl encrypt = new EncrypterImpl(Encrypter.KEY_ENCRYPT);
-		
-		if(usuarioTmp.getVchSenha() != null && !usuarioTmp.getVchSenha().isEmpty() && !usuarioTmp.getVchSenha().equals(encrypt.encrypt(senhaAtual))) {
-			msgs.addMensagem("pbpfMsgSenhaDiferenteDaAtual");
-		}
-		
-		if (!usuario.getVchSenha().equals(confirmaSenha)) {
-			msgs.addMensagem("pbpfMsgSenhaDiferenteDaNova");
-		}
-		
-		if(msgs.getNumeroRegistros() > 0) {
-			throw new RegraNegocioException(msgs);
-		}
-		
-		this.alterar(usuario, usuarioLogado);
 	}
 	
 	/**
@@ -221,11 +149,6 @@ public class UsuarioBO implements Usuario {
 	public void incluir(UsuarioTO usuario, UsuarioTO usuarioLogado,
 			String confirmaSenha) throws RegraNegocioException, BDException {
 		
-		if(!usuario.getVchSenha().equals(confirmaSenha)) {
-			throw new RegraNegocioException("pbpfMsgSenhaDiferenteDaNova");
-		}
-		
-		this.incluir(usuario, usuarioLogado);
 	}
 
 	/**
@@ -252,7 +175,7 @@ public class UsuarioBO implements Usuario {
 	 * @throws RegraNegocioException
 	 */
 	public List<TransferObject> listar(UsuarioTO usuario) throws BDException{
-		if (usuario.getVchLogin() != null || usuario.getVchNome() != null) {
+		if (usuario.getQdfCod() != null || usuario.getQdfNomFunc() != null) {
 			return this.persistencia.listar(usuario);
 		}
 		return this.persistencia.listar();		

@@ -59,15 +59,15 @@
 	<servlet>
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>*.flavios</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>ResourceServlet</servlet-name>
 		<servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
 	</servlet>
@@ -75,7 +75,7 @@
 	<servlet-mapping>
 		<servlet-name>ResourceServlet</servlet-name>
 		<url-pattern>/primefaces_resource/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 	<!-- ************* PARAMETROS ************* -->
 	<context-param>
@@ -99,13 +99,13 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>flick</param-value>
 	</context-param>
-
-	<!-- <context-param>
+	
+	<context-param>
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 		<param-value>.xhtml</param-value>
 	</context-param>
 
-	<context-param>
+	<!-- <context-param>
 		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
 		<param-value>2</param-value>
 	</context-param> -->
@@ -120,15 +120,15 @@
 		<param-value>/WEB-INF/spring/applicationContext.xml</param-value>
 	</context-param>
 
-	<!-- <context-param>
+	<context-param>
 		<param-name>com.sun.faces.enableRestoreView11Compatibility
 		</param-name>
 		<param-value>true</param-value>
-	</context-param> -->
+	</context-param>
 
-	<session-config>
+	<!-- <session-config>
 		<session-timeout>30</session-timeout>
-	</session-config>
+	</session-config> -->
 
 	<welcome-file-list>
 		<welcome-file>/xhtml/principal/index.html</welcome-file>

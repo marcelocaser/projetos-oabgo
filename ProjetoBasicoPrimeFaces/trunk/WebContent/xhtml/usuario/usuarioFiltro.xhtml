@@ -1,9 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:flavios="http://java.sun.com/jsf/composite/compomente"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:flavios="http://java.sun.com/jsf/composite/flavios"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui">
 
+<h:form>
+	<flavios:filtro>
+		<h:panelGrid columns="2" width="100%"
+			columnClasses="labelDireito, bgCampo">
+
+			<h:outputLabel value="#{msg.pbpfUsuarioCodigo}" />
+			<p:inputText value="#{usuarioBean.codigoFiltro}" />
+
+			<h:outputLabel value="#{msg.pbpfUsuarioNome}" />
+			<p:inputText value="#{usuarioBean.nomeFiltro}"
+				styleClass="inputMedio" />
+
+		</h:panelGrid>
+
+		<h:panelGrid columns="1" styleClass="centralizar">
+			<p:commandButton value="#{msg.pbpfGlobalMsgPesquisar}"
+				action="#{usuarioBean.listar}" image="ui-icon ui-icon-search"
+				ajax="false" />
+		</h:panelGrid>
+
+	</flavios:filtro>
+</h:form>
 </html>

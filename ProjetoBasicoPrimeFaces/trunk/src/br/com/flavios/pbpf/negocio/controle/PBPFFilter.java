@@ -42,12 +42,13 @@ public class PBPFFilter implements Filter, PBPFConstantes {
 			if (usuarioLogado != null) {
 				redirecionarAcessoUsuarioLogado(chain, request, response);
 			} else {
-				if (this.path.equals(URL_MOBILE)) {
-					request.getRequestDispatcher(URL_MOBILE).forward(request, response);
+				if (this.path.equals(URL_MOBILE_DASHBOARD) || this.path.equals(URL_MOBILE_LOGIN)) {
+					request.getRequestDispatcher(URL_MOBILE_LOGIN).forward(request, response);
 				} else {
 					request.getRequestDispatcher(URL_LOGIN).forward(request, response);
-					//chain.doFilter(request, response);
+					//chain.doFilter(request, response);	
 				}
+										
 			}
 		} catch (Throwable e) {
 			BaseException ex = Util.getBaseException(e);
@@ -67,7 +68,12 @@ public class PBPFFilter implements Filter, PBPFConstantes {
 		if (this.path.equals(URL_LOGIN) || this.path.equals(URL_INIT)) {
 			request.getRequestDispatcher(URL_DASHBOARD).forward(request, response);
 		} else {
-			chain.doFilter(request, response);
+			if (this.path.equals(URL_MOBILE_DASHBOARD) || this.path.equals(URL_MOBILE_LOGIN)) {
+				request.getRequestDispatcher(URL_MOBILE_DASHBOARD).forward(request, response);
+			} else {
+				chain.doFilter(request, response);	
+			}
+			
 		}
 	}
 

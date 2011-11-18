@@ -10,7 +10,7 @@ public interface PBPFConstantes {
 	/**
 	 * Nome padrão do servidor/dominio
 	 */
-	public static final String ENDERECO_WINS_FLAVIOS = "10.62.3.20";
+	public static final String ENDERECO_WINS_FLAVIOS = "10.62.3.15";
 	public static final String DOMINIO_FLAVIOS = "FLAVIOS.BR";
 	
 	/**
@@ -31,10 +31,11 @@ public interface PBPFConstantes {
 	/**
 	 * URL'S PBPF
 	 */
-	public static final String URL_INIT = "/ProjetoBasicoPrimeFaces";
-	public static final String URL_LOGIN = "/xhtml/principal/login.jsf";
-	public static final String URL_DASHBOARD = "/xhtml/principal/paginaPrincipal.jsf";
-	public static final String URL_MOBILE = "/xhtml/mobile/paginaPrincipal.jsf";
+	public static final String URL_INIT = "/pbpf";
+	public static final String URL_LOGIN = "/xhtml/principal/login.flavios";
+	public static final String URL_DASHBOARD = "/xhtml/principal/paginaPrincipal.flavios";
+	public static final String URL_MOBILE_LOGIN = "/xhtml/mobile/login.flavios";
+	public static final String URL_MOBILE_DASHBOARD = "/xhtml/mobile/paginaPrincipal.flavios";
 	
 	/**
 	 * DEFINIÇÕES SERVIDOR
@@ -63,9 +64,4 @@ public interface PBPFConstantes {
 	public static final String JCIFS_SMB_CLIENT_DOMAIN = "jcifs.smb.client.domain";
 	public static final String JCIFS_NETBIOS_WINS = "jcifs.netbios.wins";
 	
-	
-	/**
-	 * DEFINIÇÕES DO JSF 2.0 PARA REDIRECT DAS PÁGINAS 
-	 */
-	public static final String URL_USUARIO_LISTAR = "/xhtml/usuario/usuarioListar";
 }

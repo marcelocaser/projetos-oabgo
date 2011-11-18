@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:flavios="http://java.sun.com/jsf/composite/flavios"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -20,81 +21,75 @@
 				<h:form>
 					<p:menuButton value="#{msg.pbpfMenuOpcao}">
 						<p:menuitem value="#{msg.pbpfMenuOpcaoNovo}"
-							action="#{activeDirectoryBean.listar}" icon="iconeMenuOpcoesNovo"
+							action="#{activeDirectoryBean.listar}"
+							onclick="statusDialog.show()" icon="ui-icon ui-icon-plus"
 							ajax="false" />
 					</p:menuButton>
 				</h:form>
 			</p:toolbarGroup>
 		</p:toolbar>
 
-		<p:panel id="painelListagem" headerClass="txtRotuloPannelCenter">
-			<h:form prependId="false">
-				<p:dataTable width="100%" id="lista"
-					rendered="#{not empty usuarioBean.listaUsuarioDataTable}"
-					rows="#{usuarioBean.itensPorPagina}"
+		<flavios:modalDialog mensagem="Deseja realmente excluir?"
+			managedBean="#{usuarioBean.excluir}" />
+
+		<p:panel id="painelListagem">
+			<h:form id="form">
+				<p:dataTable id="lista" paginatorPosition="bottom"
+					rows="#{usuarioBean.itensPorPagina}" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
 					value="#{usuarioBean.listaUsuarioDataTable}" var="usuario">
 
-					<p:column styleClass="alignCenter"
-						headerText="#{msg.pbpfMenuOpcao}">
-						<p:commandLink id="confirmarExclusao"
-							action="#{usuarioBean.excluir}" ajax="false">
-							<p:tooltip for="confirmarExclusao"
-								value="#{msg.pbpfOpcoesToolTipoExcluir}" />
-							<h:graphicImage style="border: 0px;"
-								value="#{msg.pbpfIconeExcluir}" />
-						</p:commandLink>
-						<p:spacer width="5" />
-						<p:commandLink id="editar" action="#{usuarioBean.editar}">
-							<p:tooltip for="editar" value="#{msg.pbpfOpcoesToolTipoEditar}" />
-							<h:graphicImage style="border: 0px;"
-								value="#{msg.pbpfIconeEditar}" />
-							<f:setPropertyActionListener value="#{usuario}"
-								target="#{usuarioBean.usuario}" />
-						</p:commandLink>
-					</p:column>
-
-					<p:column headerText="#{msg.pbpfUsuarioUserName}">
-						<p:commandLink value="#{usuario.vchLogin}"
-							action="#{usuarioBean.consultar}">
-							<f:setPropertyActionListener value="#{usuario}"
-								target="#{usuarioBean.usuario}" />
-						</p:commandLink>
+					<p:column sortBy="#{usuario.qdfCod}"
+						headerText="#{msg.pbpfUsuarioCodigo}">
+						<h:outputText value="#{usuario.qdfCod}" />
 					</p:column>
 
 					<p:column headerText="#{msg.pbpfUsuarioNome}">
-						<p:commandLink value="#{usuario.vchNome}"
-							action="#{usuarioBean.consultar}">
-							<f:setPropertyActionListener value="#{usuario}"
-								target="#{usuarioBean.usuario}" />
-						</p:commandLink>
+						<h:outputText value="#{usuario.qdfNomFunc}" />
 					</p:column>
 
-					<p:column headerText="#{msg.pbpfUsuarioEmail}">
-						<p:commandLink value="#{usuario.vchEmail}"
-							action="#{usuarioBean.consultar}">
-							<f:setPropertyActionListener value="#{usuario}"
-								target="#{usuarioBean.usuario}" />
-						</p:commandLink>
+					<p:column headerText="#{msg.pbpfUsuarioEmail}"
+						filterBy="#{usuario.qdfExtEmai}" filterMatchMode="contains">
+						<h:outputText value="#{usuario.qdfExtEmai}" />
+					</p:column>
+
+					<p:column sortBy="#{usuario.qdfLoginAd}"
+						headerText="#{msg.pbpfUsuarioLogin}">
+						<h:outputText value="#{usuario.qdfLoginAd}" />
 					</p:column>
 
 					<p:column styleClass="alignCenter"
 						headerText="#{msg.pbpfUsuarioAtivo}">
-						<p:commandLink action="#{usuarioBean.consultar}">
+						<flavios:boolean value="#{usuario.qdfStaFunc}" />
+					</p:column>
+
+					<p:column styleClass="alignCenter">
+						<p:commandButton id="editar" action="#{usuarioBean.consultar}"
+							image="ui-icon ui-icon-search" onclick="statusDialog.show()"
+							ajax="false">
+							<p:tooltip for="editar"
+								value="#{msg.pbpfOpcoesToolTipoConsultar}" />
 							<f:setPropertyActionListener value="#{usuario}"
 								target="#{usuarioBean.usuario}" />
-						</p:commandLink>
+						</p:commandButton>
+						<p:spacer width="5" />
+						<p:commandButton id="exclusao" image="ui-icon ui-icon-close"
+							oncomplete="confirmacao.show()">
+							<p:tooltip for="exclusao"
+								value="#{msg.pbpfOpcoesToolTipoExcluir}" />
+							<f:setPropertyActionListener value="#{usuario}"
+								target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+
 					</p:column>
+
 				</p:dataTable>
 
-				<h:panelGrid width="100%" cellpadding="0" cellspacing="1"
-					columns="1">
-					<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
-
-					</h:panelGrid>
-					<h:panelGrid cellpadding="0" cellspacing="0" columns="1">
-						<h:outputText value="Rotulo Pagina" />
-					</h:panelGrid>
+				<h:panelGrid cellpadding="0" cellspacing="0" columns="1">
+					<h:outputText value="Rotulo Pagina" />
 				</h:panelGrid>
+
 			</h:form>
 		</p:panel>
 	</ui:define>

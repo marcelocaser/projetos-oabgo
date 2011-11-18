@@ -70,8 +70,13 @@ public class PBPFPhaseListener implements PhaseListener, PBPFConstantes {
 			//valida a existencia de SISTEMA associado ao controle de acesso
 			if(sistema == null){
 				//busca por um sistema que contenha o contexto chamado.
+				//Verifica se o sistema não é o MOBILE.
 				Sistema negocioSistema = PBPFBusinessFactory.getInstance().createSistema();
-				sistema = negocioSistema.consultarSistemaContexto(FacesUtil.getRequest(contexto).getContextPath());
+				if (FacesUtil.getRequest(contexto).getRequestURI().equals(FacesUtil.getRequest(contexto).getContextPath() + URL_MOBILE_LOGIN)) {
+					sistema = negocioSistema.consultarSistemaNome("MOBILE");
+				} else {
+					sistema = negocioSistema.consultarSistemaContexto(FacesUtil.getRequest(contexto).getContextPath());					
+				}
 				//verifica se é um contexto gerenciado pelo ADM, se o contexto não for gerenciado, direciona para a aplicação principal
 				if(sistema == null){
 					sistema = new SistemaTO();

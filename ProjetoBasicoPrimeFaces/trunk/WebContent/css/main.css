@@ -138,8 +138,8 @@ body {
 }
 
 .pic {
-	margin-bottom: -9px;
-	margin-right: 1px;
+	margin-bottom: -3px;
+	margin-right: 3px;
 	border: 0px;
 }
 
@@ -1396,30 +1396,3 @@ para o nome do style a ser criado.*/
 	background-image: url(../imagens/icons/iconeMenuConsulta.png);
 }
 /*FimMenuConsulta*/
-
-/*MenuOpcoes*/
-.iconeMenuOpcoes {
-	width: 16px;
-	height: 16px;
-	margin-bottom: 2px;
-	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuOpcoes.png);
-}
-
-.iconeMenuOpcoesNovo {
-	width: 16px;
-	height: 16px;
-	margin-bottom: 2px;
-	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuOpcoesNovo.png);
-}
-
-.iconeMenuOpcoesVoltar {
-	width: 16px;
-	height: 16px;
-	margin-bottom: 2px;
-	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuOpcoesVoltar.png);
-}
-/*FimMenuOpcoes*/
-

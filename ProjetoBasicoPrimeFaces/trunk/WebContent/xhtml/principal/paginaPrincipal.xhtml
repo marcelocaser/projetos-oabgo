@@ -11,8 +11,14 @@
 		<p:spacer height="100" />
 
 		<h:panelGrid columns="1" width="100%" columnClasses="alignCenter">
+			<p:spacer height="30" />
+			<h:panelGroup>
+				<h:outputText styleClass="txtPequeno" value="#{msg.pbpfCopyright} " />
+				<h:outputLink styleClass="linkLoginBold"
+					value="#{msg.pbpfPortalFlavios}" target="_blank">#{msg.pbpfFlaviosUpperCase}</h:outputLink>
+				<h:outputText styleClass="txtPequeno" value=", #{msg.pbpfDireitos}" />
+			</h:panelGroup>
 		</h:panelGrid>
-		<p:spacer height="30" />
 	</ui:define>
 </ui:composition>
 </html>

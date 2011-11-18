@@ -30,9 +30,9 @@
 						</h:panelGrid>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="centralizar">
-						<p:commandButton onclick="showModalCentro('modalSubmit')"
-							action="#{loginBean.logon}" value="#{msg.pbpfLogar}"
-							image="ui-icon ui-icon-person" />
+						<p:commandButton value="#{msg.pbpfLogar}" onclick="statusDialog.show()"
+							action="#{loginBean.logon}" image="ui-icon ui-icon-unlocked"
+							ajax="false" />
 						<p:spacer width="40px" />
 					</h:panelGrid>
 					<p:spacer width="60px" />

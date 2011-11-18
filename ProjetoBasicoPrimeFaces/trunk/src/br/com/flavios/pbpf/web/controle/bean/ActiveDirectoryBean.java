@@ -111,7 +111,7 @@ public class ActiveDirectoryBean extends PBPFManagedBean {
 		for (Iterator<TransferObject> iterator = this.getListaUsuarioCadastro().iterator(); iterator.hasNext();) {
 			usuario = (UsuarioTO) iterator.next();
 			for (int i = 0; i < this.getListaUsuarioLDAPDataTable().size(); i++) {
-				if (this.getListaUsuarioLDAPDataTable().get(i).getUserPrincipalName().equals(usuario.getVchLogin())) {
+				if (this.getListaUsuarioLDAPDataTable().get(i).getUserPrincipalName().equals(usuario.getQdfLoginAd())) {
 					this.getListaUsuarioLDAPDataTable().remove(i);
 				}
 			}

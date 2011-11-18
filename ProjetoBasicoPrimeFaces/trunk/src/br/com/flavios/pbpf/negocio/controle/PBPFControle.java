@@ -87,13 +87,24 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 	 * Dispara mensagem via modal panel no request.
 	 *
 	 * @param key - {@link String} - Chave de texto existente no arquivo de internacionalização.
-	 * @param tipo - {@link Integer} - Constante que indica o tipo de mensagem - [MSG_ERRO, MSG_SUCESSO, MSG_ATENCAO].
+	 * @param tipo - {@link Integer} - Constante que indica o tipo de mensagem - [MSG_ERRO, MSG_SUCESSO, MSG_ATENCAO, MSG_FATAL].
 	 * @return void
 	 */
 	protected void setMessage(String key, PBPFEnumTipoMensagem tipo) {
 		setParamRequest(PBPFEnumSecurity.PBPF_MODAL_MENSAGEM, 	Boolean.TRUE);
 		setParamRequest(PBPFEnumSecurity.PBPF_TIPO_MENSAGEM, 		tipo);
-		FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(this.getMessage(key)));
+		if (tipo.equals(PBPFEnumTipoMensagem.SUCESSO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_INFO, this.getMessage(key), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.ERRO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_ERROR, this.getMessage(key), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.ATENCAO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_WARN, this.getMessage(key), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.FATAL)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_FATAL,this.getMessage(key), null));
+		}
 	}
 
 	/**
@@ -101,13 +112,24 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 	 *
 	 * @param key - {@link String} - Chave de texto existente no arquivo de internacionalização.
 	 * @param parametros - {@link String[]} - Lista de parametros que serviço inseridos na mensagem.
-	 * @param tipo - {@link Integer} - Constante que indica o tipo de mensagem - [MSG_ERRO, MSG_SUCESSO, MSG_ATENCAO].
+	 * @param tipo - {@link Integer} - Constante que indica o tipo de mensagem - [MSG_ERRO, MSG_SUCESSO, MSG_ATENCAO, MSG_FATAL].
 	 * @return void
 	 */
 	protected void setMessage(String key, String[] parametros, PBPFEnumTipoMensagem tipo) {
 		setParamRequest(PBPFEnumSecurity.PBPF_MODAL_MENSAGEM, 	Boolean.TRUE);
 		setParamRequest(PBPFEnumSecurity.PBPF_TIPO_MENSAGEM, 		tipo);
-		FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(this.getMessage(key, parametros)));
+		if (tipo.equals(PBPFEnumTipoMensagem.SUCESSO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_INFO, this.getMessage(key, parametros), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.ERRO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_ERROR, this.getMessage(key, parametros), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.ATENCAO)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_WARN, this.getMessage(key, parametros), null));
+		}
+		if (tipo.equals(PBPFEnumTipoMensagem.FATAL)) {
+			FacesUtil.addMessageCtx(this.getContext(), 		new FacesMessage(FacesMessage.SEVERITY_FATAL, this.getMessage(key, parametros), null));
+		}
 	}
 	
 	/**
@@ -119,7 +141,18 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 		setParamRequest(PBPFEnumSecurity.PBPF_MODAL_MENSAGEM, 	Boolean.TRUE);
 		setParamRequest(PBPFEnumSecurity.PBPF_TIPO_MENSAGEM, 		tipo);
 		for(Mensagem msg : listaMensagem){
-			FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null)));
+			if (tipo.equals(PBPFEnumTipoMensagem.SUCESSO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_INFO, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.ERRO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_ERROR, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));				
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.ATENCAO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_WARN, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.FATAL)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_FATAL, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
 		}
 	}
 	
@@ -132,7 +165,18 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 		setParamRequest(PBPFEnumSecurity.PBPF_MODAL_MENSAGEM, 	Boolean.TRUE);
 		setParamRequest(PBPFEnumSecurity.PBPF_TIPO_MENSAGEM, 		tipo);
 		for(Mensagem msg : listaMensagem.getMensagens()){
-			FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null)));
+			if (tipo.equals(PBPFEnumTipoMensagem.SUCESSO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_INFO, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.ERRO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_ERROR, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.ATENCAO)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_WARN, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
+			if (tipo.equals(PBPFEnumTipoMensagem.FATAL)) {
+				FacesUtil.addMessageCtx(this.getContext(),new FacesMessage(FacesMessage.SEVERITY_FATAL, ResourceServiceUtil.getMessageResourceString(msg.getMensagem(), null), null));
+			}
 		}
 	}
 	
@@ -182,6 +226,22 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 	}
 	
 	/**
+	 * Remove a autenticação do usuário no controle de acesso.
+	 * @param sistema - {@link String} - Atributo que representa o sistema que requisitou o logoff 
+	 * no controle de acesso.
+	 * 
+	 * @return void
+	 */
+	protected void removerAcessoMobile() throws Exception{
+		//Destroi a sessão do Usuario
+		sessionDestroy();
+		Sistema negocioSistema = PBPFBusinessFactory.getInstance().createSistema();
+		SistemaTO sistema = negocioSistema.consultarSistemaNome("MOBILE");
+		//Redireciona para a página inicial do sistema.
+		FacesUtil.redirect(getContext(), sistema.getVchUrlSistema());
+	}
+	
+	/**
 	 * Retorna parametros do controle de acesso armazenados na sessão.
 	 *
 	 * @param key - AdmNetEnumSecurity
@@ -197,6 +257,7 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 	 */
 	protected String tratarExcecao(Exception e){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		PBPFEnumTipoMensagem tipoMensagem;
 		//Busca a origem de exceções não declaradas
 		if(e instanceof UndeclaredThrowableException){
 			e = Util.getException(e);
@@ -207,17 +268,22 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 		//exceções customizadas
 		if (e instanceof RegraNegocioException) {
 			mensagens = ((RegraNegocioException)e).getMensagens();
+			tipoMensagem = PBPFEnumTipoMensagem.ERRO;
 		}else if(e instanceof AcessoException){
 			mensagens = ((AcessoException)e).getMensagens();
+			tipoMensagem = PBPFEnumTipoMensagem.ERRO;
 		}else if(e instanceof DataIntegrityViolationException){
-			mensagens.add(new Mensagem(getMessage("admDataIntegrityViolationException")));	
+			mensagens.add(new Mensagem(getMessage("admDataIntegrityViolationException")));
+			tipoMensagem = PBPFEnumTipoMensagem.FATAL;
 		}else if(e instanceof NullPointerException){
-			mensagens.add(new Mensagem(getMessage("admNullPointerException")));	
+			mensagens.add(new Mensagem(getMessage("admNullPointerException")));
+			tipoMensagem = PBPFEnumTipoMensagem.FATAL;
 		}else{
-			mensagens.add(new Mensagem(e.getMessage()));			
+			mensagens.add(new Mensagem(e.getMessage()));
+			tipoMensagem = PBPFEnumTipoMensagem.ERRO;
 		}
 		e.printStackTrace();
-		this.setMessage(mensagens, PBPFEnumTipoMensagem.ERRO);
+		this.setMessage(mensagens, tipoMensagem);
 		return null;
 	}
 	
