@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -393,6 +394,18 @@ public class DaoHibernate implements Dao {
 	public Session getSession() throws BDException, ApplicationException{
 		return this.getSessionFactory().getCurrentSession();
 	}
+	
+	/**
+	 * Habilita as estatisticas do Hibernate
+	 * @return Statistics
+	 */
+	public Statistics getStatistics() throws BDException, ApplicationException {
+		if (!getSessionFactory().getStatistics().isStatisticsEnabled()) {
+		      getSessionFactory().getStatistics().setStatisticsEnabled(true);
+		    }
+		    return getSessionFactory().getStatistics();
+	}
+	
 	/**
 	 * Cria um objeto Query generico para o hibernate
 	 * @param str - String

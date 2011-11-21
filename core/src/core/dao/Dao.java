@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
 
 import core.enumeration.OrderType;
 import core.excecoes.ApplicationException;
@@ -341,6 +342,12 @@ public interface Dao {
 	 * @return Session
 	 */
 	public Session getSession() throws BDException, ApplicationException;
+	
+	/**
+	 * Habilita as estatisticas do Hibernate
+	 * @return Statistics
+	 */
+	public Statistics getStatistics() throws BDException, ApplicationException;
 	
 	/**
 	 * Cria um obejto Query com base em uma String passada como parâmetro.
