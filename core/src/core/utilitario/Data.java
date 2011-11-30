@@ -923,9 +923,19 @@ public class Data {
 	 * 
 	 * @return int
 	 */
-	public static int getDiaMesAtual() {
+	public static int getDiaMes() {
 		Calendar calendar = new GregorianCalendar();
 		return calendar.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	/**
+	 * Retorna o dia da Semana atual
+	 * 
+	 * @return int
+	 */
+	public static int getDiaSemana() {
+		Calendar calendar = new GregorianCalendar();
+		return calendar.get(Calendar.DAY_OF_WEEK);
 	}
 
 	/**

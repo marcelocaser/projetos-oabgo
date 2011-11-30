@@ -358,7 +358,6 @@ public class HibernateUtil extends HibernateDaoSupport{
 	 * @return TransferObject
 	 * @throws BDException
 	 */
-	@SuppressWarnings(value="unchecked")
 	public Object buscarObjeto(Query query) throws BDException, ApplicationException{
 		List resultado = query.list();
 		if(resultado.size() > 0){

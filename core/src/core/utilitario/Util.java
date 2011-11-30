@@ -336,6 +336,19 @@ public class Util {
 	}
 	
 	/**
+	 * 
+	 * Retorna valor numerico se a String for diferente de 
+	 * null ou vazia.
+	 * 
+	 */
+	public static Long setLong(String str){
+		if(stringOk(str)){
+			return Long.parseLong(str);
+		}
+		else return null;
+	}
+	
+	/**
 	 * Realiza um SPLIT, dividindo a String de acordo com o CHAR passado como parâmetro.
 	 * 
 	 * @param s - String a ser dividida

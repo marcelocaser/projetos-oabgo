@@ -59,7 +59,12 @@ public abstract class TransferObject implements Cloneable, Serializable {
 		   if(getKey() instanceof Long){
 			  return (int)(long)(Long)getKey(); 
 		   }else {
-			  return (int)(Integer) getKey(); 	
+			   if (getKey() instanceof Integer) {
+				   return (int)(Integer) getKey();				   
+			   }
+			   else {
+				   return super.hashCode();
+			   }
 		   }
 		}else{
 			return super.hashCode();
