@@ -111,20 +111,24 @@ public class UsuarioPO extends PBPFPersistencia {
 		criteria.addOrder(Order.asc("qdfLoginAd"));
 		return (List<TransferObject>) this.getDaoHibernate().executar(criteria);
 	}
-
+	
 	/**
-	 * Retorna um usuário com base no Login do mesmo.
-	 * 
-	 * @param userName
-	 *            String
-	 * @return {@link UsuarioTO}
-	 * @throws BDException
+	 * Retorna objeto UsuarioTO cadastrado e ativo.
+	 *
+	 * @param usuario
+	 * @return
+	 * @throws BDException - 
+	 * @return List<TransferObject>
 	 */
-	public UsuarioTO buscarUsuarioPorLogin(String userName) throws BDException {
-		Criteria criteria = this.getDaoHibernate().createCriteria(
-				UsuarioTO.class);
+	public UsuarioTO buscarUsuarioAtivo(UsuarioTO usuario) throws BDException {
+		Criteria criteria = this.getDaoHibernate().createCriteria(UsuarioTO.class);
 		criteria.add(Restrictions.eq("qdfStaFunc", "A"));
-		criteria.add(Restrictions.eq("qdfLoginAd", userName));
+		if (usuario.getQdfLoginAd() != null) {
+			criteria.add(Restrictions.eq("qdfLoginAd", usuario.getQdfLoginAd()));			
+		}
+		if (usuario.getQdfCod() != null) {
+			criteria.add(Restrictions.eq("qdfCod", usuario.getQdfCod()));			
+		}
 		return (UsuarioTO) this.getDaoHibernate().buscarObjeto(criteria);
 	}
 	

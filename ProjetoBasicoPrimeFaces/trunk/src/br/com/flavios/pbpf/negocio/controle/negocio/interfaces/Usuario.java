@@ -2,6 +2,7 @@ package br.com.flavios.pbpf.negocio.controle.negocio.interfaces;
 
 import java.util.List;
 
+import br.com.flavios.pbpf.negocio.controle.entidade.FilialTO;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import core.dao.TransferObject;
 import core.excecoes.BDException;
@@ -66,7 +67,7 @@ public interface Usuario {
 			throws RegraNegocioException, BDException;
 	
 	/**
-	 * VInclui as informações contidas no objeto passado como parâmetro.
+	 * Inclui as informações contidas no objeto passado como parâmetro.
 	 *
 	 * @param usuario
 	 * @param senhaAtual
@@ -110,21 +111,38 @@ public interface Usuario {
 	 */
 	public List<TransferObject> listar(UsuarioTO usuario, String orderBy) throws BDException;
 	
+	/**
+	 * Retorna a lista de usuários cadastrados.
+	 *
+	 * @return
+	 * @throws BDException - 
+	 * @return List<TransferObject>
+	 */
 	public List<TransferObject> listar() throws BDException;
+	
+	/**
+	 *  Retorna objeto UsuarioTO cadastrado e ativo.
+	 *
+	 * @param usuario
+	 * @return
+	 * @throws BDException - 
+	 * @return List<TransferObject>
+	 */
+	public UsuarioTO buscarUsuarioAtivo(UsuarioTO usuario) throws BDException;
+	
+	/**
+	 * Retorna objeto UsuarioTO cadastrado e vendedor.
+	 *
+	 * @param usuario
+	 * @return
+	 * @throws BDException - 
+	 * @return UsuarioTO
+	 */
+	public UsuarioTO buscarUsuarioVendedor(UsuarioTO usuario, FilialTO filial) throws BDException, RegraNegocioException;
 	
 	/**
 	 * Remove um objeto da sessão do Hibernate.
 	 */
 	public void retirarObjetoSessao(UsuarioTO usuario);
-	
-	/**
-	 * Retorna um usuário com base no Login do mesmo.
-	 * 
-	 * @param userName
-	 *            String
-	 * @return {@link UsuarioTO}
-	 * @throws BDException
-	 */
-	public UsuarioTO buscarUsuarioPorLogin(String userName) throws BDException;
 
 }

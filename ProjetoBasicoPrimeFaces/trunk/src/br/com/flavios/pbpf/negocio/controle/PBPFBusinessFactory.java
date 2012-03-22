@@ -1,8 +1,10 @@
 package br.com.flavios.pbpf.negocio.controle;
 
+import br.com.flavios.pbpf.negocio.controle.negocio.EstoqueProdutoBO;
 import br.com.flavios.pbpf.negocio.controle.negocio.ServicoGenericoBO;
 import br.com.flavios.pbpf.negocio.controle.negocio.SistemaBO;
 import br.com.flavios.pbpf.negocio.controle.negocio.UsuarioBO;
+import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.EstoqueProduto;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.ServicoGenerico;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Sistema;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Usuario;
@@ -13,11 +15,12 @@ public class PBPFBusinessFactory extends BusinessFactory {
 	private static PBPFBusinessFactory pbpfBusinessFactory;
 
 	
+	private static final String ESTOQUE_PRODUTO_BO = "estoqueProdutoBO";
 	private static final String SERVICO_GENERICO_BO = "servicoGenericoBO";
 	private static final String SISTEMA_BO = "sistemaBO";
 	private static final String USUARIO_BO = "usuarioBO";
 	
-	
+	private static EstoqueProduto estoqueProduto;
 	private static ServicoGenerico servicoGenerico;
 	private static Sistema sistema;
 	private static Usuario usuario;
@@ -35,6 +38,17 @@ public class PBPFBusinessFactory extends BusinessFactory {
 			pbpfBusinessFactory = new PBPFBusinessFactory();
 		}
 		return pbpfBusinessFactory;
+	}
+	
+	/**
+	 * Retorna a implementação de negocio de ServicoGenerico
+	 * @return ServicoGenerico
+	 */
+	public EstoqueProduto createEstoqueProduto() {
+		if (estoqueProduto == null) {
+			estoqueProduto = (EstoqueProduto) createBusinessObject(EstoqueProdutoBO.class, ESTOQUE_PRODUTO_BO);
+		}
+		return estoqueProduto;
 	}
 	
 	/**

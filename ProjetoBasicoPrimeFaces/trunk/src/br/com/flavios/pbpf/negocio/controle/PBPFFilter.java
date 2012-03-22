@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
+import br.com.flavios.pbpf.negocio.enumerador.PBPFEnumSecurity;
 import core.excecoes.BaseException;
 import core.utilitario.Util;
 
@@ -29,23 +30,23 @@ public class PBPFFilter implements Filter, PBPFConstantes {
 		this.path = this.hRequest.getServletPath();
 
 		UsuarioTO usuarioLogado = null;
-
+		
 		try {
 			// Caso exista sessão e sessionId associado ao request seja válido,
 			// recupera o atributo de sessão USUARIO_LOGADO.
 			if (this.hSession != null && this.hRequest.isRequestedSessionIdValid()) {
-				usuarioLogado = (UsuarioTO) this.hSession.getAttribute(PBPFConstantes.USUARIO_LOGADO);
+				usuarioLogado = (UsuarioTO) this.hSession.getAttribute(PBPFEnumSecurity.USUARIO_LOGADO.name());
 			}
-
+			
 			// Se usuário logado, aplica o controle de acesso URL. Se não,
 			// direciona para a página de LOGIN.
 			if (usuarioLogado != null) {
 				redirecionarAcessoUsuarioLogado(chain, request, response);
 			} else {
 				if (this.path.equals(URL_MOBILE_DASHBOARD) || this.path.equals(URL_MOBILE_LOGIN)) {
-					request.getRequestDispatcher(URL_MOBILE_LOGIN).forward(request, response);
+					this.hRequest.getRequestDispatcher(URL_MOBILE_LOGIN).forward(request, response);
 				} else {
-					request.getRequestDispatcher(URL_LOGIN).forward(request, response);
+					this.hRequest.getRequestDispatcher(URL_LOGIN).forward(request, response);
 					//chain.doFilter(request, response);	
 				}
 										
@@ -53,12 +54,12 @@ public class PBPFFilter implements Filter, PBPFConstantes {
 		} catch (Throwable e) {
 			BaseException ex = Util.getBaseException(e);
 			ex.printStackTrace();
-			request.setAttribute(MSG_ERRO_GERAL, Boolean.TRUE);
-			request.setAttribute(MSG_ERRO_GERAL_TXT, e.getMessage());
+			this.hRequest.setAttribute(MSG_ERRO_GERAL, Boolean.TRUE);
+			this.hRequest.setAttribute(MSG_ERRO_GERAL_TXT, e.getMessage());
 			if (usuarioLogado != null) {
-				request.getRequestDispatcher(URL_DASHBOARD).forward(request, response);
+				this.hRequest.getRequestDispatcher(URL_DASHBOARD).forward(request, response);
 			} else {
-				request.getRequestDispatcher(URL_LOGIN).forward(request, response);
+				this.hRequest.getRequestDispatcher(URL_LOGIN).forward(request, response);
 			}
 		}
 	}

@@ -26,10 +26,9 @@ public class PBPFLDAPServiceLocator {
 		return instance;
 	}
 
-	@SuppressWarnings("unchecked")
 	public DirContext getContext() throws RegraNegocioException {
 
-		Hashtable env = new Hashtable();
+		Hashtable<String, String> env = new Hashtable<String, String>();
 
 		env.put(Context.INITIAL_CONTEXT_FACTORY,
 				PBPFLDAPParametrosConfig.INITIAL_CTX);
@@ -49,11 +48,10 @@ public class PBPFLDAPServiceLocator {
 		return ctx;
 	}
 
-	@SuppressWarnings("unchecked")
 	public DirContext getContext(String usuario, String senha)
 			throws RegraNegocioException {
 
-		Hashtable env = new Hashtable();
+		Hashtable<String, String> env = new Hashtable<String, String>();
 
 		env.put(Context.INITIAL_CONTEXT_FACTORY,
 				PBPFLDAPParametrosConfig.INITIAL_CTX);

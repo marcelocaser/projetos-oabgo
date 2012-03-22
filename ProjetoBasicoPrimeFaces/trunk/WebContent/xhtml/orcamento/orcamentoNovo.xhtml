@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:flavios="http://java.sun.com/jsf/composite/flavios"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/xhtml/principal/base-codigo.xhtml">
+	<ui:define name="body">
+		<p:focus />
+		<p:dialog width="800" height="#{frenteBean.tamanhoDialogHeight}"
+			modal="true" visible="true" resizable="false"
+			widgetVar="dialogPrevenda" showEffect="clip" hideEffect="clip">
+			<f:facet name="header">
+				<p:graphicImage value="/imagens/icons/iconeMenuFrenteMovimento.png"
+					styleClass="pic" />
+				<h:outputLabel value="Pre Venda" styleClass="txtGrandeNegrito" />
+			</f:facet>
+			<p:panel>
+				<h:panelGrid columns="5">
+					<h:form prependId="false">
+						<h:panelGrid columns="5">
+							<p:graphicImage value="/imagens/icons/iconeCartao.png" />
+							<h:outputLabel for="Cartao" value="Cartão: "
+								styleClass="txtPequenoBold" />
+							<p:inputText id="Cartao"
+								value="#{frenteBean.orcamento.orcCarNro}" maxlength="7"
+								required="true" autocomplete="off"
+								disabled="#{frenteBean.validacaoCartao}">
+								<f:validateLength minimum="3" />
+							</p:inputText>
+							<p:spacer width="10" />
+							<p:commandButton value="Consultar" icon="ui-icon ui-icon-search"
+								action="#{frenteBean.validarCartao}"
+								onclick="statusDialog.show()" ajax="false"
+								rendered="#{frenteBean.validacaoCartao == false}" />
+						</h:panelGrid>
+					</h:form>
+					<h:form id="formVendedor" rendered="#{frenteBean.validacaoCartao}">
+						<h:panelGrid columns="7">
+							<p:graphicImage value="/imagens/icons/iconeVendedor.png" />
+							<h:outputLabel for="vendedor" value="Vendedor: "
+								styleClass="txtPequenoBold" />
+							<p:inputText id="vendedor" value="#{frenteBean.usuario.qdfCod}"
+								maxlength="5" required="true" autocomplete="off"
+								disabled="#{frenteBean.validacaoVendedor}">
+								<f:validateLength minimum="2" />
+							</p:inputText>
+							<p:spacer width="10" />
+							<h:outputText value="#{frenteBean.usuario.qdfNomFunc}"
+								rendered="#{frenteBean.validacaoVendedor}"
+								styleClass="txtMedioNegrito" />
+							<p:commandButton value="Consultar" icon="ui-icon ui-icon-search"
+								action="#{frenteBean.validarVendedor}"
+								onclick="statusDialog.show()"
+								rendered="#{frenteBean.validacaoVendedor == false}" ajax="false" />
+						</h:panelGrid>
+					</h:form>
+					<p:spacer width="5" />
+					<h:form>
+						<p:commandButton value="Cancelar" icon="ui-icon ui-icon-cancel"
+							action="#{frenteBean.novo}" onclick="statusDialog.show()"
+							rendered="#{frenteBean.validacaoVendedor == false}" ajax="false" />
+					</h:form>
+				</h:panelGrid>
+			</p:panel>
+			<p:spacer width="5" />
+			<p:panel rendered="#{frenteBean.validacaoVendedor}">
+				<h:form>
+					<h:panelGrid columns="5">
+						<p:graphicImage value="/imagens/icons/iconeCodigoBarra.png" />
+						<h:outputLabel value="Código de Barras: "
+							styleClass="txtPequenoBold"
+							rendered="#{frenteBean.validacaoVendedor}" />
+						<p:inputText value="#{frenteBean.estoqueProduto.proBarNovo}"
+							rendered="#{frenteBean.validacaoVendedor}" maxlength="13"
+							required="true" autocomplete="off">
+							<f:validateLength minimum="8" maximum="13" />
+						</p:inputText>
+						<p:spacer width="5" />
+						<p:commandButton value="Consultar" icon="ui-icon ui-icon-search"
+							action="#{frenteBean.consultarEstoqueProduto}"
+							onclick="statusDialog.show()" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+			<p:spacer width="5" />
+			<p:dataTable
+				rendered="#{not empty frenteBean.listaEstoqueProdutoDataTable}"
+				value="#{frenteBean.listaEstoqueProdutoDataTable}"
+				var="estoqueProduto">
+				<p:column headerText="Código">
+					<h:outputText value="#{estoqueProduto.estoqueProdutoChaveComposta.produto.proCod}" />
+				</p:column>
+				<p:column headerText="Cor">
+					<h:outputText
+						value="#{estoqueProduto.estoqueProdutoChaveComposta.corCod}" />
+				</p:column>
+				<p:column headerText="Nro">
+					<h:outputText
+						value="#{estoqueProduto.estoqueProdutoChaveComposta.estNum}" />
+				</p:column>
+				<p:column headerText="Referência">
+					<h:outputText value="#{estoqueProduto.estoqueProdutoChaveComposta.produto.proRefer}" />
+				</p:column>
+				<p:column headerText="Quantidade">
+
+				</p:column>
+				<p:column headerText="Valor Unitário">
+					<h:outputText value="#{estoqueProduto.prcVlrPreV}" />
+				</p:column>
+				<p:column headerText="% Desconto">
+
+				</p:column>
+				<p:column headerText="R$ Desconto">
+
+				</p:column>
+				<p:column headerText="Total Item">
+
+				</p:column>
+			</p:dataTable>
+			<p:spacer rendered="#{frenteBean.validacaoVendedor}" />
+			<h:panelGrid columns="2" styleClass="centralizar"
+				rendered="#{frenteBean.validacaoVendedor}">
+				<h:form>
+					<p:commandButton value="Incluir Pre Venda"
+						onclick="statusDialog.show()" icon="ui-icon ui-icon-check"
+						rendered="#{not empty frenteBean.listaEstoqueProdutoDataTable}"
+						ajax="false" />
+					<p:spacer width="5" />
+					<p:commandButton value="Cancelar" icon="ui-icon ui-icon-cancel"
+						action="#{frenteBean.novo}" onclick="statusDialog.show()"
+						ajax="false" />
+				</h:form>
+			</h:panelGrid>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -32,23 +32,21 @@
 			<div id="logoFlaviosTopo"></div>
 		</div>
 		<div id="caixaTopoUsuarioLogado">
-			<h:outputText value="#{msg.pbpfUsuarioOla}, "
+			<h:outputText value="#{msg.pbpfOla}, "
 				styleClass="labelInfoUsuario" />
-			<h:outputText value="#{usuarioLogado.qdfNomFunc}."
+			<h:outputText value="#{USUARIO_LOGADO.qdfNomFunc}."
 				styleClass="labelInfoUsuario" />
-			<!-- <h:outputLabel value="#{msg.pbpfUsuarioUltimoAcesso} 08/02/2011, 16:40:52" styleClass="labelInfoUsuario"/> -->
 		</div>
 
 		<div id="topoLinks">
 			<h:form>
-				<p:commandButton id="home" image="ui-icon ui-icon-home"
+				<p:commandButton id="home" icon="ui-icon ui-icon-home" onclick="statusDialog.show()"
 					action="#{loginBean.dashBoard}" ajax="false">
 					<p:tooltip followMouse="true" for="home" value="#{msg.pbpfHome}" />
 				</p:commandButton>
 				<p:spacer height="10" />
-				<p:commandButton id="logoff" image="ui-icon ui-icon-locked"
-					action="#{loginBean.logoff}" onclick="statusDialog.show()"
-					ajax="false">
+				<p:commandButton id="logoff" icon="ui-icon ui-icon-locked" onclick="statusDialog.show()"
+					action="#{loginBean.logoff}" ajax="false">
 					<p:tooltip followMouse="true" for="logoff" value="#{msg.pbpfSair}" />
 				</p:commandButton>
 			</h:form>
@@ -62,11 +60,12 @@
 			</div>
 		</div>
 
+		<!-- ## ACIONA O COMPONENTE MODAL SUBMIT ## -->
 		<flavios:modalSubmit />
 
 		<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
-		<flavios:modalMensagem modalTeste="#{PBPF_MODAL_MENSAGEM}"
-			mensagemTeste="#{PBPF_TIPO_MENSAGEM}" />
+		<flavios:modalMensagem modalValidation="#{PBPF_MODAL_MENSAGEM}"
+			mensagemValidation="#{PBPF_TIPO_MENSAGEM}" />
 	</f:view>
 </h:body>
 </html>

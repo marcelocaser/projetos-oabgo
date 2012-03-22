@@ -9,11 +9,18 @@
 	<p:menubar>
 		<p:submenu label="#{msg.pbpfMenuCadastro}" icon="iconeMenuCadastro">
 			<p:menuitem value="#{msg.pbpfMenuCadastroUsuario}"
-				onclick="statusDialog.show()" action="#{usuarioBean.listar}"
+				onclick="statusDialog.show();" action="#{usuarioBean.listar}"
 				icon="iconeMenuCadastroUsuario" ajax="false" />
 			<p:separator />
 			<p:submenu label="#{msg.pbpfMenuCadastroTabela}"
 				icon="iconeMenuCadastroTabelas">
+			</p:submenu>
+		</p:submenu>
+		<p:submenu label="#{msg.pbpfMenuFrente}" icon="iconeMenuFrente">
+			<p:submenu label="#{msg.pbpfMenuMovimento}" icon="iconeMenuFrenteMovimento">
+				<p:menuitem value="#{msg.pbpfMenuMovimentoProcessaVenda}"
+					onclick="statusDialog.show();" action="#{frenteBean.novo}"
+					ajax="false" />
 			</p:submenu>
 		</p:submenu>
 		<p:submenu label="#{msg.pbpfMenuConsulta}" icon="iconeMenuConsulta">

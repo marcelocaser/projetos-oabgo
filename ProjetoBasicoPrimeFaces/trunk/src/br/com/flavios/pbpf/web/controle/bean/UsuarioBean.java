@@ -35,7 +35,7 @@ public class UsuarioBean extends PBPFManagedBean {
 	private static final long serialVersionUID = 1336108950785391584L;
 
 	private Integer itensPorPagina = 15;
-
+	
 	private List<SelectItem> listaUsuario;
 
 	private UsuarioTO usuario;
@@ -71,7 +71,7 @@ public class UsuarioBean extends PBPFManagedBean {
 	 */
 	public UsuarioTO pegarValorFiltro() {
 		UsuarioTO usuario = new UsuarioTO();
-		usuario.setQdfCod(Util.setInteger(this.getCodigoFiltro()));
+		usuario.setQdfCod(Util.setLong(this.getCodigoFiltro()));
 		usuario.setQdfNomFunc(Util.setString(this.getNomeFiltro()));
 		return usuario;
 	}
@@ -84,7 +84,7 @@ public class UsuarioBean extends PBPFManagedBean {
 	public String incluir() {
 		Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
 		try {
-
+			
 			negocioUsuario.incluir(this.getUsuario(), this.getUsuarioLogado());
 
 			setMessage("msgSucessoIncluir", PBPFEnumTipoMensagem.SUCESSO);
@@ -103,9 +103,9 @@ public class UsuarioBean extends PBPFManagedBean {
 	 * @return String
 	 */
 	public String excluir() {
-		Usuario negocio = getPBPFBusinessFactory().createUsuario();
+		Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
 		try {
-			negocio.excluir(this.getUsuario(), getUsuarioLogado());
+			negocioUsuario.excluir(this.getUsuario(), getUsuarioLogado());
 			setMessage("msgSucessoExcluir", PBPFEnumTipoMensagem.SUCESSO);
 			return this.listar();
 		} catch (Exception e) {
@@ -142,8 +142,7 @@ public class UsuarioBean extends PBPFManagedBean {
 	public String editar() {
 		Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
 		try {
-			this.setUsuario(negocioUsuario.consultar(new UsuarioTO(this
-					.getUsuario().getQdfCod())));
+			this.setUsuario(negocioUsuario.consultar(new UsuarioTO(this.getUsuario().getQdfCod())));
 
 			return "editarUsuario";
 		} catch (Exception e) {
@@ -175,10 +174,10 @@ public class UsuarioBean extends PBPFManagedBean {
 	 * @return String
 	 */
 	public String consultar() {
-		Usuario negocio = getPBPFBusinessFactory().createUsuario();
+		Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
 		try {
-			negocio.retirarObjetoSessao(usuario);
-			this.setUsuario(negocio.consultar(new UsuarioTO(this.getUsuario().getQdfCod())));
+			negocioUsuario.retirarObjetoSessao(this.getUsuario());
+			this.setUsuario(negocioUsuario.consultar(new UsuarioTO(this.getUsuario().getQdfCod())));
 
 			return URL_USUARIO_CONSULTAR;
 		} catch (Exception e) {
@@ -193,11 +192,9 @@ public class UsuarioBean extends PBPFManagedBean {
 	 */
 	public List<SelectItem> getListaUsuario() {
 		if (listaUsuario == null) {
-			Usuario negocio = getPBPFBusinessFactory().createUsuario();
-			List<TransferObject> lista = negocio.listar(new UsuarioTO(),
-					"vchNome");
-			this.listaUsuario = Util.createListSelectItens(lista, "id",
-					"vchNome");
+			Usuario negocioUsuario = getPBPFBusinessFactory().createUsuario();
+			List<TransferObject> lista = negocioUsuario.listar(new UsuarioTO(), "vchNome");
+			this.listaUsuario = Util.createListSelectItens(lista, "id", "vchNome");
 		}
 		return listaUsuario;
 	}
@@ -218,9 +215,6 @@ public class UsuarioBean extends PBPFManagedBean {
 	 * @return UsuarioTO
 	 */
 	public UsuarioTO getUsuario() {
-		if (usuario == null) {
-			usuario = new UsuarioTO();
-		}
 		return usuario;
 	}
 
@@ -243,7 +237,7 @@ public class UsuarioBean extends PBPFManagedBean {
 	}
 
 	public List<TransferObject> getListaUsuarioDataTable() {
-		if (listaUsuarioDataTable == null) {
+	if (listaUsuarioDataTable == null) {
 			listaUsuarioDataTable = new ArrayList<TransferObject>();
 		}
 		return listaUsuarioDataTable;

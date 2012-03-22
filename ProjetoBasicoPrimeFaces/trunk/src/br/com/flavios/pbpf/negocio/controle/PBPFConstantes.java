@@ -19,7 +19,6 @@ public interface PBPFConstantes {
 	public static final String MSG_CTR_ACESSO_RECURSO = "Usuário não possui privilégios para acessar este recurso, entre em contato com o Administrador do sistema.";
 	public static final String MSG_ERRO_GERAL_TXT = "txtMsgErroGlobal";
 	public static final String MSG_ERRO_GERAL = "msgErroFilterPBPF";
-	public static final String USUARIO_LOGADO = "usuarioLogado";
 
 	/**
 	 * Chave das mensagens

@@ -18,10 +18,10 @@
 			widgetVar="confirmacao">
 			<h:form>
 				<p:commandButton value="#{msg.pbpfGlobalSim}"
-					action="#{cc.attrs.managedBean}" image="ui-icon ui-icon-check"
+					action="#{cc.attrs.managedBean}" icon="ui-icon ui-icon-check"
 					oncomplete="confirmacao.hide()" ajax="false" />
 				<p:commandButton value="#{msg.pbpfGlobalNao}"
-					onclick="confirmacao.hide()" image="ui-icon ui-icon-cancel" />
+					onclick="confirmacao.hide()" icon="ui-icon ui-icon-cancel" />
 			</h:form>
 		</p:confirmDialog>
 	</composite:implementation>

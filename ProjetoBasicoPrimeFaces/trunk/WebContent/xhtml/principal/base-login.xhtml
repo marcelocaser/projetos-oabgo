@@ -22,7 +22,12 @@
 
 <h:body>
 
+	<!-- ## ACIONA O COMPONENTE MODAL SUBMIT ## -->
 	<flavios:modalSubmit />
+
+	<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
+	<flavios:modalMensagem modalValidation="#{PBPF_MODAL_MENSAGEM}"
+		mensagemValidation="#{PBPF_TIPO_MENSAGEM}" />
 
 	<f:view contentType="text/html">
 		<div id="bordaCentroLogin">
@@ -30,10 +35,7 @@
 				<ui:insert name="corpo" />
 			</div>
 		</div>
-
-		<!-- ## ACIONA O COMPONENTE PARA MENSAGENS NO REQUEST ## -->
-		<flavios:modalMensagem modalTeste="#{PBPF_MODAL_MENSAGEM}"
-			mensagemTeste="#{PBPF_TIPO_MENSAGEM}" />
 	</f:view>
+
 </h:body>
 </html>

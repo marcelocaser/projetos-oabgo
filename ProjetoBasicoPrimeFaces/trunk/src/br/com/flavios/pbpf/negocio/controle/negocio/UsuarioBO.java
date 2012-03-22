@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.flavios.pbpf.negocio.controle.entidade.FilialTO;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Usuario;
 import br.com.flavios.pbpf.negocio.controle.persistencia.UsuarioPO;
@@ -188,12 +189,51 @@ public class UsuarioBO implements Usuario {
 	 * @param orderBy - String, parâmetro de ordenação
 	 * @return List
 	 */
-	public List<TransferObject> listar(UsuarioTO to, String orderBy) throws BDException{
-		return this.persistencia.listar(to, orderBy);
+	public List<TransferObject> listar(UsuarioTO usuario, String orderBy) throws BDException{
+		return this.persistencia.listar(usuario, orderBy);
 	}
 	
 	public List<TransferObject> listar() throws BDException {
 		return this.persistencia.listar();
+	}
+	
+	/**
+	 * Retorna objeto UsuarioTO cadastrado e ativo.
+	 *
+	 * @param usuario
+	 * @return
+	 * @throws BDException - 
+	 * @return List<TransferObject>
+	 */
+	public UsuarioTO buscarUsuarioAtivo(UsuarioTO usuario) throws BDException {
+		return this.persistencia.buscarUsuarioAtivo(usuario);
+	}
+	
+	/**
+	 * Retorna objeto UsuarioTO quando vendedor.
+	 *
+	 * @param usuario
+	 * @return
+	 * @throws BDException
+	 * @throws RegraNegocioException - 
+	 */
+	public UsuarioTO buscarUsuarioVendedor(UsuarioTO usuario, FilialTO filial) throws BDException, RegraNegocioException {
+		usuario = this.buscarUsuarioAtivo(usuario);
+		
+		if (usuario == null) {
+			goMsg("pbpfUsuarioVendedorNaoEncontrado");
+		}
+		
+		if (usuario.getQdfTipVen() == 1 || usuario.getQdfTipVen() == 3) {
+			goMsg("pbpfUsuarioNaoVendedor");
+		}
+		
+		if (!usuario.getFilial().getFilCod().equals(filial.getFilCod())) {
+			goMsg("pbpfUsuarioVendedorNaoAutorizadoParaLoja");
+			
+		}
+		
+		return usuario;
 	}
 	
 	/**
@@ -204,25 +244,12 @@ public class UsuarioBO implements Usuario {
 	}
 	
 	/**
-	 * Retorna um usuário com base no Login do mesmo.
-	 * 
-	 * @param userName
-	 *            String
-	 * @return {@link UsuarioTO}
-	 * @throws BDException
-	 */
-	public UsuarioTO buscarUsuarioPorLogin(String userName) throws BDException {
-		return this.persistencia.buscarUsuarioPorLogin(userName);
-	}
-
-	/**
 	 * 
 	 * Lança um RegraNegocioException com a Menssagem.
 	 * 
 	 * @param MsG
 	 * @throws RegraNegocioException
 	 */
-	@SuppressWarnings("unused")
 	private void goMsg(String msg) throws RegraNegocioException {
 		MensagemLista msgs = new MensagemLista();
 		msgs.addMensagem(msg);

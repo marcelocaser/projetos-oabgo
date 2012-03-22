@@ -3,11 +3,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/xhtml/principal/base-login.xhtml">
 	<ui:define name="corpo">
-		<p:focus />
 		<h:panelGrid id="panelLogin" styleClass="centralizar"
 			columnClasses="alignRight">
 			<h:graphicImage url="#{msg.pbpfIconeBeta}" styleClass="alignRight" />
@@ -26,13 +26,14 @@
 							<h:outputLabel for="Senha" styleClass="txtPequenoBold"
 								value="#{msg.pbpfSenha}:" />
 							<p:password id="Senha" required="true" feedback="false"
-								value="#{loginBean.senha}" />
+							value="#{loginBean.senha}" />
 						</h:panelGrid>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="centralizar">
-						<p:commandButton value="#{msg.pbpfLogar}" onclick="statusDialog.show()"
-							action="#{loginBean.logon}" image="ui-icon ui-icon-unlocked"
-							ajax="false" />
+						<p:commandButton value="#{msg.pbpfLogar}" ajax="false"
+							onclick="statusDialog.show()" action="#{loginBean.logon}"
+							icon="ui-icon ui-icon-unlocked">
+						</p:commandButton>
 						<p:spacer width="40px" />
 					</h:panelGrid>
 					<p:spacer width="60px" />
@@ -47,6 +48,8 @@
 						</h:panelGroup>
 					</h:panelGrid>
 				</div>
+				<pe:keyFilter for="Usuario" mask="alpha"/>
+				<p:focus for="Usuario" />
 			</h:form>
 		</h:panelGrid>
 	</ui:define>

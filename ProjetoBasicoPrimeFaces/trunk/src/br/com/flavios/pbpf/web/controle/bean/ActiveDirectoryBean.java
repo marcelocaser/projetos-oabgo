@@ -58,7 +58,6 @@ public class ActiveDirectoryBean extends PBPFManagedBean {
 
 	private String nomeFiltro;
 	
-	@SuppressWarnings("unchecked")
 	public String listar() {
 
 		try {
@@ -69,7 +68,7 @@ public class ActiveDirectoryBean extends PBPFManagedBean {
 
 			ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-			NamingEnumeration answer = ctx.search(PBPFLDAPParametrosConfig.BASE_DN,
+			NamingEnumeration<SearchResult> answer = ctx.search(PBPFLDAPParametrosConfig.BASE_DN,
 					pegarValorFiltro(), ctls);
 			
 			this.setListaUsuarioLDAPDataTable(new ArrayList<PBPFLDAPUsuario>());

@@ -17,40 +17,32 @@
 
 	<pm:page title="Flávios Mobile">
 
-		<flavios:modalDialog mensagem="Deseja realmente excluir?"
+		<flavios:modalConfirmDialog mensagem="Deseja realmente excluir?"
 			managedBean="#{usuarioBean.excluir}" />
 
-		<pm:view id="login">
+		<pm:view id="loginView">
 			<p:messages />
 			<pm:header title="Flávios Mobile" swatch="b">
 				<f:facet name="right">
-					<pm:button value="Sobre" icon="info" href="sobre"
+					<p:button value="Sobre" icon="info" href="sobre"
 						transition="slideup" />
 				</f:facet>
 			</pm:header>
 			<pm:content>
-				<h:form id="formLogin">
-					<p:focus />
-					<pm:panelGrid columns="2">
-						<pm:buttonGroup>
-							<p:graphicImage
-								value="/imagens/layout/imagemLogoFlavios_100x34.png" />
-							<pm:field>
-								<h:outputLabel for="login" value="#{msg.pbpfUsuario}: "
-									styleClass="txtPequenoBold" />
-								<h:inputText id="login" value="#{loginBean.login}"
-									required="true" autocomplete="off" />
-							</pm:field>
+				<h:form prependId="false">
+					<p:graphicImage
+						value="/imagens/layout/imagemLogoFlavios_100x34.png" />
+					<h:outputLabel for="usuario" value="#{msg.pbpfUsuario}: "
+						styleClass="txtPequenoBold" />
+					<h:inputText id="usuario" value="#{loginBean.login}" required="true"
+						autocomplete="off" />
 
-							<pm:field>
-								<h:outputLabel for="senha" value="#{msg.pbpfSenha}: " />
-								<h:inputSecret id="senha" required="true"
-									value="#{loginBean.senha}" />
-							</pm:field>
-						</pm:buttonGroup>
-					</pm:panelGrid>
+					<h:outputLabel for="senha" value="#{msg.pbpfSenha}: " />
+					<h:inputSecret id="senha" required="true"
+						value="#{loginBean.senha}" />
+
 					<pm:buttonGroup orientation="horizontal">
-						<pm:commandButton value="Login" swatch="b" icon="check"
+						<p:commandButton value="Login" swatch="b" icon="check"
 							action="#{loginBean.logonMobile}" ajax="fasle" />
 					</pm:buttonGroup>
 
@@ -61,7 +53,7 @@
 		<pm:view id="sobre" swatch="b">
 			<pm:header title="Sobre" swatch="b">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back" />
+					<p:button value="Voltar" icon="back" role="back" />
 				</f:facet>
 			</pm:header>
 

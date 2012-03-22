@@ -10,6 +10,7 @@ import javax.faces.component.html.HtmlPanelGrid;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
+import br.com.flavios.pbpf.negocio.controle.entidade.FilialTO;
 import br.com.flavios.pbpf.negocio.controle.entidade.SistemaTO;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Sistema;
@@ -72,6 +73,14 @@ public class PBPFControle extends Controlador implements PBPFConstantes {
 	 */
 	public SistemaTO getSistemaLogado(){
 		return (SistemaTO)getParamSession(PBPFEnumSecurity.SISTEMA_CONTROLADO); 
+	}
+	
+	/**
+	 * Retorna a filial logada.
+	 * @return SistemaTO
+	 */
+	public FilialTO getFilialLogada(){
+		return (FilialTO)getParamSession(PBPFEnumSecurity.FILIAL); 
 	}
 	
 	/**

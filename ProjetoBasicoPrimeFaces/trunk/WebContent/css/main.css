@@ -96,9 +96,16 @@ body {
 
 #caixaTopoUsuarioLogado {
 	position: absolute;
-	top: 136px;
+	top: 145px;
+	left: 155px;
 	text-align: left;
-	left: 150px;
+}
+
+#caixaTopoSistemaLogado {
+	position: absolute;
+	top: 145px;
+	right: -25px;
+	text-align: right;
 }
 
 #areaTrabalho {
@@ -1367,7 +1374,7 @@ para o nome do style a ser criado.*/
 	height: 16px;
 	margin-bottom: 2px;
 	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuCadastro.png);
+	background: url(../imagens/icons/iconeMenuCadastro.png) no-repeat !important;
 }
 
 .iconeMenuCadastroUsuario {
@@ -1375,7 +1382,7 @@ para o nome do style a ser criado.*/
 	height: 16px;
 	margin-bottom: 2px;
 	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuCadastroUsuario.png);
+	background: url(../imagens/icons/iconeMenuCadastroUsuario.png) no-repeat !important;
 }
 
 .iconeMenuCadastroTabelas {
@@ -1383,7 +1390,7 @@ para o nome do style a ser criado.*/
 	height: 16px;
 	margin-bottom: 2px;
 	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuCadastroTabelas.png);
+	background: url(../imagens/icons/iconeMenuCadastroTabelas.png) no-repeat !important;
 }
 /*FimMenuCadastro*/
 
@@ -1393,6 +1400,24 @@ para o nome do style a ser criado.*/
 	height: 16px;
 	margin-bottom: 2px;
 	margin-right: 4px;
-	background-image: url(../imagens/icons/iconeMenuConsulta.png);
+	background: url(../imagens/icons/iconeMenuConsulta.png) no-repeat !important;
 }
 /*FimMenuConsulta*/
+
+/*MenuFrente*/
+.iconeMenuFrente {
+	width: 16px;
+	height: 16px;
+	margin-bottom: 2px;
+	margin-right: 4px;
+	background: url(../imagens/icons/iconeMenuFrente.png) no-repeat !important;
+}
+
+.iconeMenuFrenteMovimento {
+	width: 16px;
+	height: 16px;
+	margin-bottom: 2px;
+	margin-right: 4px;
+	background: url(../imagens/icons/iconeMenuFrenteMovimento.png) no-repeat !important;
+}
+/*FimMenuFrente*/

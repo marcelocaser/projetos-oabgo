@@ -9,7 +9,6 @@ import core.businessFactory.BusinessFactory;
 import core.utilitario.Util;
 
 public class PBPFLoadListener implements ServletContextListener {
-
 	
 	/**
 	 * Metodo executado no STARTUP da aplicacao.

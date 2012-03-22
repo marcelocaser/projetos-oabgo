@@ -19,7 +19,7 @@
 			<pm:header title="Flávios Mobile" swatch="#{mobileBean.tema}">
 				<f:facet name="right">
 					<h:form>
-						<pm:commandButton value="Sair" icon="delete"
+						<p:commandButton value="Sair" icon="delete"
 							swatch="#{mobileBean.tema}" action="#{loginBean.logoffMobile}"
 							ajax="false" />
 					</h:form>
@@ -27,11 +27,11 @@
 			</pm:header>
 
 			<pm:content>
-				<pm:listView>
+				<pm:view>
 					<h:outputLink value="#autorizarVenda">Autorizar Venda</h:outputLink>
 					<h:outputLink value="#exibirAutorizadas">Vendas Autorizadas</h:outputLink>
 					<h:outputLink value="#exibirTema">Escolher Tema</h:outputLink>
-				</pm:listView>
+				</pm:view>
 			</pm:content>
 
 		</pm:view>
@@ -42,7 +42,7 @@
 		<pm:view id="autorizarVenda">
 			<pm:header title="Autorizar Venda" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back"
+					<p:button value="Voltar" icon="back" role="back"
 						swatch="#{mobileBean.tema}" />
 				</f:facet>
 			</pm:header>
@@ -59,11 +59,10 @@
 						</pm:field>
 					</pm:buttonGroup>
 
-					<pm:commandButton value="Autorizar" icon="check"
+					<p:commandButton value="Autorizar" icon="check"
 						action="#{mobileBean.gerarCodigo}"
 						oncomplete="PrimeFaces.navigate('vendaAutorizada')"
-						update=":formCodigoGerado, codigoCliente">
-					</pm:commandButton>
+						update=":formCodigoGerado, codigoCliente" />
 				</h:form>
 
 			</pm:content>
@@ -74,9 +73,8 @@
 		<pm:view id="vendaAutorizada">
 			<pm:header title="Número da autorização" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back"
-						swatch="#{mobileBean.tema}">
-					</pm:button>
+					<p:button value="Voltar" icon="back" role="back"
+						swatch="#{mobileBean.tema}" />
 				</f:facet>
 			</pm:header>
 			<pm:content>
@@ -93,7 +91,7 @@
 		<pm:view id="exibirAutorizadas">
 			<pm:header title="Autorizadas" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back"
+					<p:button value="Voltar" icon="back" role="back"
 						swatch="#{mobileBean.tema}" />
 				</f:facet>
 			</pm:header>
@@ -108,7 +106,7 @@
 		<pm:view id="exibirTema">
 			<pm:header title="Temas" swatch="#{mobileBean.tema}">
 				<f:facet name="left">
-					<pm:button value="Voltar" icon="back" role="back"
+					<p:button value="Voltar" icon="back" role="back"
 						swatch="#{mobileBean.tema}" />
 				</f:facet>
 			</pm:header>
@@ -125,9 +123,8 @@
 							<f:selectItem itemLabel="Preto" itemValue="a" />
 						</h:selectOneMenu>
 					</pm:field>
-					<pm:commandButton value="Aplicar" icon="check"
-						onclick="location.reload()">
-					</pm:commandButton>
+					<p:commandButton value="Aplicar" icon="check"
+						onclick="location.reload()" />
 				</h:form>
 			</pm:content>
 		</pm:view>

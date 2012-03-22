@@ -8,27 +8,25 @@
 
 <h:body>
 	<composite:interface>
-		<composite:attribute name="modalTeste" required="true" />
-		<composite:attribute name="mensagemTeste" required="true" />
+		<composite:attribute name="modalValidation" required="true" />
+		<composite:attribute name="mensagemValidation" required="true" />
 	</composite:interface>
 
 	<composite:implementation>
-		<c:if test="#{cc.attrs.modalTeste}">
-			<c:if test="#{cc.attrs.mensagemTeste eq 'SUCESSO'}">
+		<c:if test="#{cc.attrs.modalValidation}">
+			<c:if test="#{cc.attrs.mensagemValidation eq 'SUCESSO'}">
 				<p:growl id="sucesso" life="3000" />
 			</c:if>
-			<c:if test="#{cc.attrs.mensagemTeste eq 'ERRO'}">
+			<c:if test="#{cc.attrs.mensagemValidation eq 'ERRO'}">
 				<p:growl id="erro" life="3000" />
 			</c:if>
-			<c:if test="#{cc.attrs.mensagemTeste eq 'ATENCAO'}">
+			<c:if test="#{cc.attrs.mensagemValidation eq 'ATENCAO'}">
 				<p:growl id="warm" life="3000" />
 			</c:if>
-			<c:if test="#{cc.attrs.mensagemTeste eq 'FATAL'}">
+			<c:if test="#{cc.attrs.mensagemValidation eq 'FATAL'}">
 				<p:growl id="fatal" life="3000" />
 			</c:if>
 		</c:if>
 	</composite:implementation>
 </h:body>
-
-
 </html>

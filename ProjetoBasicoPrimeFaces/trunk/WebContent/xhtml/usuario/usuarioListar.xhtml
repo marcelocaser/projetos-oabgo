@@ -22,14 +22,14 @@
 					<p:menuButton value="#{msg.pbpfMenuOpcao}">
 						<p:menuitem value="#{msg.pbpfMenuOpcaoNovo}"
 							action="#{activeDirectoryBean.listar}"
-							onclick="statusDialog.show()" icon="ui-icon ui-icon-plus"
+							onclick="statusDialog.show();" icon="ui-icon ui-icon-plus"
 							ajax="false" />
 					</p:menuButton>
 				</h:form>
 			</p:toolbarGroup>
 		</p:toolbar>
 
-		<flavios:modalDialog mensagem="Deseja realmente excluir?"
+		<flavios:modalConfirmDialog mensagem="Deseja realmente excluir?"
 			managedBean="#{usuarioBean.excluir}" />
 
 		<p:panel id="painelListagem">
@@ -64,9 +64,13 @@
 						<flavios:boolean value="#{usuario.qdfStaFunc}" />
 					</p:column>
 
+					<p:column styleClass="alignCenter" headerText="">
+						<h:outputText value="#{usuario.filial.filDesc}" />
+					</p:column>
+
 					<p:column styleClass="alignCenter">
 						<p:commandButton id="editar" action="#{usuarioBean.consultar}"
-							image="ui-icon ui-icon-search" onclick="statusDialog.show()"
+							icon="ui-icon ui-icon-search" onclick="statusDialog.show()"
 							ajax="false">
 							<p:tooltip for="editar"
 								value="#{msg.pbpfOpcoesToolTipoConsultar}" />
@@ -74,7 +78,7 @@
 								target="#{usuarioBean.usuario}" />
 						</p:commandButton>
 						<p:spacer width="5" />
-						<p:commandButton id="exclusao" image="ui-icon ui-icon-close"
+						<p:commandButton id="exclusao" icon="ui-icon ui-icon-close"
 							oncomplete="confirmacao.show()">
 							<p:tooltip for="exclusao"
 								value="#{msg.pbpfOpcoesToolTipoExcluir}" />

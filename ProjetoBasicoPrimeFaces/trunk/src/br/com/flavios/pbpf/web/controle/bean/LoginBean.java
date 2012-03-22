@@ -11,6 +11,7 @@ import jcifs.smb.SmbException;
 import jcifs.smb.SmbSession;
 import br.com.flavios.pbpf.negocio.controle.entidade.UsuarioTO;
 import br.com.flavios.pbpf.negocio.controle.negocio.interfaces.Usuario;
+import br.com.flavios.pbpf.negocio.enumerador.PBPFEnumSecurity;
 import br.com.flavios.pbpf.web.controle.PBPFManagedBean;
 import core.excecoes.RegraNegocioException;
 
@@ -40,6 +41,7 @@ public class LoginBean extends PBPFManagedBean {
 	private boolean 	mensagem;
 
 	public String logon(){
+		
 		try{
 			
 			if (this.getSenha() == null) {
@@ -71,6 +73,7 @@ public class LoginBean extends PBPFManagedBean {
 	private void rotinaAutenticacaoSingleSignOn(String userName, String password)throws RegraNegocioException{
 		
 		Usuario usuarioService = getPBPFBusinessFactory().createUsuario();
+		this.getUsuario().setQdfLoginAd(userName);
 		
 		try {
 			//Recupera o controlador de Domínio, baseado no IP do Servidor AD
@@ -82,13 +85,17 @@ public class LoginBean extends PBPFManagedBean {
 				SmbSession.logon(myDomainController, myCreds);
 				
 				//consulta um usuário com base no login e na senha
-				this.setUsuario(usuarioService.buscarUsuarioPorLogin(userName));
+				this.setUsuario(usuarioService.buscarUsuarioAtivo(this.getUsuario()));
 				if(this.getUsuario().getQdfCod() != null){
 					//associa o usuário a sessão atual.
-					setParamSession(USUARIO_LOGADO, usuario);
+					setParamSession(PBPFEnumSecurity.USUARIO_LOGADO.name(), this.getUsuario());
+					//associa a filial ativa na sessão atual.
+					setParamSession(PBPFEnumSecurity.FILIAL.name(), this.getUsuario().getFilial());
 					
 				}else{
-					removeParamSession(USUARIO_LOGADO);
+					removeParamSession(PBPFEnumSecurity.USUARIO_LOGADO.name());
+					removeParamSession(PBPFEnumSecurity.FILIAL.name());
+					removeParamSession(PBPFEnumSecurity.SISTEMA_CONTROLADO.name());
 					throw new RegraNegocioException("Usuário " + userName + " não encontrado.");
 				}
 				

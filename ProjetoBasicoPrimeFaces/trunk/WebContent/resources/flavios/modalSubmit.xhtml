@@ -10,10 +10,9 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<p:dialog modal="true" widgetVar="statusDialog"
-			header="#{msg.pbpfAguarde}" draggable="false" closable="false"
-			resizable="false">
-			<p:graphicImage value="#{msg.pbpfBarraAjax}" />
+		<p:dialog modal="true" widgetVar="statusDialog" draggable="false"
+			dynamic="false" closable="false" resizable="false" showHeader="false">
+			<p:graphicImage id="barraAjax" value="#{msg.pbpfBarraAjax}" />
 		</p:dialog>
 	</composite:implementation>
 </h:body>

@@ -85,11 +85,13 @@ public class PBPFPhaseListener implements PhaseListener, PBPFConstantes {
 					return false;
 				}else {
 					this.urlDestino = sistema.getVchUrlPaginaPrincipal();
+					session.setAttribute(PBPFEnumSecurity.SISTEMA_CONTROLADO.name(), sistema);
 					return false;
 				}
 			}else{
 				if(PBPFSecurityUtil.getParamSession(contexto, PBPFEnumSecurity.REQUEST_DASH_BOARD) == null){
 					this.urlDestino = sistema.getVchUrlPaginaPrincipal();
+					session.setAttribute(PBPFEnumSecurity.SISTEMA_CONTROLADO.name(), sistema);
 					return false;							
 				}else{
 					PBPFSecurityUtil.removeParamSession(contexto, PBPFEnumSecurity.REQUEST_DASH_BOARD);
