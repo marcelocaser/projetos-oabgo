@@ -18,26 +18,26 @@ import core.dao.TransferObject;
 public class UsuarioTO extends TransferObject {
 
 	@Id
-	@Column(name = "qdfCod", unique = true, nullable = false)
+	@Column(name = "qdfCod", unique = true, nullable = false, length = 7)
 	private Long qdfCod;
 	
-	@Column(name = "qdfNomFunc", nullable = false)
+	@Column(name = "qdfNomFunc", nullable = false, length = 40)
 	private String qdfNomFunc;
 	
 	@ManyToOne
 	@JoinColumn(name = "qdfFilCod", nullable = false)
 	private FilialTO filial;
 	
-	@Column(name = "qdfTipVen", nullable = false)
+	@Column(name = "qdfTipVen", nullable = false, length = 1)
 	private Integer qdfTipVen;
 	
-	@Column(name = "qdfStaFunc", nullable = false)
+	@Column(name = "qdfStaFunc", nullable = false, length = 1)
 	private String qdfStaFunc;
 	
-	@Column(name = "qdfExtEmai", nullable = false)
+	@Column(name = "qdfExtEmai", nullable = false, length = 40)
 	private String qdfExtEmai;
 	
-	@Column(name = "qdfLoginAd", nullable = false)
+	@Column(name = "qdfLoginAd", nullable = false, length = 30)
 	private String qdfLoginAd;
 	
 	public UsuarioTO() {

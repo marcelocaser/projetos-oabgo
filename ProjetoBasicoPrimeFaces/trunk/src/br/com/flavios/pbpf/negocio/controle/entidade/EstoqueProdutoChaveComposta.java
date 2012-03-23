@@ -19,10 +19,10 @@ public class EstoqueProdutoChaveComposta implements Serializable {
 	@JoinColumn(name = "proCod", nullable = false)
 	private ProdutoTO produto;
 
-	@Column(name = "corCod", nullable = false)
+	@Column(name = "corCod", nullable = false, length = 10)
 	private String corCod;
 
-	@Column(name = "estNum", nullable = false)
+	@Column(name = "estNum", nullable = false, length = 3)
 	private String estNum;
 
 	// *** Gets and Sets ***

@@ -22,20 +22,20 @@ public class OrcamentoTO extends TransferObject {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "orcNro", unique = true, nullable = false)
+	@Column(name = "orcNro", unique = true, nullable = false, length = 7)
 	private Long orcNro;
 
-	@Column(name = "orcPerDes")
+	@Column(name = "orcPerDes", length = 6, precision = 2)
 	private Double orcPerDes;
 
-	@Column(name = "orcCarNro", nullable = false)
+	@Column(name = "orcCarNro", nullable = false, length = 7)
 	private Integer orcCarNro;
 
 	@ManyToOne
 	@JoinColumn(name = "qdfCod", nullable = false)
 	private UsuarioTO usuario;
 
-	@Column(name = "orcStatus", nullable = false)
+	@Column(name = "orcStatus", nullable = false, length = 1)
 	private char orcStatus;
 
 	@Column(name = "orcInicio", nullable = false)
@@ -44,13 +44,13 @@ public class OrcamentoTO extends TransferObject {
 	@Column(name = "orcDat1aPa")
 	private Date orcDat1aPa;
 
-	@Column(name = "orcVlrEnt")
+	@Column(name = "orcVlrEnt", length = 10, precision = 2)
 	private Double orcVlrEnt;
 
-	@Column(name = "orcConRec")
+	@Column(name = "orcConRec", length = 2)
 	private Integer orcConRec;
 
-	@Column(name = "orcTipVda")
+	@Column(name = "orcTipVda", length = 3)
 	private Integer orcTipVda;
 
 	public OrcamentoTO() {

@@ -16,13 +16,13 @@ import core.dao.TransferObject;
 public class FilialTO extends TransferObject {
 	
 	@Id
-	@Column(name = "filCod", unique = true, nullable = false)
+	@Column(name = "filCod", unique = true, nullable = false, length = 2)
 	private Long filCod;
 	
-	@Column(name = "filDesc", nullable = false)
+	@Column(name = "filDesc", nullable = false, length = 20)
 	private String filDesc;
 	
-	@Column(name = "filSigEti", nullable = false)
+	@Column(name = "filSigEti", nullable = false, length = 12)
 	private String filSigEti;
 	
 	public FilialTO() {

@@ -18,13 +18,13 @@ public class EstoqueProdutoTO extends TransferObject {
 	@EmbeddedId
 	private EstoqueProdutoChaveComposta estoqueProdutoChaveComposta;
 	
-	@Column(name = "proBarCod", nullable = false)
+	@Column(name = "proBarCod", nullable = false, length = 10)
 	private String proBarCod;
 
-	@Column(name = "proBarNovo", nullable = false)
+	@Column(name = "proBarNovo", nullable = false, length = 13)
 	private String proBarNovo;
 	
-	@Column(name = "prcVlrPreV", nullable = false)
+	@Column(name = "prcVlrPreV", nullable = false, length = 10, precision = 2)
 	private Float prcVlrPreV;
 
 	public EstoqueProdutoTO() {

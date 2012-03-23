@@ -16,13 +16,13 @@ import core.dao.TransferObject;
 public class ProdutoTO extends TransferObject {
 	
 	@Id
-	@Column(name = "proCod", unique = true, nullable = false)
+	@Column(name = "proCod", unique = true, nullable = false, length = 7)
 	private Long proCod;
 	
-	@Column(name = "proDesc", nullable = false)
+	@Column(name = "proDesc", nullable = false, length = 60)
 	private String proDesc;
 	
-	@Column(name = "proRefer", nullable = false)
+	@Column(name = "proRefer", nullable = false, length = 40)
 	private String proRefer;
 	
 	public ProdutoTO() {

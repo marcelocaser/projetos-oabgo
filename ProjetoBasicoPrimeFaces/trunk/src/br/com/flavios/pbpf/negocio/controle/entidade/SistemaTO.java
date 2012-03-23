@@ -20,37 +20,37 @@ public class SistemaTO extends TransferObject {
  
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "Id", unique = true, nullable = false)
+	@Column(name = "Id", unique = true, nullable = false, length = 7)
 	private Long id;
 	 
-	@Column(name = "vchNome", nullable = false)
+	@Column(name = "vchNome", nullable = false, length = 40)
 	private String vchNome;
 	
-	@Column(name = "vchSigla", nullable = false)
+	@Column(name = "vchSigla", nullable = false, length = 5)
 	private String vchSigla;
 	 
-	@Column(name = "vchDescricao", nullable = false)
+	@Column(name = "vchDescricao", nullable = false, length = 254)
 	private String vchDescricao;
 	 
-	@Column(name = "vchVersao")
+	@Column(name = "vchVersao", length = 6)
 	private String vchVersao;
 	 
-	@Column(name = "chrTipo")
+	@Column(name = "chrTipo", length = 1)
 	private String chrTipo;
 	
 	@Column(name="bitSistemaPrincipal", nullable=false)
 	private Boolean bitSistemaPrincipal;
 	
-	@Column(name="vchContextoAplicacao", nullable=false, unique=true)
+	@Column(name="vchContextoAplicacao", nullable=false, unique=true, length = 50)
 	private String vchContextoAplicacao;
 
-	@Column(name="vchUrlSistema", nullable=false, unique=true)
+	@Column(name="vchUrlSistema", nullable=false, unique=true, length = 5)
 	private String vchUrlSistema;
 
-	@Column(name="vchUrlPaginaPrincipal", nullable=false, unique=true)
+	@Column(name="vchUrlPaginaPrincipal", nullable=false, unique=true, length = 50)
 	private String vchUrlPaginaPrincipal;
 	
-	@Column(name="vchNomePaginaLogin", nullable=false)
+	@Column(name="vchNomePaginaLogin", nullable=false, length = 50)
 	private String vchNomePaginaLogin;
 	
 	public SistemaTO(){
