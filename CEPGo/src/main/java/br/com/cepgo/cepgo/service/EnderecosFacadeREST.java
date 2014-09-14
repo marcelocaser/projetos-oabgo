@@ -30,7 +30,7 @@ import javax.ws.rs.Produces;
 @Path("cep")
 public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
 
-    @PersistenceContext(unitName = "br.com.cepgo_CEPGo_war_1.0.0PU")
+    @PersistenceContext(unitName = "CEPGo_PU")
     private EntityManager em;
 
     public EnderecosFacadeREST() {
