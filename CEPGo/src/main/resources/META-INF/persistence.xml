@@ -4,6 +4,7 @@
     <jta-data-source>jdbc/cepgo</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
+      <property name="eclipselink.jdbc.native-sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
