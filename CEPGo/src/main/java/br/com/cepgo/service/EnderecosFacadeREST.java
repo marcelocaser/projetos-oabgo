@@ -1,19 +1,16 @@
 package br.com.cepgo.service;
 
 import br.com.cepgo.Enderecos;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
+import javax.persistence.Persistence;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * <b>Classe:</b> EnderecosFacadeREST.java <br>
@@ -30,32 +27,32 @@ import javax.ws.rs.Produces;
 @Path("cep")
 public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
 
-    @PersistenceContext(unitName = "CEPGo_PU")
+    //@PersistenceUnit(unitName = "CEPGo_PU")
     private EntityManager em;
 
     public EnderecosFacadeREST() {
         super(Enderecos.class);
     }
 
-    @POST
+    /*@POST
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Enderecos entity) {
         super.create(entity);
-    }
+    }*/
 
-    @PUT
+    /*@PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") Integer id, Enderecos entity) {
         super.edit(entity);
-    }
+    }*/
 
-    @DELETE
+    /*@DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
-    }
+    }*/
 
     /*@GET
      @Path("{id}")
@@ -65,42 +62,43 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
      }*/
     @GET
     @Path("{cep}.json")
-    @Produces({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
     public Enderecos cepJSON(@PathParam("cep") String cep) {
         return consultaCEP(cep);
     }
 
     @GET
     @Path("{cep}.xml")
-    @Produces({"application/xml"})
+    @Produces(MediaType.APPLICATION_XML)
     public Enderecos cepXML(@PathParam("cep") String cep) {
         return consultaCEP(cep);
     }
 
-    @GET
+    /*@GET
     @Override
     @Produces({"application/xml", "application/json"})
     public List<Enderecos> findAll() {
         return super.findAll();
-    }
+    }*/
 
-    @GET
+    /*@GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
     public List<Enderecos> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
-    }
+    }*/
 
-    @GET
+    /*@GET
     @Path("count")
     @Produces("text/plain")
     public String countREST() {
         return String.valueOf(super.count());
-    }
+    }*/
 
     @Override
     protected EntityManager getEntityManager() {
-        return em;
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("CEPGo_PU");
+        return em = factory.createEntityManager();
     }
 
     private Enderecos consultaCEP(String cep) {
