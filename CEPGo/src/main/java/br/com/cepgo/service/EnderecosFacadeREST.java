@@ -5,7 +5,9 @@ import static br.com.cepgo.util.RequisicaoJson.readJsonFromUrl;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
+import javax.enterprise.context.Dependent;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -29,7 +31,7 @@ import org.json.JSONObject;
  * @author marcelocaser
  * @version Revision: $$ Date: 12/09/2014
  */
-@Stateless
+@Singleton
 @Path("cep")
 public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
 
@@ -70,17 +72,7 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
     @Path("{cep}.json")
     @Produces(MediaType.APPLICATION_JSON)
     public Enderecos cepJSON(@PathParam("cep") String cep) {
-        try {
-            JSONObject json = readJsonFromUrl("http://localhost/CEPGoB/?cep=74825140");
-            System.out.println(json.toString());
-            System.out.println(json.get("cliente"));
-            return consultaCEP(cep);
-        } catch (IOException ex) {
-            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JSONException ex) {
-            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return consultaCEP(cep);
     }
 
     @GET
@@ -116,7 +108,7 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
         return em = factory.createEntityManager();
     }
 
-    private Enderecos consultaCEP(String cep) {
+    public Enderecos consultaCEP(String cep) {
         Enderecos enderecos = null;
         if (cep != null && !cep.isEmpty()) {
             cep = cep.replaceAll("[A-Za-z.-]", "");
@@ -133,6 +125,25 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
                     return null;
                 }
             }
+        }
+        return enderecos;
+    }
+
+    private Enderecos consultaCEPCorreios(String cep) {
+        Enderecos enderecos = new Enderecos();
+        try {
+            JSONObject json = readJsonFromUrl("http://localhost/CEPGoB/?cep=74825140");
+            System.out.println(json.get("cliente"));
+            System.out.println(json.get("uf"));
+            System.out.println(json.get("cidade"));
+            System.out.println(json.get("logradouro"));
+            System.out.println(json.get("bairro"));
+            System.out.println(json.get("cep"));
+            return consultaCEP(cep);
+        } catch (IOException ex) {
+            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
         return enderecos;
     }
