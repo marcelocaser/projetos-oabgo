@@ -1,6 +1,10 @@
 package br.com.cepgo.service;
 
 import br.com.cepgo.Enderecos;
+import static br.com.cepgo.util.RequisicaoJson.readJsonFromUrl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,6 +15,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * <b>Classe:</b> EnderecosFacadeREST.java <br>
@@ -35,24 +41,24 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
     }
 
     /*@POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(Enderecos entity) {
-        super.create(entity);
-    }*/
+     @Override
+     @Consumes({"application/xml", "application/json"})
+     public void create(Enderecos entity) {
+     super.create(entity);
+     }*/
 
     /*@PUT
-    @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Enderecos entity) {
-        super.edit(entity);
-    }*/
+     @Path("{id}")
+     @Consumes({"application/xml", "application/json"})
+     public void edit(@PathParam("id") Integer id, Enderecos entity) {
+     super.edit(entity);
+     }*/
 
     /*@DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }*/
+     @Path("{id}")
+     public void remove(@PathParam("id") Integer id) {
+     super.remove(super.find(id));
+     }*/
 
     /*@GET
      @Path("{id}")
@@ -64,7 +70,17 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
     @Path("{cep}.json")
     @Produces(MediaType.APPLICATION_JSON)
     public Enderecos cepJSON(@PathParam("cep") String cep) {
-        return consultaCEP(cep);
+        try {
+            JSONObject json = readJsonFromUrl("http://localhost/CEPGoB/?cep=74825140");
+            System.out.println(json.toString());
+            System.out.println(json.get("cliente"));
+            return consultaCEP(cep);
+        } catch (IOException ex) {
+            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @GET
@@ -75,26 +91,25 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
     }
 
     /*@GET
-    @Override
-    @Produces({"application/xml", "application/json"})
-    public List<Enderecos> findAll() {
-        return super.findAll();
-    }*/
+     @Override
+     @Produces({"application/xml", "application/json"})
+     public List<Enderecos> findAll() {
+     return super.findAll();
+     }*/
 
     /*@GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Enderecos> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }*/
+     @Path("{from}/{to}")
+     @Produces({"application/xml", "application/json"})
+     public List<Enderecos> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+     return super.findRange(new int[]{from, to});
+     }*/
 
     /*@GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }*/
-
+     @Path("count")
+     @Produces("text/plain")
+     public String countREST() {
+     return String.valueOf(super.count());
+     }*/
     @Override
     protected EntityManager getEntityManager() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("CEPGo_PU");
@@ -108,14 +123,14 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
             if (cep.trim().length() == 8) {
                 //Incluir um traço antes de consultar
                 try {
-                    cep = cep.substring(0,5).concat("-").concat(cep.substring(5,8));
+                    cep = cep.substring(0, 5).concat("-").concat(cep.substring(5, 8));
                     enderecos = getEntityManager().createQuery("SELECT e FROM Enderecos e WHERE e.cep = :cep", Enderecos.class)
                             .setParameter("cep", cep)
                             .getSingleResult();
                 } catch (NoResultException ex) {
                     return null;
                 } catch (java.lang.StringIndexOutOfBoundsException ex) {
-                     return null;
+                    return null;
                 }
             }
         }
