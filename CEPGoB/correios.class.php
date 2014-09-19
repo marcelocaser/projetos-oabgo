@@ -127,7 +127,7 @@ class Correios {
                 $pesquisa[] = $dados;
             }
         }
-        return $pesquisa;
+        return $pesquisa[0];
     }
 
     static public function rastreio($codigo) {
