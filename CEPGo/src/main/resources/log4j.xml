@@ -2,7 +2,7 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     
-    <!--<appender name="LogFile" class="org.apache.log4j.DailyRollingFileAppender">
+    <appender name="LogFile" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value=".\\logs\\cepgo.log" />
         <param name="DatePattern" value="yyyy-MM-dd"/>
         <param name="append" value="true"/>
@@ -15,7 +15,7 @@
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
         </layout>
-    </appender>-->
+    </appender>
 
     <logger name="br.com.cepgo">
         <level value="debug"/>

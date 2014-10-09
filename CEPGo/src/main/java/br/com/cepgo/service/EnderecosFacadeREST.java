@@ -1,13 +1,15 @@
 package br.com.cepgo.service;
 
-import br.com.cepgo.Enderecos;
+import br.com.cepgo.CEP;
+import br.com.cepgo.SimpleClass;
+import br.com.cepgo.entity.Bairros;
+import br.com.cepgo.entity.Cidades;
+import br.com.cepgo.entity.Enderecos;
 import static br.com.cepgo.util.RequisicaoJson.readJsonFromUrl;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateful;
-import javax.enterprise.context.Dependent;
-import javax.inject.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -31,12 +33,20 @@ import org.json.JSONObject;
  * @author marcelocaser
  * @version Revision: $$ Date: 12/09/2014
  */
-@Singleton
 @Path("cep")
 public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
 
     //@PersistenceUnit(unitName = "CEPGo_PU")
     private EntityManager em;
+
+    @Inject
+    private CEP cepConsulta;
+
+    @Inject
+    private CidadesFacadeREST cidadesFacadeREST;
+
+    @Inject
+    private SimpleClass simple;
 
     public EnderecosFacadeREST() {
         super(Enderecos.class);
@@ -71,8 +81,24 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
     @GET
     @Path("{cep}.json")
     @Produces(MediaType.APPLICATION_JSON)
-    public Enderecos cepJSON(@PathParam("cep") String cep) {
-        return consultaCEP(cep);
+    public CEP cepJSON(@PathParam("cep") String cep) {
+        
+        //Busca CEP banco de dados.
+        Enderecos enderecos = consultaCEP(cep);
+        CEP cepRetorno = new CEP();
+        if (enderecos == null) {
+            //Busca CEP na base dos correios.
+            enderecos = consultaCEPCorreios(cep);
+        }
+        if (enderecos == null) {
+            return cepRetorno;
+        }
+        cepRetorno.setLogradouro(enderecos.getNomeclog());
+        cepRetorno.setBairro(String.valueOf(enderecos.getBairroId().getNome()));
+        cepRetorno.setLocalidade(String.valueOf(enderecos.getCidadeId()));
+        cepRetorno.setUf(enderecos.getUf());
+        cepRetorno.setCep(enderecos.getCep());
+        return cepRetorno;
     }
 
     @GET
@@ -110,42 +136,88 @@ public class EnderecosFacadeREST extends AbstractFacade<Enderecos> {
 
     public Enderecos consultaCEP(String cep) {
         Enderecos enderecos = null;
-        if (cep != null && !cep.isEmpty()) {
-            cep = cep.replaceAll("[A-Za-z.-]", "");
-            if (cep.trim().length() == 8) {
-                //Incluir um traço antes de consultar
-                try {
-                    cep = cep.substring(0, 5).concat("-").concat(cep.substring(5, 8));
-                    enderecos = getEntityManager().createQuery("SELECT e FROM Enderecos e WHERE e.cep = :cep", Enderecos.class)
-                            .setParameter("cep", cep)
-                            .getSingleResult();
-                } catch (NoResultException ex) {
-                    return null;
-                } catch (java.lang.StringIndexOutOfBoundsException ex) {
-                    return null;
-                }
+        cep = isCEPValido(cep);
+        if (cep != null) {
+            //Incluir um traço antes de consultar
+            try {
+                enderecos = getEntityManager().createQuery("SELECT e FROM Enderecos e WHERE e.cep = :cep", Enderecos.class)
+                        .setParameter("cep", cep)
+                        .getSingleResult();
+            } catch (NoResultException | java.lang.StringIndexOutOfBoundsException ex) {
+                return null;
             }
         }
         return enderecos;
     }
 
     private Enderecos consultaCEPCorreios(String cep) {
-        Enderecos enderecos = new Enderecos();
-        try {
-            JSONObject json = readJsonFromUrl("http://localhost/CEPGoB/?cep=74825140");
-            System.out.println(json.get("cliente"));
-            System.out.println(json.get("uf"));
-            System.out.println(json.get("cidade"));
-            System.out.println(json.get("logradouro"));
-            System.out.println(json.get("bairro"));
-            System.out.println(json.get("cep"));
-            return consultaCEP(cep);
-        } catch (IOException ex) {
-            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JSONException ex) {
-            Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        Enderecos enderecos = null;
+        Cidades cidades = null;
+        Bairros bairros = null;
+        cep = isCEPValido(cep);
+        if (cep != null) {
+            try {
+                JSONObject json = readJsonFromUrl("http://localhost/CEPGoB/?cep=".concat(cep));
+                cidades = consultaCidadePeloNome(json.get("cidade").toString());
+                bairros = consultaBairrosPeloNome(json.get("bairro").toString(), json.get("uf").toString());
+                enderecos = new Enderecos();
+                if (bairros != null) {
+                    enderecos.setBairroId(bairros);
+                }
+                enderecos.setCep(json.get("cep").toString());
+                enderecos.setCidadeId(cidades.getId());
+                enderecos.setNomeclog(json.get("logradouro").toString());
+                enderecos.setUf(cidades.getUf());
+                enderecos.setUfCod(cidades.getEstadoCod());
+                return enderecos;
+            } catch (IOException ex) {
+                Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(EnderecosFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return enderecos;
+    }
+
+    private String isCEPValido(String cep) {
+        if (cep != null && !cep.isEmpty()) {
+            cep = cep.replaceAll("[A-Za-z.-]", "");
+            if (cep.trim().length() == 8) {
+                return cep.substring(0, 5).concat("-").concat(cep.substring(5, 8));
+            }
+        }
+        return null;
+    }
+
+    private Cidades consultaCidadePeloNome(String nome) {
+        Cidades cidades = null;
+        if (nome != null && !nome.isEmpty()) {
+            try {
+                cidades = getEntityManager().createQuery("SELECT c FROM Cidades c WHERE c.nome LIKE :nome", Cidades.class)
+                        .setParameter("nome", nome)
+                        .getSingleResult();
+            } catch (NoResultException ex) {
+                return null;
+            } catch (java.lang.StringIndexOutOfBoundsException ex) {
+                return null;
+            }
+        }
+        return cidades;
+    }
+
+    private Bairros consultaBairrosPeloNome(String nome, String uf) {
+        Bairros bairros = null;
+        if (nome != null && !nome.isEmpty()) {
+            try {
+                bairros = getEntityManager().createQuery("SELECT b FROM Bairros b WHERE b.nome LIKE :nome", Bairros.class)
+                        .setParameter("nome", nome)
+                        .setParameter("uf", uf)
+                        .getSingleResult();
+            } catch (NoResultException | java.lang.StringIndexOutOfBoundsException ex) {
+                return null;
+            }
+        }
+        return bairros;
     }
 
 }

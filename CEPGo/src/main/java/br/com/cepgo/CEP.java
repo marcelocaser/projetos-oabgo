@@ -1,6 +1,7 @@
 package br.com.cepgo;
 
 import java.io.Serializable;
+import javax.annotation.ManagedBean;
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author marcelocaser
  */
 @XmlRootElement
+@ManagedBean
 public class CEP implements Serializable {
 
     private static final long serialVersionUID = 1L;

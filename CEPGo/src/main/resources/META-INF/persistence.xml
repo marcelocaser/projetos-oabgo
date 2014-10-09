@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="CEPGo_PU">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>br.com.cepgo.Enderecos</class>
-        <class>br.com.cepgo.Estados</class>
-        <properties>
-            <!-- dados da conexao -->
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
-            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/fj21" />-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://10.62.3.38:1433;databaseName=CEP" />
-            <property name="javax.persistence.jdbc.user" value="desenvolvimento" />
-            <property name="javax.persistence.jdbc.password" value="genexus" />
-
-            <!--  atualiza o banco, gera as tabelas se for preciso -->
-            <property name="eclipselink.ddl-generation" value="none" />
-            <property name="eclipselink.jdbc.native-sql" value="true"/>
-    
-        </properties>
-    </persistence-unit>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="CEPGo_PU">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.cepgo.entity.Estados</class>
+    <class>br.com.cepgo.entity.Enderecos</class>
+    <class>br.com.cepgo.entity.Cidades</class>
+    <class>br.com.cepgo.entity.Bairros</class>
+    <properties>
+      <!-- dados da conexao -->
+      <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/fj21" />-->
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://10.62.3.38:1433;databaseName=CEP"/>
+      <property name="javax.persistence.jdbc.user" value="desenvolvimento"/>
+      <property name="javax.persistence.jdbc.password" value="genexus"/>
+      <!--  atualiza o banco, gera as tabelas se for preciso -->
+      <property name="eclipselink.ddl-generation" value="none"/>
+      <property name="eclipselink.jdbc.native-sql" value="true"/>
+    </properties>
+  </persistence-unit>
 </persistence>

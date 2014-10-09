@@ -1,4 +1,4 @@
-package br.com.cepgo;
+package br.com.cepgo.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * <b>Projeto:</b> CEPGo <br>
  * <b>Pacote:</b> br.com.cepgo.cepgo <br>
  * <b>Empresa:</b> Flávios Calçados e Esportes <br>
- * 
+ *
  * @author marcelocaser
  * @version Revision: $$ Date: 12/09/2014
  */
@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Estados.findByNome", query = "SELECT e FROM Estados e WHERE e.nome = :nome"),
     @NamedQuery(name = "Estados.findByUf", query = "SELECT e FROM Estados e WHERE e.uf = :uf")})
 public class Estados implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

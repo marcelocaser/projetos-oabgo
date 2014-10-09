@@ -1,12 +1,17 @@
-package br.com.cepgo;
+package br.com.cepgo.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -49,7 +54,9 @@ public class Enderecos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "bairro_id")
-    private int bairroId;
+    //@OneToOne(mappedBy = "bairro_id", targetEntity = Bairros.class, cascade =  CascadeType.ALL)
+    //@JoinColumn(name = "bairro_id", referencedColumnName = "id")
+    private Bairros bairroId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 300)
@@ -96,7 +103,7 @@ public class Enderecos implements Serializable {
         this.id = id;
     }
 
-    public Enderecos(Integer id, int bairroId, String cep, int cidadeId, String logracompl, String logradouro, String nomeclog, String nomeslog, String uf, int ufCod) {
+    public Enderecos(Integer id, Bairros bairroId, String cep, int cidadeId, String logracompl, String logradouro, String nomeclog, String nomeslog, String uf, int ufCod) {
         this.id = id;
         this.bairroId = bairroId;
         this.cep = cep;
@@ -117,11 +124,11 @@ public class Enderecos implements Serializable {
         this.id = id;
     }
 
-    public int getBairroId() {
+    public Bairros getBairroId() {
         return bairroId;
     }
 
-    public void setBairroId(int bairroId) {
+    public void setBairroId(Bairros bairroId) {
         this.bairroId = bairroId;
     }
 
